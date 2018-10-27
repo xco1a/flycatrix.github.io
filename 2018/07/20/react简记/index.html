@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记,React," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="目录结构和流程create-react-app生成项目。目录树。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788">
+<meta name="keywords" content="学习笔记,React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react简记">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/react简记/index.html">
+<meta property="og:site_name" content="xco1a&#39;s b10g">
+<meta property="og:description" content="目录结构和流程create-react-app生成项目。目录树。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-07T11:07:49.289Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react简记">
+<meta name="twitter:description" content="目录结构和流程create-react-app生成项目。目录树。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/20/react简记/"/>
+
+
+
+
+
+  <title>react简记 | xco1a's b10g</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xco1a's b10g</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/react简记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xcola">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xco1a's b10g">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">react简记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-20T08:34:52+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="目录结构和流程"><a href="#目录结构和流程" class="headerlink" title="目录结构和流程"></a>目录结构和流程</h2><p>create-react-app生成项目。目录树。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line">│  .gitignore</span><br><span class="line">│  config-overrides.js</span><br><span class="line">│  package-lock.json</span><br><span class="line">│  package.json</span><br><span class="line">│  README.md</span><br><span class="line">│  </span><br><span class="line">├─public</span><br><span class="line">│      favicon.ico</span><br><span class="line">│      index.html</span><br><span class="line">│      manifest.json</span><br><span class="line">│      </span><br><span class="line">├─screenshot</span><br><span class="line">│      bookPage.jpg</span><br><span class="line">│      eventPage.jpg</span><br><span class="line">│      eventPage01.jpg</span><br><span class="line">│      homePage.jpg</span><br><span class="line">│      repoPage.jpg</span><br><span class="line">│      </span><br><span class="line">└─src</span><br><span class="line">    │  App.js</span><br><span class="line">    │  index.js</span><br><span class="line">    │  registerServiceWorker.js</span><br><span class="line">    │  </span><br><span class="line">    ├─assets</span><br><span class="line">    │  └─images</span><br><span class="line">    │          allbooks0.svg</span><br><span class="line">    │          allbooks1.svg</span><br><span class="line">    │          buy0.svg</span><br><span class="line">    │          buy1.svg</span><br><span class="line">    │          comment.png</span><br><span class="line">    │          data.png</span><br><span class="line">    │          like.png</span><br><span class="line">    │          link.svg</span><br><span class="line">    │          location.png</span><br><span class="line">    │          logo.svg</span><br><span class="line">    │          me.png</span><br><span class="line">    │          me0.svg</span><br><span class="line">    │          me1.svg</span><br><span class="line">    │          outline.png</span><br><span class="line">    │          star.png</span><br><span class="line">    │          three.png</span><br><span class="line">    │          yy.png</span><br><span class="line">    │          </span><br><span class="line">    ├─Components</span><br><span class="line">    │  ├─Books</span><br><span class="line">    │  │  │  index.css</span><br><span class="line">    │  │  │  index.js</span><br><span class="line">    │  │  │  index.scss</span><br><span class="line">    │  │  │  </span><br><span class="line">    │  │  ├─Allbooks</span><br><span class="line">    │  │  │      index.css</span><br><span class="line">    │  │  │      index.js</span><br><span class="line">    │  │  │      index.scss</span><br><span class="line">    │  │  │      </span><br><span class="line">    │  │  ├─Bought</span><br><span class="line">    │  │  │      index.css</span><br><span class="line">    │  │  │      index.js</span><br><span class="line">    │  │  │      index.scss</span><br><span class="line">    │  │  │      </span><br><span class="line">    │  │  └─Me</span><br><span class="line">    │  │          index.css</span><br><span class="line">    │  │          index.js</span><br><span class="line">    │  │          index.scss</span><br><span class="line">    │  │          </span><br><span class="line">    │  ├─Common</span><br><span class="line">    │  │  └─Navbar</span><br><span class="line">    │  │          index.css</span><br><span class="line">    │  │          index.js</span><br><span class="line">    │  │          index.scss</span><br><span class="line">    │  │          </span><br><span class="line">    │  ├─Event</span><br><span class="line">    │  │  │  index.css</span><br><span class="line">    │  │  │  index.js</span><br><span class="line">    │  │  │  index.scss</span><br><span class="line">    │  │  │  </span><br><span class="line">    │  │  ├─all</span><br><span class="line">    │  │  │      index.css</span><br><span class="line">    │  │  │      index.js</span><br><span class="line">    │  │  │      index.scss</span><br><span class="line">    │  │  │      </span><br><span class="line">    │  │  ├─beijing</span><br><span class="line">    │  │  │      index.css</span><br><span class="line">    │  │  │      index.js</span><br><span class="line">    │  │  │      index.scss</span><br><span class="line">    │  │  │      </span><br><span class="line">    │  │  ├─guangzhou</span><br><span class="line">    │  │  │      index.css</span><br><span class="line">    │  │  │      index.js</span><br><span class="line">    │  │  │      index.scss</span><br><span class="line">    │  │  │      </span><br><span class="line">    │  │  ├─hangzhou</span><br><span class="line">    │  │  │      index.css</span><br><span class="line">    │  │  │      index.js</span><br><span class="line">    │  │  │      index.scss</span><br><span class="line">    │  │  │      </span><br><span class="line">    │  │  ├─shanghai</span><br><span class="line">    │  │  │      index.css</span><br><span class="line">    │  │  │      index.js</span><br><span class="line">    │  │  │      index.scss</span><br><span class="line">    │  │  │      </span><br><span class="line">    │  │  └─shenzhen</span><br><span class="line">    │  │          index.css</span><br><span class="line">    │  │          index.js</span><br><span class="line">    │  │          index.scss</span><br><span class="line">    │  │          </span><br><span class="line">    │  ├─Home</span><br><span class="line">    │  │      index.css</span><br><span class="line">    │  │      index.js</span><br><span class="line">    │  │      index.scss</span><br><span class="line">    │  │      </span><br><span class="line">    │  ├─Pins</span><br><span class="line">    │  │  │  index.css</span><br><span class="line">    │  │  │  index.js</span><br><span class="line">    │  │  │  index.scss</span><br><span class="line">    │  │  │  </span><br><span class="line">    │  │  ├─Recommended</span><br><span class="line">    │  │  │      index.css</span><br><span class="line">    │  │  │      index.js</span><br><span class="line">    │  │  │      index.scss</span><br><span class="line">    │  │  │      </span><br><span class="line">    │  │  └─Subscribed</span><br><span class="line">    │  │          index.css</span><br><span class="line">    │  │          index.js</span><br><span class="line">    │  │          index.scss</span><br><span class="line">    │  │          </span><br><span class="line">    │  └─Repos</span><br><span class="line">    │          index.css</span><br><span class="line">    │          index.js</span><br><span class="line">    │          index.scss</span><br><span class="line">    │          </span><br><span class="line">    ├─Redux</span><br><span class="line">    │  │  index.js</span><br><span class="line">    │  │  </span><br><span class="line">    │  └─Reducer</span><br><span class="line">    │          bookListReducer.js</span><br><span class="line">    │          changeTitleReducer.js</span><br><span class="line">    │          getEventBannerReducer.js</span><br><span class="line">    │          getEventDataReducer.js</span><br><span class="line">    │          getRecommendListReducer.js</span><br><span class="line">    │          getReposListReducer.js</span><br><span class="line">    │          recommendListReducer.js</span><br><span class="line">    │          </span><br><span class="line">    └─Router</span><br><span class="line">            index.js</span><br></pre></td></tr></table></figure>
+<p>public中存放的index.html是项目页面，其中的<code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code>标签包裹项目组件。src目录下index.js为入口文件，通过render函数将路由组件挂载到index.html中的<code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code>上，在路由组件中，通过匹配路由规则，将不同的组件显示在App根组件中<code>this.props.children</code>的位置。</p>
+<h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><p>react提出了组件可以是函数的思想，构造组件有两种方式——类或函数。根据组件功能的不同，亦可划分为容器组件和展示组件。容器组件负责数据获取和状态更新等功能，而展示组件描述页面的结构和样式。</p>
+<h3 id="展示组件"><a href="#展示组件" class="headerlink" title="展示组件"></a>展示组件</h3><p>通常使用函数的方法定义，除非它需要状态或者有生命周期函数性能优化等需求。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Welcome</span> (<span class="params">props</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>welcome! &#123;props.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="容器组件"><a href="#容器组件" class="headerlink" title="容器组件"></a>容器组件</h3><p>通常使用类的方式定义，容器组件一般不写什么样式和页面结构，作用是向其他组件提供数据和功能，因为充当数据源的角色，所以容器组件一般都有状态。redux的操作也在容器组件中进行，并把方法和数据通过Provider提供给展示组件使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Datalist</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>()&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.state = &#123;</span><br><span class="line">            list:[]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">    componentDidMount()&#123;</span><br><span class="line">        <span class="keyword">this</span>.props.getList()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过类定义的组件有更完善的功能，包括状态、render、生命周期函数、用户自定义方法、以及redux扩展的方法等。</p>
+<p>用展示组件和容器组件相分离的方法编写组件，有利于理解UI和应用之间的关系。通过给展示组件传递不同属性的方法，提高了展示组件的可复用性。</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>react的路由是提供导航和跳转的组件。得益于jsx语法，书写路由也像在写dom结构。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = (</span><br><span class="line">	&lt;Provider store = &#123;Store&#125;&gt;</span><br><span class="line">		&lt;Router&gt;</span><br><span class="line">			&lt;App&gt;</span><br><span class="line">				&lt;Switch&gt;</span><br><span class="line">					&lt;Route path=<span class="string">"/home"</span> component=&#123;Home&#125; /&gt;</span><br><span class="line">					&lt;Route path=<span class="string">"/repos"</span> component=&#123;Repos&#125; /&gt;</span><br><span class="line">					&lt;Route path=<span class="string">"/books"</span> render=&#123;()=&gt;</span><br><span class="line">						&lt;Books&gt;</span><br><span class="line">							&lt;Switch&gt;</span><br><span class="line">								&lt;Route path=<span class="string">"/books/allbooks"</span> component=&#123;Allbooks&#125; /&gt;</span><br><span class="line">								&lt;Route path=<span class="string">"/books/bought"</span> component=&#123;Bought&#125; /&gt;</span><br><span class="line">								&lt;Route path=<span class="string">"/books/me"</span> component=&#123;Me&#125; /&gt;</span><br><span class="line">								&lt;Redirect <span class="keyword">from</span>=<span class="string">"/books"</span> to=<span class="string">"/books/allbooks"</span>/&gt;</span><br><span class="line">							&lt;<span class="regexp">/Switch&gt;</span></span><br><span class="line"><span class="regexp">						&lt;/</span>Books&gt;</span><br><span class="line">					&#125; /&gt;</span><br><span class="line">					&lt;Route path=<span class="string">"/event"</span> render=&#123;()=&gt;</span><br><span class="line">						&lt;Event&gt;</span><br><span class="line">							&lt;Switch&gt;</span><br><span class="line">								&lt;Route path=<span class="string">"/event/all"</span> component=&#123;all&#125; /&gt;</span><br><span class="line">								&lt;Route path=<span class="string">"/event/beijing"</span> component=&#123;beijing&#125; /&gt;</span><br><span class="line">								&lt;Route path=<span class="string">"/event/guangzhou"</span> component=&#123;guangzhou&#125; /&gt;</span><br><span class="line">								&lt;Route path=<span class="string">"/event/hangzhou"</span> component=&#123;hangzhou&#125; /&gt;</span><br><span class="line">								&lt;Route path=<span class="string">"/event/shenzhen"</span> component=&#123;shenzhen&#125; /&gt;</span><br><span class="line">								&lt;Route path=<span class="string">"/event/shanghai"</span> component=&#123;shanghai&#125; /&gt;</span><br><span class="line">								&lt;Redirect <span class="keyword">from</span>=<span class="string">"/event"</span> to=<span class="string">"/event/all"</span>/&gt;</span><br><span class="line">							&lt;<span class="regexp">/Switch&gt;</span></span><br><span class="line"><span class="regexp">						&lt;/</span>Event&gt;</span><br><span class="line">					&#125; /&gt;</span><br><span class="line">					&lt;Route path=<span class="string">"/pins"</span> render=&#123;()=&gt;</span><br><span class="line">						&lt;Pins&gt;</span><br><span class="line">							&lt;Switch&gt;</span><br><span class="line">								&lt;Route path=<span class="string">"/pins/recommended"</span> component=&#123;Recommended&#125; /&gt;</span><br><span class="line">								&lt;Route path=<span class="string">"/pins/subscribed"</span> component=&#123;Subscribed&#125; /&gt;</span><br><span class="line">								&lt;Redirect <span class="keyword">from</span>=<span class="string">"/pins"</span> to=<span class="string">"/pins/recommended"</span>/&gt;</span><br><span class="line">							&lt;<span class="regexp">/Switch&gt;</span></span><br><span class="line"><span class="regexp">						&lt;/</span>Pins&gt;</span><br><span class="line">					&#125; /&gt;</span><br><span class="line">					&lt;Redirect <span class="keyword">from</span>=<span class="string">"*"</span> to=<span class="string">"/home"</span>/&gt;</span><br><span class="line">					</span><br><span class="line">				&lt;<span class="regexp">/Switch&gt;</span></span><br><span class="line"><span class="regexp">			&lt;/</span>App&gt;</span><br><span class="line">		&lt;<span class="regexp">/Router&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>Provider&gt;</span><br><span class="line">)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> router</span><br></pre></td></tr></table></figure>
+<p>Provider组件包裹在路由最外层，为所有组件提供上下文环境，redux发出的状态和回调函数通过这个上下文环境传递和通信。</p>
+<p>App组件作为根组件初始化，内部的组件通过<code>this.props.children</code> 路由容器显示在App组件中。</p>
+<p>Switch开关保证同一location下只有第一个被匹配到的路由会被渲染。</p>
+<p>Route组件的path属性匹配路径，component或render属性都可以指明此路由匹配的组件，但render可以被用来编写二级路由。exact属性接受一个布尔值，精确匹配会防止包容性路由匹配到路径相似的路由规则。</p>
+<p>redirect重定向。</p>
+<h2 id="生命周期-amp-State更新问题"><a href="#生命周期-amp-State更新问题" class="headerlink" title="生命周期&amp;State更新问题"></a>生命周期&amp;State更新问题</h2><p>react也提供生命周期函数，大致可以分为三个阶段——初始化阶段、运行阶段、销毁阶段。</p>
+<h3 id="挂载阶段"><a href="#挂载阶段" class="headerlink" title="挂载阶段"></a>挂载阶段</h3><p>getDefaultProps()</p>
+<p>getInitialState()</p>
+<p>componentWillMount()</p>
+<p>render()</p>
+<p><em>在此之前DOM节点都未被渲染，也无法获取</em></p>
+<p>componentDidMount()</p>
+<p><em>DOM节点已被渲染，异步操作可以在这里执行</em></p>
+<h3 id="更新阶段"><a href="#更新阶段" class="headerlink" title="更新阶段"></a>更新阶段</h3><p>componentWillReciveProps()</p>
+<p><em>在组件接收到一个新的 prop 时被调用</em></p>
+<p>shouldComponentUpdate()</p>
+<p><em>返回一个布尔值。在组件接收到新的props或者state时被调用。合理使用有性能优化的效果</em></p>
+<p>componentWillUpdate()</p>
+<p><em>在组件接收到新的props或者state但还没有render时被调用。</em></p>
+<p>render()</p>
+<p>componentDidUpdate()</p>
+<h3 id="销毁阶段"><a href="#销毁阶段" class="headerlink" title="销毁阶段"></a>销毁阶段</h3><p>componentWillUnmount()</p>
+<p><em>组件被移除时调用</em></p>
+<h3 id="setState方法"><a href="#setState方法" class="headerlink" title="setState方法"></a>setState方法</h3><p>直接修改state不会触发render更新组件，且直接修改的state会被之后setState方法提交的state状态所覆盖，造成难以预估的错误。因此正确的姿势是使用setState方法。同时也由于setState方法会触发render函数，因此在render函数中setState会陷入死循环直至溢出。</p>
+<p>关于setState异步执行的问题，受教于知乎@<a href="https://www.zhihu.com/people/lucas-hc" target="_blank" rel="noopener">Lucas HC</a> 的<a href="https://www.zhihu.com/question/66749082/answer/246217812" target="_blank" rel="noopener">回答</a>。setState在react合成事件中触发是异步更新的，也就是说，setState后state并不会立即更新。setState是一个复杂的过程，不仅要更新state，也同时会根据所谓diff算法决定是否更新，如何更新，多个setState调用时还有可能需要被合并，因此被设计为延时异步更新state。</p>
+<p>但如果通过js原生方法addEventListener添加一个事件，在原生事件中通过setState方法更新state，会发现state被同步更新了。也就是说，由 React 控制的事件处理过程 setState 不会同步更新 this.state，React 控制之外的情况， setState 会同步更新 this.state。</p>
+<p>当然，大部分情况下在react项目中都是大量使用react合成后的组件与事件，因此setState基本上是异步执行的。</p>
+<h2 id="react-redux"><a href="#react-redux" class="headerlink" title="react-redux"></a>react-redux</h2><p>react也没有自己的状态管理机制，单向数据流的通信方式使得组件间通信复杂麻烦。redux提供的状态管理可以追踪状态变化的发生时间和前因后果，其带来的便利性不仅体现在开发上，也体现在调试上。</p>
+<h3 id="三个原则"><a href="#三个原则" class="headerlink" title="三个原则"></a>三个原则</h3><p>redux中的几个概念——state，action，reducer。state是redux要管理的状态；action是一个简单对象，描述了一个行为；reducer接受一个action，按照action的描述返回一个新的状态。在这个过程中，redux遵循三个原则：</p>
+<ul>
+<li><p>单一数据源——整个应用的state同一存在于一个唯一的store中。</p>
+</li>
+<li><p>state只读——state不能直接修改，必须通过提交一个action的方式变更。</p>
+</li>
+<li><p>reducer是纯函数——reducer接受action和state，返回新的state。</p>
+</li>
+</ul>
+<p><em>纯函数的概念：</em></p>
+<blockquote>
+<ul>
+<li>给定相同的输入(传入值)，一定会返回相同输出值结果(返回值)</li>
+<li>不会产生副作用</li>
+<li>不依赖任何外部的状态</li>
+</ul>
+</blockquote>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="在路由中"><a href="#在路由中" class="headerlink" title="在路由中"></a>在路由中</h4><p>react-redux通过props读取状态和调用函数，因此需要在路由的最外层包裹一个Provider容器提供store。若使用常见的父子通信传递props，势必要将props挂载到传递路径中的每一个组件上，因此采用provider组件提供context上下文环境，有状态管理需求的组件通过上下文挂载props属性。</p>
+<h4 id="在组件中"><a href="#在组件中" class="headerlink" title="在组件中"></a>在组件中</h4><p>react-redux提供connect方法，将UI部分和逻辑部分连接在一起。connect是一个高阶函数，接受两个参数并返回另一个以当前组件为参数的函数。connect的两个参数分别提供从state到组件props的映射（mapStatetoProps），和从组件到dispatch方法的映射（mapDispatchtoProps）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(</span><br><span class="line">	(state)=&gt;&#123;</span><br><span class="line">		<span class="keyword">return</span> &#123;</span><br><span class="line">			List:state.getListReducer</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		getList()&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="function">(<span class="params">dispatch</span>)=&gt;</span>&#123;</span><br><span class="line">				axios.get(<span class="string">'url.com'</span>).then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">					dispatch(&#123;</span><br><span class="line">						type:<span class="string">"getList"</span>,</span><br><span class="line">						payload:res.data.d</span><br><span class="line">					&#125;);</span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">)(Datalist);</span><br></pre></td></tr></table></figure>
+<h5 id="mapStateToProps"><a href="#mapStateToProps" class="headerlink" title="mapStateToProps"></a>mapStateToProps</h5><p>组件通过这个参数描述自己需要从某个reducer中接受一个状态，这个状态将通过props的方式挂载在组件上。</p>
+<h5 id="mapDispatchtoProps"><a href="#mapDispatchtoProps" class="headerlink" title="mapDispatchtoProps"></a>mapDispatchtoProps</h5><p>组件通过这个参数定义几个dispatch函数，用以向reducer返回一个状态，这些dispatch函数将以回调函数的形式挂载在组件上。</p>
+<h4 id="redux模块中"><a href="#redux模块中" class="headerlink" title="redux模块中"></a>redux模块中</h4><p>通过combine方法合并不同的reducer函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;createStore&#125; <span class="keyword">from</span> <span class="string">"redux"</span></span><br><span class="line"><span class="keyword">import</span> &#123;combineReducers,applyMiddleware,compose&#125; <span class="keyword">from</span> <span class="string">"redux"</span></span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">"redux-thunk"</span></span><br><span class="line"><span class="keyword">import</span> promiseMiddleware <span class="keyword">from</span> <span class="string">"redux-promise"</span></span><br><span class="line"><span class="keyword">import</span> getEventDataReducer <span class="keyword">from</span> <span class="string">"./Reducer/getEventDataReducer"</span></span><br><span class="line"><span class="keyword">import</span> getRecommendListReducer <span class="keyword">from</span> <span class="string">"./Reducer/getRecommendListReducer"</span></span><br><span class="line"><span class="keyword">const</span> reducer = combineReducers(&#123;</span><br><span class="line">    getEventDataReducer,</span><br><span class="line">    getRecommendListReducer</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> composeEnhancers = <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;</span><br><span class="line"><span class="keyword">const</span> store = createStore(reducer, composeEnhancers(</span><br><span class="line">    applyMiddleware(thunk,promiseMiddleware)</span><br><span class="line">));</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br></pre></td></tr></table></figure>
+<p>createStore方法创建一个store容器，接受reducer和composeEnhancers为两个参数，composeEnhancers为解决异步action添加中间件，同时为redux浏览器调试插件提供支持。</p>
+<h4 id="reducer函数"><a href="#reducer函数" class="headerlink" title="reducer函数"></a>reducer函数</h4><p>reducer接受dispatch方法传来的action，根据action的type属性判断处理方法，返回一个新的状态。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// getEventDataReducer.js</span></span><br><span class="line"><span class="keyword">const</span> getEventData = <span class="function">(<span class="params">prevstate=[],data=&#123;&#125;</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> &#123;type,payload&#125; = data;</span><br><span class="line">    <span class="keyword">switch</span>(type)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">"getEventData"</span>:</span><br><span class="line">            <span class="keyword">return</span> [...prevstate,...payload];</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> prevstate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> getEventData</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">暂时写到这里，日后抽空填坑。。</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/05/vue简记/" rel="next" title="vue简记">
+                <i class="fa fa-chevron-left"></i> vue简记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/27/部分面试知识点梳理/" rel="prev" title="部分面试知识点梳理">
+                部分面试知识点梳理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjcxMC8xMzI0NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="xcola" />
+            
+              <p class="site-author-name" itemprop="name">xcola</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/flycatrix" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:chen-fish@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/灬柠檬猪" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=501960614&website=www.oicqzone.com" target="_blank" title="QQZone">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQZone</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://airpoc.cn/" title="Air的博客" target="_blank">Air的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://18dian.github.io/" title="林檀的博客" target="_blank">林檀的博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构和流程"><span class="nav-number">1.</span> <span class="nav-text">目录结构和流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件"><span class="nav-number">2.</span> <span class="nav-text">组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#展示组件"><span class="nav-number">2.1.</span> <span class="nav-text">展示组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器组件"><span class="nav-number">2.2.</span> <span class="nav-text">容器组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由"><span class="nav-number">3.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期-amp-State更新问题"><span class="nav-number">4.</span> <span class="nav-text">生命周期&amp;State更新问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载阶段"><span class="nav-number">4.1.</span> <span class="nav-text">挂载阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新阶段"><span class="nav-number">4.2.</span> <span class="nav-text">更新阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#销毁阶段"><span class="nav-number">4.3.</span> <span class="nav-text">销毁阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setState方法"><span class="nav-number">4.4.</span> <span class="nav-text">setState方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react-redux"><span class="nav-number">5.</span> <span class="nav-text">react-redux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三个原则"><span class="nav-number">5.1.</span> <span class="nav-text">三个原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">5.2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在路由中"><span class="nav-number">5.2.1.</span> <span class="nav-text">在路由中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在组件中"><span class="nav-number">5.2.2.</span> <span class="nav-text">在组件中</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mapStateToProps"><span class="nav-number">5.2.2.1.</span> <span class="nav-text">mapStateToProps</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mapDispatchtoProps"><span class="nav-number">5.2.2.2.</span> <span class="nav-text">mapDispatchtoProps</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redux模块中"><span class="nav-number">5.2.3.</span> <span class="nav-text">redux模块中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reducer函数"><span class="nav-number">5.2.4.</span> <span class="nav-text">reducer函数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xcola</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">29.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

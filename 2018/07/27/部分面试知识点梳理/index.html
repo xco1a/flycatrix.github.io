@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="面试笔记," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="移动端适配响应式布局一套css方案兼容多个终端，而不是为了每个特定终端重写css方案。 1，添加视口meta标签，重写默认视口  &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&amp;gt; 2，媒体查询 123@media (max-width: 480px)&amp;#1">
+<meta name="keywords" content="面试笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="部分面试知识点梳理">
+<meta property="og:url" content="http://yoursite.com/2018/07/27/部分面试知识点梳理/index.html">
+<meta property="og:site_name" content="xco1a&#39;s b10g">
+<meta property="og:description" content="移动端适配响应式布局一套css方案兼容多个终端，而不是为了每个特定终端重写css方案。 1，添加视口meta标签，重写默认视口  &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&amp;gt; 2，媒体查询 123@media (max-width: 480px)&amp;#1">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-15T02:09:46.492Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="部分面试知识点梳理">
+<meta name="twitter:description" content="移动端适配响应式布局一套css方案兼容多个终端，而不是为了每个特定终端重写css方案。 1，添加视口meta标签，重写默认视口  &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, initial-scale=1.0&amp;quot;&amp;gt; 2，媒体查询 123@media (max-width: 480px)&amp;#1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/27/部分面试知识点梳理/"/>
+
+
+
+
+
+  <title>部分面试知识点梳理 | xco1a's b10g</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xco1a's b10g</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/部分面试知识点梳理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xcola">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xco1a's b10g">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">部分面试知识点梳理</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-27T08:37:21+08:00">
+                2018-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  4.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  15
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="移动端适配"><a href="#移动端适配" class="headerlink" title="移动端适配"></a>移动端适配</h2><h3 id="响应式布局"><a href="#响应式布局" class="headerlink" title="响应式布局"></a>响应式布局</h3><p>一套css方案兼容多个终端，而不是为了每个特定终端重写css方案。</p>
+<p>1，添加视口meta标签，重写默认视口 </p>
+<p><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</code></p>
+<p>2，媒体查询</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> (max-width: <span class="number">480px</span>)&#123;...&#125;</span><br><span class="line">@<span class="keyword">media</span> (max-width: <span class="number">767px</span>)&#123;...&#125;</span><br><span class="line">@<span class="keyword">media</span> (min-width: <span class="number">768px</span>) and (max-width: <span class="number">979px</span>)&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>这里也有一个IE兼容性问题，IE不支持媒体查询，因此需要一个js解决方案。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">!–[if</span> <span class="attr">lt</span> <span class="attr">IE</span> <span class="attr">9</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">”../../css3-mediaqueries.js”</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">![endif]–</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="流式布局（百分比布局）"><a href="#流式布局（百分比布局）" class="headerlink" title="流式布局（百分比布局）"></a>流式布局（百分比布局）</h3><p>页面元素的宽度按照屏幕分辨率进行适配调整，但整体布局不变。 宽度使用百分比定义，但是高度和文字大小等大都是用px来固定 ，因此在大屏幕下不太协调。</p>
+<h3 id="rem布局（等比缩放、弹性布局）"><a href="#rem布局（等比缩放、弹性布局）" class="headerlink" title="rem布局（等比缩放、弹性布局）"></a>rem布局（等比缩放、弹性布局）</h3><blockquote>
+<p>rem和em的区别：rem,em都是顺应不同网页字体大小展现而产生的。其中，em是相对其父元素，在实际应用中相对而言会带来很多不便；而rem是始终相对于html大小，即页面根元素。 </p>
+</blockquote>
+<p>由于页面元素的大小单位换成了rem，而rem又基于html根字号计算，因此应先确定根字号的值。</p>
+<p>使用淘宝<em>flexible.js</em>适配，在head标签中引入，不需设置meta标签重置默认视口，交给flexible.js自动处理。</p>
+<p>除了font-size之外的尺寸均写成rem单位，根据设计稿大小和设计稿的基准字体换算。sass、less、sublime插件可以方便的在px和rem单位中转换。</p>
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p>1，请减少HTTP请求 ，合并图片为精灵图，合并css和js文件，懒加载等。</p>
+<p>2，重绘和回流。尽量使用class为页面元素变换属性，每设置一次style属性将导致一次回流，重新计算布局和大小等样式。无法避免回流时，使用DocumentFragment 缓存操作。</p>
+<p>3，减少DOM操作。循环创建DOM时可将节点缓存在变量中，循环结束时一次性写入。使用DocumentFragment 缓存操作。</p>
+<p>4，使用CDN加速（内容分发网络）。CDN系统能够实时地根据网络流量和各节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上。 引自百度百科。</p>
+<p>5，页面缓存。通过manifest文件在客户端本地缓存一部分公共资源或者变动较少的资源，达到提升页面载入速度，降低服务器压力的效果。</p>
+<p>6，减少DNS查找，减少重定向。浏览器可以并行下载，但多个主机名需要多次DNS查询，因此将主机名控制在2-4个之内。重定向将导致浏览器再次重复解析、请求的过程，因此尽量避免。</p>
+<h2 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h2><p>作为服务器前端的优化，减少请求数或延迟请求数。 </p>
+<p>方式：</p>
+<ul>
+<li>使用setTimeOut或setInterval进行加载延迟. </li>
+<li>符合某些条件或者触发了某些事件才开始异步下载 </li>
+<li>仅加载用户可以看到的区域，这个主要由监控滚动条来实现，一般会在距用户看到某图片前一定距离遍开始加载 </li>
+</ul>
+<p>补充：</p>
+<p>1，屏幕可视区域大小</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">**原生方法**：         <span class="built_in">window</span>.innerHeight||<span class="built_in">document</span>.documentElement.clientHeight||<span class="built_in">document</span>.body.clientHeight </span><br><span class="line">**jQuery方法**： </span><br><span class="line">$(<span class="built_in">window</span>).height();</span><br></pre></td></tr></table></figure>
+<p>2，浏览器窗口顶端与文档顶部距离（滚动条滚动距离）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">**原生方法**：     <span class="built_in">window</span>.pagYoffset||<span class="built_in">document</span>.documentElement.scrollTop||<span class="built_in">document</span>.body.scrollTop </span><br><span class="line">**jQuery方法**：</span><br><span class="line">$(<span class="built_in">document</span>).scrollTop();</span><br></pre></td></tr></table></figure>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>1，有权访问另一个函数作用域中的变量的的函数。 </p>
+<p>2，能够读取其他函数内部变量的函数。 </p>
+<p>3，函数和声明该函数的词法环境的组合。 </p>
+<p>4，当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。 </p>
+<p>分析参见博客<a href="http://blog.xcola.top/2018/05/23/%E5%AF%B9%E9%97%AD%E5%8C%85%E7%9A%84%E7%90%86%E8%A7%A3/" target="_blank" rel="noopener">对闭包的理解</a>。</p>
+<p>优点：</p>
+<ul>
+<li>保护函数内的变量安全,加强了封装性  </li>
+<li>在内存中维持一个变量不被销毁，设计私有的方法和变量</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>常驻内存 ，易造成内存泄漏</li>
+</ul>
+<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p>在用构造函数构造对象时，构造出的对象每个都是相互独立的，既不互相影响，也都有自己属性和方法的副本，没有共享可言，也浪费了资源。为了解决这个问题，每个函数都有一个prototype属性，这里记录了 所有实例对象需要共享的属性和方法，而那些不需要共享的数据或者方法，则还放在构造函数中去。而实例对象一经创建，<code>__proto__</code>自动引用prototype中记录的属性和方法。 prototype像是实例对象的原型，实例则像是继承了prototype对象。 <code>__proto__</code>按照继承关系层层引用，形成一条原型链，最终指向null。</p>
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><h3 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h3><p>cors支持post、get两种请求方式。支持cors的服务器对跨域请求响应时将添加Access-Control-Allow-Origin响应头 ，浏览器会分析该响应头中所标示的内容。如果其包含了当前页面所在的域，那么浏览器就将知道这是一个被允许的跨域访问，从而不再根据同源策略来限制用户对该数据的访问。</p>
+<h3 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h3><p>JSONP通过在文档中嵌入一个<code>&lt;script&gt;</code>标记来从另一个域中返回数据。script标签的src属性不受同源策略限制，利用这一点可以实现跨域请求数据，由此而来的缺点也显而易见——仅支持get请求。</p>
+<h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><p><em>webpack</em> 是一个现代 JavaScript 应用程序的<em>静态模块打包器(module bundler)</em>。当 webpack 处理应用程序时，它会递归地构建一个<em>依赖关系图(dependency graph)</em>，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 <em>bundle</em>。 </p>
+<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</span><br><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>);</span><br><span class="line"><span class="keyword">const</span> ExtractTextPlugin = <span class="built_in">require</span>(<span class="string">'extract-text-webpack-plugin'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">        entry: __dirname + <span class="string">"/app/main.js"</span>, <span class="comment">//入口文件</span></span><br><span class="line">        output: &#123;						 <span class="comment">//出口</span></span><br><span class="line">            path: __dirname + <span class="string">"/build"</span>,</span><br><span class="line">            filename: <span class="string">"bundle-[hash].js"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        devtool: <span class="string">'none'</span>,</span><br><span class="line">        devServer: &#123;</span><br><span class="line">            contentBase: <span class="string">"./public"</span>, <span class="comment">//本地服务器所加载的页面所在的目录</span></span><br><span class="line">            historyApiFallback: <span class="literal">true</span>, <span class="comment">//不跳转</span></span><br><span class="line">            inline: <span class="literal">true</span>,</span><br><span class="line">            hot: <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="built_in">module</span>: &#123;</span><br><span class="line">            rules: [&#123;</span><br><span class="line">                    test: <span class="regexp">/(\.jsx|\.js)$/</span>,</span><br><span class="line">                    use: &#123;</span><br><span class="line">                        loader: <span class="string">"babel-loader"</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    exclude: <span class="regexp">/node_modules/</span></span><br><span class="line">                &#125;, &#123;</span><br><span class="line">                    test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">                    use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">                        fallback: <span class="string">"style-loader"</span>,</span><br><span class="line">                        use: [&#123;</span><br><span class="line">                            loader: <span class="string">"css-loader"</span>,</span><br><span class="line">                            options: &#123;</span><br><span class="line">                                modules: <span class="literal">true</span>,</span><br><span class="line">                                localIdentName: <span class="string">'[name]__[local]--[hash:base64:5]'</span></span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;, &#123;</span><br><span class="line">                            loader: <span class="string">"postcss-loader"</span></span><br><span class="line">                        &#125;],</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">            template: __dirname + <span class="string">"/app/index.tmpl.html"</span> <span class="comment">//new 一个这个插件的实例，并传入相关的参数</span></span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> webpack.optimize.OccurrenceOrderPlugin(),</span><br><span class="line">        <span class="keyword">new</span> webpack.optimize.UglifyJsPlugin(),</span><br><span class="line">        <span class="keyword">new</span> ExtractTextPlugin(<span class="string">"style.css"</span>)</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>bable：编译JavaScript </li>
+<li>devserver ：开启一个本地服务环境</li>
+<li>Loaders：调用外部的脚本或工具，实现对不同格式的文件的处理 （Sass - css）</li>
+<li>Plugins：拓展Webpack功能，在整个构建过程中生效，执行相关的任务 </li>
+</ul>
+<h2 id="前端存储"><a href="#前端存储" class="headerlink" title="前端存储"></a>前端存储</h2><h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>cookie是由服务器发给客户端的信息，以文本的形式保存在客户端本地，客户端每次发起请求时将在header里携带cookie一起发送到服务端。由此弥补了http协议无状态的缺陷，服务端可以得知用户的身份信息，跟踪会话。</p>
+<p>cookie受同源策略限制，且存在有效期、路径、httponly（JavaScript不能读取httponly的cookie）、secure（只使用https协议发送，防止中间人攻击）等属性，JavaScript操作cookie需要自己封装函数。</p>
+<p>此外，cookie的数量和大小也有限制，由于每次请求都会带上cookie，因此过多的cookie将导致性能下降。</p>
+<h3 id="sessionStorage"><a href="#sessionStorage" class="headerlink" title="sessionStorage"></a>sessionStorage</h3><p>sessionStorage 是HTML5新增的一个会话存储对象，用于临时保存同一窗口(或标签页)的数据，在关闭窗口或标签页之后将会删除这些数据。 sessionStorage只在本地生效，不会随http请求发送到服务端，sessionStorage同样存在存储大小限制，5MB左右。sessionStorage适合用于SPA单页应用，在不同组件中传值。</p>
+<p>sessionStorage有原生的操作方法，不需要自己动手封装。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sessionStorage.setItem(key , value);  <span class="comment">//写入</span></span><br><span class="line">sessionStorage.getItem(key);  <span class="comment">//读取</span></span><br><span class="line">sessionStorage.removeItem(key);  <span class="comment">//移除</span></span><br><span class="line">sessionStorage.clear();  <span class="comment">//清除所有值</span></span><br></pre></td></tr></table></figure>
+<h3 id="localStorage"><a href="#localStorage" class="headerlink" title="localStorage"></a>localStorage</h3><p>localStorage也是html5新增的特性，实现本地存储。不同于cookie，localStorage的存储大小为5MB左右，与sessionStorage唯一不同的是，localStorage是永久的，会话结束也不会被销毁，其语法也与sessionStorage相似。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">localStorage.setItem(key, value);</span><br><span class="line">localStorage.getItem(key);</span><br><span class="line">localStorage.removeItem(key);</span><br><span class="line">localStorage.clear();</span><br></pre></td></tr></table></figure>
+<h3 id="indexedDB-amp-WebSql"><a href="#indexedDB-amp-WebSql" class="headerlink" title="indexedDB &amp; WebSql"></a>indexedDB &amp; WebSql</h3><p>实现了一个前端的持久化数据库。</p>
+<h2 id="BFC（块级格式化上下文）"><a href="#BFC（块级格式化上下文）" class="headerlink" title="BFC（块级格式化上下文）"></a>BFC（块级格式化上下文）</h2><p>一个独立的渲染区域，只有块级元素参与， 它规定了内部的块级元素如何布局，并且与这个区域外部毫不相干。 </p>
+<h3 id="生成BFC"><a href="#生成BFC" class="headerlink" title="生成BFC"></a>生成BFC</h3><ul>
+<li>根元素</li>
+<li>浮动元素</li>
+<li>position为absolute或fixed</li>
+<li>display为inline-block, table-cell, table-caption, flex, inline-flex</li>
+<li>overflow不为visible</li>
+</ul>
+<p>参考：<a href="http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html" target="_blank" rel="noopener">http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html</a></p>
+<h2 id="Web攻击"><a href="#Web攻击" class="headerlink" title="Web攻击"></a>Web攻击</h2><h3 id="XSS（跨站脚本攻击-）"><a href="#XSS（跨站脚本攻击-）" class="headerlink" title="XSS（跨站脚本攻击 ）"></a>XSS（跨站脚本攻击 ）</h3><p>攻击者向Web页面中插入恶意Script代码，当用户浏览该页时，嵌入其中的Script代码会被执行，从而达到恶意攻击用户的目的。 </p>
+<p>XSS是由于浏览器直接执行不可信的用户输入导致的，包括存储型和反射型两种，反射型XSS攻击没有将恶意代码保存到网站，通过引诱用户点击触发。存储型XSS将恶意代码保存在网站服务器中，每当用户访问网站时触发，因此危害更大。</p>
+<p>防御方法：前端对用户表单提交的数据进行过滤，检测用户输入是否含有非法内容，如&lt;&gt;;&amp;+等，同时后端应对前端的提交内容做进一步的转义处理，</p>
+<h3 id="CSRF（跨站请求伪造-）"><a href="#CSRF（跨站请求伪造-）" class="headerlink" title="CSRF（跨站请求伪造 ）"></a>CSRF（跨站请求伪造 ）</h3><p>XSS利用受信任的用户，恶意代码由攻击者提交，而CSRF利用受信任的网站，构造好恶意代码后由受害用户提交。CSRF漏洞允许攻击者利用正常用户的身份发起一个请求，达到恶意修改密码、修改绑定邮箱、代替支付等行为。</p>
+<p>防御方法：为每个用户会话随机生成一个token，保存在session中，每次提交时验证服务端的session与客户端的token是否相同。</p>
+<p>如果事先XSS拿到cookie，再去CSRF。。</p>
+<h2 id="服务端推送"><a href="#服务端推送" class="headerlink" title="服务端推送"></a>服务端推送</h2><h3 id="ajax轮询"><a href="#ajax轮询" class="headerlink" title="ajax轮询"></a>ajax轮询</h3><p>每隔一段时间发送一次ajax请求，直到接到数据为止。会对造成服务端压力，发送大量无用请求。</p>
+<h3 id="ajax长轮询"><a href="#ajax长轮询" class="headerlink" title="ajax长轮询"></a>ajax长轮询</h3><p>发送一次请求，若没有新消息则服务端将请求挂起，直到有新消息再返回。会造成服务端进程占用，资源不能即时释放。</p>
+<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><p>先利用http协议握手，随后使用TCP连接，全双工通信。</p>
+<p>———————–8月20日更新———————-</p>
+<p>学历问题签合同的时候被某外包拒签。这个事情告诉我们不确定的事情尽量先处理完。。</p>
+<p>此前面试通过4家公司，收到的反馈有对项目规范化流程不熟练，项目经验略少且偏向展示，没有复杂交互经验，有些细节知识掌握不到位，停留在死记硬背的水平上。电话面试的时候真应该录音，方便整理、查漏补缺，应对下一次面试。</p>
+<p>————————补充部分面试经验——————–</p>
+<p>实际上面试过程中，我前面整理的知识点都有问到，算作是基础的部分，但只是简单的梳理，对各部分知识的了解应该能自己阐述明白，做到条理清晰，用词规范准确最好。</p>
+<h2 id="ES6语法"><a href="#ES6语法" class="headerlink" title="ES6语法"></a>ES6语法</h2><p>几乎每次面试必问。。答出let，const声明变量、模板字符串、箭头函数、class声明类、对象扩展、数组扩展、promise、async（await）即可。</p>
+<h3 id="let、const声明变量"><a href="#let、const声明变量" class="headerlink" title="let、const声明变量"></a>let、const声明变量</h3><p>let声明变量产生块级作用域和暂时性死区，const声明常量不可更改其值，但const声明对象可更改对象的属性，答出其原理。</p>
+<h3 id="字符串扩展"><a href="#字符串扩展" class="headerlink" title="字符串扩展"></a>字符串扩展</h3><p>可保留字符串内的回车换行，内嵌变量或者函数。</p>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>箭头函数和普通函数的区别，this指向问题。箭头函数的函数体中的this仍指向其所在的上下文环境，而普通函数内部的this指向将随函数的调用者的改变而改变。</p>
+<h3 id="class声明类"><a href="#class声明类" class="headerlink" title="class声明类"></a>class声明类</h3><p>其原理仍然是js的原型链继承。阐述时理清prototype，<code>__proto__</code>，constructor等指针的指向和继承关系。</p>
+<h3 id="对象扩展"><a href="#对象扩展" class="headerlink" title="对象扩展"></a>对象扩展</h3><p>直接在对象中写变量，属性值为变量值，属性名为变量名。</p>
+<h3 id="数组扩展"><a href="#数组扩展" class="headerlink" title="数组扩展"></a>数组扩展</h3><p><code>...</code>运算符实现数组或者对象的克隆、合并等等。这部分涉及到的浅拷贝和深拷贝的理解，理解为主。此外问到过数组的迭代map、foreach的区别，fliter方法等等。</p>
+<h3 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h3><p>promise问的相当多，js实现异步是回调和promise，promise的思想和原理需要简单过目记忆，链式调用的原理，race方法和all方法使用的场景也有问到。</p>
+<h3 id="async-amp-await"><a href="#async-amp-await" class="headerlink" title="async &amp; await"></a>async &amp; await</h3><p>放在一起说，ES6用迭代函数generator实现了程序中断，在generator函数的内部使用yield和next等方法控制中断和恢复程序执行，async和await是generator函数的一套语法糖，合并了复杂的语法实现简化语法。理解不了的话这段话可以背一下。。</p>
+<h2 id="react"><a href="#react" class="headerlink" title="react"></a>react</h2><h3 id="render在什么情况下会被触发"><a href="#render在什么情况下会被触发" class="headerlink" title="render在什么情况下会被触发"></a>render在什么情况下会被触发</h3><p>三个情况，props改变，state改变，父组件状态改变。父组件更新子组件会被重新render，在子组件的shouldComponentUpdate生命周期中返回false阻止回流，做一部分性能优化。</p>
+<p>这里涉及一个纯组件的概念，通过继承一个特殊的类pureComponent来实现自动性能优化，在状态改变时对虚拟DOM做一层浅比较，然后自动判断是否需要重新渲染。详细原理可以自行百度。</p>
+<h3 id="connect函数"><a href="#connect函数" class="headerlink" title="connect函数"></a>connect函数</h3><p>将组件的展示部分和逻辑部分链接起来，返回一个高阶组件。connect函数接受两个参数mapStateToProps和mapDispatchToProps分别将状态和dispatch函数映射到当前组件的props中，同时返回一个函数，这个函数接收当前组件为参数，最终返回一个将逻辑和展示组合在一起的高阶组件。高阶组件的本质是函数。理解不了可以背一背。</p>
+<h3 id="react-redux的流程"><a href="#react-redux的流程" class="headerlink" title="react-redux的流程"></a>react-redux的流程</h3><p>官网上的说明就不错。redux将所有需要管理的状态放在一个单一的store中，改变state的唯一方法是触发一个action，action是一个普通对象，描述了状态应该怎样改变，dispatch函数将action提交给reduce函数，reducer函数应该是一个纯函数，接收到action后将新状态与老状态合并，返回一个新的状态，触发组件的更新。理解不了可以背一背。</p>
+<h3 id="diff算法"><a href="#diff算法" class="headerlink" title="diff算法"></a>diff算法</h3><p>react框架本身不知道哪个组件做了更改需要重新渲染，因此render函数需要靠setState或者接受新props来触发，通过diff算法在虚拟DOM中统计比较发生变化的组件，将需要重新渲染的组件标记为脏，然后根据更新后的虚拟DOM重新渲染发生变化的组件。觉得不够详细可以再自己整理。虚拟DOM什么的自己试着说两遍。</p>
+<h2 id="antd"><a href="#antd" class="headerlink" title="antd"></a>antd</h2><p>antd可以着重去看它的表单控件和表格控件，做<strong>输入合法性验证和独立校验</strong>的方法，antd经常遇到的问题在于若和设计稿有不符，怎么去修改antd组件的样式。</p>
+<p>主题方面，antd可以自己设计主题色调，圆角等，官方文档里有说明。第三方库<strong>styled-components</strong>也可以自定义antd组件样式。其他覆盖className的技巧有（mei）兴（shi）趣（gan）可以自己去segmentfault上找。</p>
+<p>这部分结合自己的项目经验去找去看，问的还是相当多的。</p>
+<h2 id="git操作"><a href="#git操作" class="headerlink" title="git操作"></a>git操作</h2><p>必会的基础，git add 、commit、push、branch、checkout、merge、pull、status、log每个命令的作用，工作时提交的流程，合并分支出错的解决办法：根据报错找到错误位置手动合并。</p>
+<h2 id="项目具体"><a href="#项目具体" class="headerlink" title="项目具体"></a>项目具体</h2><p>对自己简历上写的项目的业务逻辑，功能和技术要点要了然于胸，多看几个项目功能的具体实践甚至是github上去找几个项目实践来看看，比如登陆注册，web存储，redux应用，表单控件验证，表格操作，要通过看代码理清楚具体是怎么实现的，说出来才有可信度。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试笔记/" rel="tag"># 面试笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/20/react简记/" rel="next" title="react简记">
+                <i class="fa fa-chevron-left"></i> react简记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/13/2018-10-第二周读书笔记/" rel="prev" title="2018/10第二周读书笔记">
+                2018/10第二周读书笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjcxMC8xMzI0NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="xcola" />
+            
+              <p class="site-author-name" itemprop="name">xcola</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/flycatrix" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:chen-fish@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/灬柠檬猪" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=501960614&website=www.oicqzone.com" target="_blank" title="QQZone">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQZone</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://airpoc.cn/" title="Air的博客" target="_blank">Air的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://18dian.github.io/" title="林檀的博客" target="_blank">林檀的博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#移动端适配"><span class="nav-number">1.</span> <span class="nav-text">移动端适配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#响应式布局"><span class="nav-number">1.1.</span> <span class="nav-text">响应式布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流式布局（百分比布局）"><span class="nav-number">1.2.</span> <span class="nav-text">流式布局（百分比布局）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rem布局（等比缩放、弹性布局）"><span class="nav-number">1.3.</span> <span class="nav-text">rem布局（等比缩放、弹性布局）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能优化"><span class="nav-number">2.</span> <span class="nav-text">性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#懒加载"><span class="nav-number">3.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">4.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型链"><span class="nav-number">5.</span> <span class="nav-text">原型链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域"><span class="nav-number">6.</span> <span class="nav-text">跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cors"><span class="nav-number">6.1.</span> <span class="nav-text">cors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsonp"><span class="nav-number">6.2.</span> <span class="nav-text">jsonp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack"><span class="nav-number">7.</span> <span class="nav-text">webpack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-config-js"><span class="nav-number">7.1.</span> <span class="nav-text">webpack.config.js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端存储"><span class="nav-number">8.</span> <span class="nav-text">前端存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie"><span class="nav-number">8.1.</span> <span class="nav-text">cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sessionStorage"><span class="nav-number">8.2.</span> <span class="nav-text">sessionStorage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#localStorage"><span class="nav-number">8.3.</span> <span class="nav-text">localStorage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#indexedDB-amp-WebSql"><span class="nav-number">8.4.</span> <span class="nav-text">indexedDB &amp; WebSql</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFC（块级格式化上下文）"><span class="nav-number">9.</span> <span class="nav-text">BFC（块级格式化上下文）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成BFC"><span class="nav-number">9.1.</span> <span class="nav-text">生成BFC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web攻击"><span class="nav-number">10.</span> <span class="nav-text">Web攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS（跨站脚本攻击-）"><span class="nav-number">10.1.</span> <span class="nav-text">XSS（跨站脚本攻击 ）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSRF（跨站请求伪造-）"><span class="nav-number">10.2.</span> <span class="nav-text">CSRF（跨站请求伪造 ）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端推送"><span class="nav-number">11.</span> <span class="nav-text">服务端推送</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ajax轮询"><span class="nav-number">11.1.</span> <span class="nav-text">ajax轮询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ajax长轮询"><span class="nav-number">11.2.</span> <span class="nav-text">ajax长轮询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket"><span class="nav-number">11.3.</span> <span class="nav-text">WebSocket</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6语法"><span class="nav-number">12.</span> <span class="nav-text">ES6语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#let、const声明变量"><span class="nav-number">12.1.</span> <span class="nav-text">let、const声明变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串扩展"><span class="nav-number">12.2.</span> <span class="nav-text">字符串扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#箭头函数"><span class="nav-number">12.3.</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class声明类"><span class="nav-number">12.4.</span> <span class="nav-text">class声明类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象扩展"><span class="nav-number">12.5.</span> <span class="nav-text">对象扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组扩展"><span class="nav-number">12.6.</span> <span class="nav-text">数组扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#promise"><span class="nav-number">12.7.</span> <span class="nav-text">promise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async-amp-await"><span class="nav-number">12.8.</span> <span class="nav-text">async &amp; await</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react"><span class="nav-number">13.</span> <span class="nav-text">react</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#render在什么情况下会被触发"><span class="nav-number">13.1.</span> <span class="nav-text">render在什么情况下会被触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#connect函数"><span class="nav-number">13.2.</span> <span class="nav-text">connect函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#react-redux的流程"><span class="nav-number">13.3.</span> <span class="nav-text">react-redux的流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff算法"><span class="nav-number">13.4.</span> <span class="nav-text">diff算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#antd"><span class="nav-number">14.</span> <span class="nav-text">antd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git操作"><span class="nav-number">15.</span> <span class="nav-text">git操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目具体"><span class="nav-number">16.</span> <span class="nav-text">项目具体</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xcola</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">29.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="commonJS&amp;emsp;&amp;emsp;在我对js的理解还停留在只用来做做页面认证和特效的时候，它早已牛逼到支持操作系统层面的操作了。根据学习整理，大致梳理出这么一个故事 —— 虽然js天生的弱类型和半吊子面向对象的特性在逐步向强类型语言靠拢，但js没有模块系统、标准库较少、没有包管理工具的痛点阻碍着js发展出开发大型应用的能力。于是commonJS跳出来尝试解决这个问题。commonJS的首页上">
+<meta name="keywords" content="学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于JavaScript模块化开发的梳理">
+<meta property="og:url" content="http://yoursite.com/2018/06/10/关于JavaScript模块化开发的梳理/index.html">
+<meta property="og:site_name" content="xco1a&#39;s b10g">
+<meta property="og:description" content="commonJS&amp;emsp;&amp;emsp;在我对js的理解还停留在只用来做做页面认证和特效的时候，它早已牛逼到支持操作系统层面的操作了。根据学习整理，大致梳理出这么一个故事 —— 虽然js天生的弱类型和半吊子面向对象的特性在逐步向强类型语言靠拢，但js没有模块系统、标准库较少、没有包管理工具的痛点阻碍着js发展出开发大型应用的能力。于是commonJS跳出来尝试解决这个问题。commonJS的首页上">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-18T12:52:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于JavaScript模块化开发的梳理">
+<meta name="twitter:description" content="commonJS&amp;emsp;&amp;emsp;在我对js的理解还停留在只用来做做页面认证和特效的时候，它早已牛逼到支持操作系统层面的操作了。根据学习整理，大致梳理出这么一个故事 —— 虽然js天生的弱类型和半吊子面向对象的特性在逐步向强类型语言靠拢，但js没有模块系统、标准库较少、没有包管理工具的痛点阻碍着js发展出开发大型应用的能力。于是commonJS跳出来尝试解决这个问题。commonJS的首页上">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/10/关于JavaScript模块化开发的梳理/"/>
+
+
+
+
+
+  <title>关于JavaScript模块化开发的梳理 | xco1a's b10g</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xco1a's b10g</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/10/关于JavaScript模块化开发的梳理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xcola">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xco1a's b10g">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">关于JavaScript模块化开发的梳理</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-10T14:52:35+08:00">
+                2018-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="commonJS"><a href="#commonJS" class="headerlink" title="commonJS"></a>commonJS</h2><p>&emsp;&emsp;在我对js的理解还停留在只用来做做页面认证和特效的时候，它早已牛逼到支持操作系统层面的操作了。根据学习整理，大致梳理出这么一个故事 —— 虽然js天生的弱类型和半吊子面向对象的特性在逐步向强类型语言靠拢，但js没有模块系统、标准库较少、没有包管理工具的痛点阻碍着js发展出开发大型应用的能力。于是<a href="http://www.commonjs.org/" target="_blank" rel="noopener">commonJS</a>跳出来尝试解决这个问题。<a href="http://www.commonjs.org/" target="_blank" rel="noopener">commonJS</a>的首页上就写着</p>
+<blockquote>
+<p>javascript: not just for browsers any more !</p>
+</blockquote>
+<p>可见<a href="http://www.commonjs.org/" target="_blank" rel="noopener">commonJS</a>是希望Js运行在浏览器以外发挥作用的。</p>
+<p>&emsp;&emsp;<a href="http://www.commonjs.org/" target="_blank" rel="noopener">commonJS</a>针对JS模块化开发制定了一系列规范，主要包括模块引用、模块定义、模块标识。规范仅仅是规范，亦可以说是指导，而node.js实现了它。nodejs把Chrome V8从浏览器中剥离出来，又编写了一部分底层代码，添加了对I/O操作的支持，js获得了在操作系统层面的运行能力，于是浏览器框不住js了。</p>
+<p>&emsp;&emsp;在commonJS中，一个文件就是一个模块，拥有单独的作用域， 普通方式定义的变量、函数、对象都属于该模块内，因为所有代码都运行在局部作用域内，因此避免了污染全局作用域的问题。模块可以多次加载但只会运行一次，此后模块被缓存起来可以被直接调用，模块的加载顺序由书写顺序决定，以同步的方式加载。</p>
+<p>&emsp;&emsp;但commonJS旨在使js获得在服务端开发的能力，因此模块规范的订制都采用同步的方式，但在浏览器中，同步意味着用户必须等待程序的执行、加载等步骤，由此造成严重的用户体验和使用性能问题。那么浏览器中js程序的模块化规范怎么办呢？</p>
+<h2 id="AMD和CMD"><a href="#AMD和CMD" class="headerlink" title="AMD和CMD"></a>AMD和CMD</h2><p>&emsp;&emsp;实际上，为了达到浏览器端模块化开发的目的，目前有两种常用的规范——AMD（Asynchronous Module Definition）和CMD（Common Module Definition ）。引用玉伯大佬在知乎上的解释。</p>
+<blockquote>
+<p>AMD 是 RequireJS 在推广过程中对模块定义的规范化产出。</p>
+<p> CMD 是 SeaJS 在推广过程中对模块定义的规范化产出。 </p>
+</blockquote>
+<p>&emsp;&emsp;AMD和CMD均实现了异步模块加载，但有其各自的特点。</p>
+<h3 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h3><p>&emsp;&emsp;RequireJS应用的异步加载模块规范，需要注意的是，依赖必须在模块开头写明。AMD主要提供define和require两个方法来进行模块化编程 ，define用于定义模块，require用于引入模块。</p>
+<h4 id="AMD的define"><a href="#AMD的define" class="headerlink" title="AMD的define"></a>AMD的define</h4><p>&emsp;&emsp;define用于定义模块，通过return对象来暴露内部定义的属性和方法，实际上应用的就是采用 匿名函数模块化开发 的思路。关于基本js模块化开发的介绍可移步另一篇博客 —— <a href="http://blog.xcola.top/2018/05/23/%E5%85%B3%E4%BA%8Ejavascript%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/" target="_blank" rel="noopener">关于javascript模块化开发</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">func1</span> (<span class="params">args</span>)</span>&#123;</span><br><span class="line">        <span class="comment">//....</span></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">func2</span> (<span class="params">args1,args2</span>)</span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        func1: func1,</span><br><span class="line">        func2: func2</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;当模块独立运行不需要依赖别的模块时，上面的代码是可行的。当模块之间存在依赖时，需要在define中以数组的方式指明依赖的模块。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'./modules1'</span>,<span class="string">'./modules2'</span>,..],<span class="function"><span class="keyword">function</span>(<span class="params">m1,m2,...</span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">func1</span> (<span class="params">args</span>)</span>&#123;</span><br><span class="line">        <span class="comment">//可调用modules1、modules2中的方法</span></span><br><span class="line">        <span class="keyword">return</span> m1.func1(args);</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">func2</span> (<span class="params">args1,args2</span>)</span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        func1: func1,</span><br><span class="line">        func2: func2</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;可以看出，在添加了依赖的模块后，define的回调函数中指定了几个形参，这几个形参即为各模块中返回的对象，因此可以通过调用形参的方法获得别的模块中定义的功能。</p>
+<h4 id="AMD的require"><a href="#AMD的require" class="headerlink" title="AMD的require"></a>AMD的require</h4><p>&emsp;&emsp;require用于引入模块，语法也与define相近，处理亦置于回调函数中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>([<span class="string">'./modules1'</span>,<span class="string">'./modules2'</span>,..],<span class="function"><span class="keyword">function</span>(<span class="params">m1,m2,..</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="AMD的调用方式"><a href="#AMD的调用方式" class="headerlink" title="AMD的调用方式"></a>AMD的调用方式</h4><p>&emsp;&emsp;RequireJS的调用采取标签的形式，标签中指定入口。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">data-main</span>=<span class="string">'./scripts/main'</span> <span class="attr">src</span>=<span class="string">'./scripts/require.js'</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;data-main指定了模块的入口，这里main.js即为入口，依赖模块将通过入口开始异步加载进入执行。</p>
+<h3 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h3><p>&emsp;&emsp;这是淘宝的攻城狮玉伯开发的seaJS执行的标准，名字据说是有“ 海纳百川，有容乃大 ”的寓意。CMD和AMD都有define和require方法，但CMD实际上是不需要在require和define中指定依赖的。</p>
+<h4 id="CMD的define"><a href="#CMD的define" class="headerlink" title="CMD的define"></a>CMD的define</h4><p>define的三个参数分别指明</p>
+<ul>
+<li><p>require – 依赖的模块（以id为标识符）（推荐就近书写）</p>
+</li>
+<li><p>exports – 向外界提供的接口</p>
+</li>
+<li><p>modules – 一个对象，存储当前模块的属性和方法【id（标识符）,uri（绝对路径）,exports（导出接口）】</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//CMD</span></span><br><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require,exports,modules</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//依赖模块的使用</span></span><br><span class="line">    <span class="keyword">var</span> m1 = <span class="built_in">require</span>(<span class="string">'./modules1'</span>);</span><br><span class="line">    m1.func1();</span><br><span class="line">    <span class="comment">//导出方法</span></span><br><span class="line">    exports.func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 或者。。</span></span><br><span class="line">    modules.exports = &#123;</span><br><span class="line">        func: func</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="CMD的调用方式"><a href="#CMD的调用方式" class="headerlink" title="CMD的调用方式"></a>CMD的调用方式</h4><p>首先是毫无疑问的第一步。。引入seaJS。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../sea-modules/seajs/seajs/2.2.0/sea.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在引入seaJS后，进行基础的配置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// seajs 的简单配置</span></span><br><span class="line">seajs.config(&#123;</span><br><span class="line">    <span class="comment">// 配置路径，Sea.js 在解析顶级标识时，会相对 base 路径来解析。</span></span><br><span class="line">  base: <span class="string">"../sea-modules/"</span>,</span><br><span class="line">    <span class="comment">// 配置别名，有了alias后可以require('jquery')，否则只能require ID</span></span><br><span class="line">  alias: &#123;		</span><br><span class="line">    <span class="string">"jquery"</span>: <span class="string">"jquery/jquery/1.10.1/jquery.js"</span> </span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加载入口模块</span></span><br><span class="line">seajs.use(<span class="string">"../static/hello/src/main"</span>)</span><br></pre></td></tr></table></figure>
+<p>当然seaJS的配置还有很多。。有个博客写的很详细，<a href="http://yslove.net/seajs/" target="_blank" rel="noopener">传送门</a>。</p>
+<h3 id="CMD和AMD的区别"><a href="#CMD和AMD的区别" class="headerlink" title="CMD和AMD的区别"></a>CMD和AMD的区别</h3><p>&emsp;&emsp;至于AMD和CMD的差别，引用玉伯的描述：AMD先定义所有依赖，操作在加载完成后的回调函数中执行，而CMD依赖就近，用到什么依赖到时候再说。对于依赖的模块，AMD提前执行，CMD延后执行。（但执行AMD标准的RequireJS也已添加延迟执行的选项。）另外，AMD 的 API 默认是一个当多个用，CMD 的 API 严格区分，推崇职责单一。 </p>
+<p>&emsp;&emsp;CMD的哲学是 as lazy as possible，emm深得我心。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/31/jQuery-core-js阅读笔记/" rel="next" title="jQuery-core.js（整体架构部分）阅读笔记">
+                <i class="fa fa-chevron-left"></i> jQuery-core.js（整体架构部分）阅读笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/16/express-mongodb搭建简易博客系统/" rel="prev" title="express+mongodb搭建简易博客系统">
+                express+mongodb搭建简易博客系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjcxMC8xMzI0NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="xcola" />
+            
+              <p class="site-author-name" itemprop="name">xcola</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/flycatrix" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:chen-fish@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/灬柠檬猪" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=501960614&website=www.oicqzone.com" target="_blank" title="QQZone">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQZone</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://airpoc.cn/" title="Air的博客" target="_blank">Air的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://18dian.github.io/" title="林檀的博客" target="_blank">林檀的博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#commonJS"><span class="nav-number">1.</span> <span class="nav-text">commonJS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AMD和CMD"><span class="nav-number">2.</span> <span class="nav-text">AMD和CMD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AMD"><span class="nav-number">2.1.</span> <span class="nav-text">AMD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AMD的define"><span class="nav-number">2.1.1.</span> <span class="nav-text">AMD的define</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AMD的require"><span class="nav-number">2.1.2.</span> <span class="nav-text">AMD的require</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AMD的调用方式"><span class="nav-number">2.1.3.</span> <span class="nav-text">AMD的调用方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMD"><span class="nav-number">2.2.</span> <span class="nav-text">CMD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CMD的define"><span class="nav-number">2.2.1.</span> <span class="nav-text">CMD的define</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CMD的调用方式"><span class="nav-number">2.2.2.</span> <span class="nav-text">CMD的调用方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMD和AMD的区别"><span class="nav-number">2.3.</span> <span class="nav-text">CMD和AMD的区别</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xcola</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">29.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

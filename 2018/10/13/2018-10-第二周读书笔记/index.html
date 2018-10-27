@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记,JavaScript设计模式与开发实践," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="不知不觉断更三个月了。。阿里云外包的工作没有想象中的难适应，多页面vue+jQuery的技术栈，大部分时间都像在写jQuery和原生JS，实现的需求虽然算是过关了，但是觉得代码质量和代码规范还是一团糟。。从一周前每天看几章《JavaScript设计模式与开发实践》，写了点笔记和感想，趁着周末总结出来。 关于面向对象的JavaScript传统面向对象语言的几个重要特征，比如继承，封装，多态，在Jav">
+<meta name="keywords" content="学习笔记,JavaScript设计模式与开发实践">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018&#x2F;10第二周读书笔记">
+<meta property="og:url" content="http://yoursite.com/2018/10/13/2018-10-第二周读书笔记/index.html">
+<meta property="og:site_name" content="xco1a&#39;s b10g">
+<meta property="og:description" content="不知不觉断更三个月了。。阿里云外包的工作没有想象中的难适应，多页面vue+jQuery的技术栈，大部分时间都像在写jQuery和原生JS，实现的需求虽然算是过关了，但是觉得代码质量和代码规范还是一团糟。。从一周前每天看几章《JavaScript设计模式与开发实践》，写了点笔记和感想，趁着周末总结出来。 关于面向对象的JavaScript传统面向对象语言的几个重要特征，比如继承，封装，多态，在Jav">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-14T13:03:39.568Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018&#x2F;10第二周读书笔记">
+<meta name="twitter:description" content="不知不觉断更三个月了。。阿里云外包的工作没有想象中的难适应，多页面vue+jQuery的技术栈，大部分时间都像在写jQuery和原生JS，实现的需求虽然算是过关了，但是觉得代码质量和代码规范还是一团糟。。从一周前每天看几章《JavaScript设计模式与开发实践》，写了点笔记和感想，趁着周末总结出来。 关于面向对象的JavaScript传统面向对象语言的几个重要特征，比如继承，封装，多态，在Jav">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/13/2018-10-第二周读书笔记/"/>
+
+
+
+
+
+  <title>2018/10第二周读书笔记 | xco1a's b10g</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xco1a's b10g</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/13/2018-10-第二周读书笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xcola">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xco1a's b10g">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">2018/10第二周读书笔记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-13T12:54:49+08:00">
+                2018-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>不知不觉断更三个月了。。阿里云外包的工作没有想象中的难适应，多页面vue+jQuery的技术栈，大部分时间都像在写jQuery和原生JS，实现的需求虽然算是过关了，但是觉得代码质量和代码规范还是一团糟。。从一周前每天看几章《JavaScript设计模式与开发实践》，写了点笔记和感想，趁着周末总结出来。</p>
+<h2 id="关于面向对象的JavaScript"><a href="#关于面向对象的JavaScript" class="headerlink" title="关于面向对象的JavaScript"></a>关于面向对象的JavaScript</h2><p>传统面向对象语言的几个重要特征，比如继承，封装，多态，在JavaScript动态类型脚本语言中都用迂回的方式实现。比如封装不再依赖private，protected之类的关键字，而是靠函数作用域实现；继承靠原型链实现；多态靠检测参数的值或者给传进来的对象定义一个相同方法名的不同方法。</p>
+<h3 id="动态类型"><a href="#动态类型" class="headerlink" title="动态类型"></a>动态类型</h3><blockquote>
+<p>对变量赋值时，不需考虑它的类型 </p>
+<p>——可以尝试调用任何对象的任意方法，而不需要考虑它原本是否被设计为拥有该方法</p>
+</blockquote>
+<p>只关注对象的行为，不去关注对象本身。例如一个对象如果有pop和push方法并且它们有正确的实现，那么就可以当作一个栈来使用（鸭子类型）。</p>
+<p>动态类型赋予JavaScript极大的灵活性，也是它能够简化实现各种静态语言设计模式的重要原因。</p>
+<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>同一操作作用于不同的对象上可以产生不同的解释和执行结果。</p>
+<p>——把“做什么”和“谁来做”相分离。</p>
+<p>1，检测参数，用if分支实现多态。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> student = &#123;</span><br><span class="line">    say:funtion()&#123;</span><br><span class="line">    	<span class="built_in">console</span>.log(<span class="string">'am student'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> teacher = &#123;</span><br><span class="line">    say:funtion()&#123;</span><br><span class="line">    	<span class="built_in">console</span>.log(<span class="string">'am teacher'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> introduce = <span class="function"><span class="keyword">function</span>(<span class="params">position</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(position === <span class="string">'student'</span>)&#123;            <span class="comment">// 检测传进来的参数值选择采取的操作</span></span><br><span class="line">        student.say()</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(position === <span class="string">'teacher'</span>)&#123;</span><br><span class="line">        teacher.say()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">introduce(<span class="string">'teacher'</span>)  <span class="comment">// am teacher</span></span><br></pre></td></tr></table></figure>
+<p>introduce函数通过检测传进来的参数值来执行不同的操作，但如果想再增加一个职位，那么就只能在introduce函数里继续堆砌if语句。</p>
+<p>这里可以注意到，student和teacher有同一个方法名的方法say()，虽然他们执行结果不同，但是调用过程是一样的，因此还可以直接把不同的对象传进去，调用同一个方法名的方法实现多态。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> introduce = <span class="function"><span class="keyword">function</span>(<span class="params">position</span>)</span>&#123;</span><br><span class="line">    position.say()</span><br><span class="line">&#125;</span><br><span class="line">introduce(student);  <span class="comment">// am student</span></span><br><span class="line">introduce(teacher);  <span class="comment">// am teacher</span></span><br></pre></td></tr></table></figure>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>创建一个对象有两种思路：</p>
+<pre><code>a，先指定类型，通过实例化这个类获得一个对象。
+
+b，不关心具体类型，找到一个对象克隆得到一个对象。
+</code></pre><p>很明显JavaScript使用第二种思路创建对象。具体的实现过程是那个经典的问题，new操作都干了啥。。</p>
+<p>这种创建对象的思路有两个重要的特征，一是<strong>对象能够记住它的原型</strong>，二是<strong>如果对象无法响应一个请求，会委托给自己的原型去处理。</strong></p>
+<p>JavaScript的对象最初都是由Object.prototype克隆得到的，所以所有对象最初的原型都指向Object.prototype，但是JavaScript允许对象动态的改变对象原型的指向，因此才有各种灵活的继承实现。</p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>保证一个类仅有一个实例，并提供一个访问这个实例的全局访问点。</p>
+<p>思路：用一个变量标识这个类有没有创建过对象，如果创建过则直接返回之前创建的对象，否则创建一个实例并返回。</p>
+<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><p>普通实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Singleton.getInstance = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> instance = <span class="literal">null</span>;                <span class="comment">// 是否创建过对象的标识</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!instance)&#123;</span><br><span class="line">            instance = <span class="keyword">new</span> Singleton(name);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;                <span class="comment">// 访问点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p>缺点：使用者必须用Singleton.getInstance创建单例，而不能直接使用new Singleton()的方式。</p>
+<p>透明实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Singleton = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> instance;                     <span class="comment">// 是否创建过对象的标识</span></span><br><span class="line">    <span class="keyword">var</span> Singleton = <span class="function"><span class="keyword">function</span>(<span class="params">props</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance)&#123;</span><br><span class="line">            <span class="keyword">return</span> instance;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.name = props;</span><br><span class="line">        <span class="keyword">this</span>.init();				 <span class="comment">// 为单例执行某些操作</span></span><br><span class="line">        <span class="keyword">return</span> instance = <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Singleton.prototype.init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    	<span class="comment">// some code...</span></span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> Singleton;</span><br><span class="line">&#125;)()</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Singleton(<span class="string">'xcola'</span>)</span><br><span class="line">a   <span class="comment">// Singleton &#123;name: "xcola"&#125;</span></span><br></pre></td></tr></table></figure>
+<p>缺点：违反单一职责原则，代码复杂。</p>
+<p>代理实现：将管理单一实例的代码和创建实例的代码相拆分，使得创建不同的对象也可以使用单例模式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> CreateObj = <span class="function"><span class="keyword">function</span>(<span class="params">props</span>)</span>&#123;			<span class="comment">// 创建单例</span></span><br><span class="line">    <span class="keyword">this</span>.name = props;</span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line">&#125;</span><br><span class="line">CreateObj.prototype.init = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;       <span class="comment">// 执行构建单例的操作</span></span><br><span class="line">	<span class="comment">// some code...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> proxyCreateObj = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;			<span class="comment">// 代理实现控制单一实例</span></span><br><span class="line">    <span class="keyword">var</span> instance;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">props</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!instance)&#123;</span><br><span class="line">            instance = <span class="keyword">new</span> CreateObj(props);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"><span class="keyword">var</span> a = proxyCreateObj(<span class="string">'emm'</span>)</span><br><span class="line">a     <span class="comment">// CreateObj &#123;name: "emm"&#125;</span></span><br></pre></td></tr></table></figure>
+<p>BB了这么多，JavaScript最简单的单例实现是创建全局变量。/笑哭</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;<span class="attr">name</span>:<span class="string">'emm'</span>&#125;</span><br><span class="line"><span class="comment">//首先它独一无二，其次它能全局都访问到</span></span><br></pre></td></tr></table></figure>
+<p>大量使用全局变量总是不好的，引入命名空间。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> namespace = &#123;</span><br><span class="line">    a:&#123;&#125;,</span><br><span class="line">    b:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="关于惰性单例"><a href="#关于惰性单例" class="headerlink" title="关于惰性单例"></a>关于惰性单例</h3><p>在需要的时候才创建单例实例（事件触发）。将创建实例的职责和管理单例的职责写在两个方法里，他们相互之间可以独立变化而互不影响，结合在一起使用就完成了一个单例模式。</p>
+<h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><p>定义一系列的算法，把他们封装起来，使他们可以相互替换。</p>
+<p>思路：一个基于策略模式的程序由至少两部分组成，一组<strong>策略类，存放具体的算法</strong>，一组<strong>环境类，接受客户的请求，委托给某一个策略类处理。</strong></p>
+<p>做法：告诉程序，谁来做，做什么。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> strategies = &#123;					<span class="comment">// 一组策略类</span></span><br><span class="line">    <span class="string">"s"</span>:<span class="function"><span class="keyword">function</span>(<span class="params">salary</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> salary*<span class="number">4</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"a"</span>:<span class="function"><span class="keyword">function</span>(<span class="params">salary</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> salary*<span class="number">3</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">	<span class="string">"b"</span>:<span class="function"><span class="keyword">function</span>(<span class="params">salary</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> salary*<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> caculate = <span class="function"><span class="keyword">function</span>(<span class="params">level,salary</span>)</span>&#123;	<span class="comment">// 选取策略类，执行对应操作</span></span><br><span class="line">    <span class="keyword">return</span> strategies[level](salary);</span><br><span class="line">&#125;</span><br><span class="line">caculate(<span class="string">'s'</span>,<span class="number">1000</span>)      <span class="comment">// 4000</span></span><br></pre></td></tr></table></figure>
+<p>应用场景：某个元素的不同动态效果，不断变更的表单验证方式</p>
+<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p>为一个对象提供一个代用品或者占位符，以便控制对它的访问。</p>
+<p>思路：当不方便直接访问一个对象或者当前不满足条件的时候，提供一个替身对象来控制这个对象。</p>
+<h3 id="虚拟代理"><a href="#虚拟代理" class="headerlink" title="虚拟代理"></a>虚拟代理</h3><p>创建代理舰艇某个对象的状态变化，在合适的时机由代理对象执行操作。</p>
+<p>example：在图片尚未加载完成时显示loading.gif图。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newImg = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> imgNode = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(imgNode);</span><br><span class="line">    <span class="keyword">return</span>&#123;</span><br><span class="line">        setSrc:<span class="function"><span class="keyword">function</span>(<span class="params">src</span>)</span>&#123;</span><br><span class="line">            imgNode.src = src;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"><span class="keyword">var</span> proxySetImg = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image;</span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        newImg.setSrc(<span class="keyword">this</span>.src);            <span class="comment">// 3，加载完毕时将img节点的loading图替换成真正的图片</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        setSrc:<span class="function"><span class="keyword">function</span>(<span class="params">src</span>)</span>&#123;</span><br><span class="line">            newImg.setSrc(<span class="string">'loading.gif'</span>);   <span class="comment">// 2，先显示loading图</span></span><br><span class="line">            img.src = src                   <span class="comment">// 1，接受真正的图片地址</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line">proxySetImg.setSrc(<span class="string">'http://imgurl'</span>)</span><br></pre></td></tr></table></figure>
+<p>代理对象和被代理对象都提供setSrc方法，所以任何使用本体对象的场景都可以无缝切换成代理对象。</p>
+<p>应用场景：合并http请求，惰性加载文件。</p>
+<h3 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h3><p>为一些开销大的运算缓存结果，下次运算时如果参数一致，直接从缓存池中返回之前计算的结果。</p>
+<p>example：缓存乘积运算</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mult = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++)&#123;</span><br><span class="line">        result = result * <span class="built_in">arguments</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> proxyMult = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cache = &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.join.call(<span class="built_in">arguments</span>,<span class="string">','</span>);</span><br><span class="line">        <span class="keyword">if</span>(args <span class="keyword">in</span> cache)&#123;</span><br><span class="line">            <span class="keyword">return</span> cache[args];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cache[args] = mult.apply(<span class="keyword">this</span>.arguments)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br><span class="line">proxyMult(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)     <span class="comment">// 6 mult函数计算得出</span></span><br><span class="line">proxyMult(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)     <span class="comment">// 6 proxyMult从缓存中取出之前的结果</span></span><br></pre></td></tr></table></figure>
+<h2 id="发布-订阅（观察者）模式"><a href="#发布-订阅（观察者）模式" class="headerlink" title="发布-订阅（观察者）模式"></a>发布-订阅（观察者）模式</h2><p>定义对象间一种一对多的依赖关系，当一个对象（发布者）的状态发生改变时，所有依赖于它的对象（订阅者）都将得到通知。在js中事件模型即是。</p>
+<p>思路：1，指定发布者。2，为发布者添加缓存列表，存放订阅者的回调。3，发布消息时遍历缓存列表。</p>
+<h3 id="简单订阅-发布实现："><a href="#简单订阅-发布实现：" class="headerlink" title="简单订阅-发布实现："></a>简单订阅-发布实现：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> publisher = &#123;&#125;;						<span class="comment">// 定义发布者</span></span><br><span class="line">publisher.clientList = [];				 <span class="comment">// 定义缓存池</span></span><br><span class="line">publisher.listen = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;    <span class="comment">// 订阅方法</span></span><br><span class="line">    <span class="keyword">this</span>.clientList.push(callback);</span><br><span class="line">&#125;</span><br><span class="line">publisher.trigger = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;			  <span class="comment">// 发布消息</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>,fn; fn = <span class="keyword">this</span>.clientList[i++]; )&#123;</span><br><span class="line">        fn.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> subscriber = &#123;							<span class="comment">// 定义订阅者</span></span><br><span class="line">    name:<span class="string">'xcola'</span>,</span><br><span class="line">    subscribe:<span class="function"><span class="keyword">function</span>(<span class="params">info</span>)</span>&#123;				 <span class="comment">// 订阅的回调</span></span><br><span class="line">        <span class="built_in">console</span>.log(info);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">publisher.listen(subscriber.subscribe);		  <span class="comment">// 将订阅者的回调传给listen函数，加入发布者的缓存池中</span></span><br><span class="line">publisher.trigger(<span class="string">'emmm'</span>)                     <span class="comment">// subscriber.subscribe输出“emmm”</span></span><br></pre></td></tr></table></figure>
+<p>在此种实现下，订阅者会收到所有发布者的消息，若添加一个标识，指定订阅哪种类型的消息，这样就不会给订阅者带来不必要的困扰。</p>
+<h3 id="指定订阅类型"><a href="#指定订阅类型" class="headerlink" title="指定订阅类型"></a>指定订阅类型</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">publisher.listen = <span class="function"><span class="keyword">function</span>(<span class="params">key,callback</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>.clientList[key])&#123;			<span class="comment">// 如果先前不存在这种标识的发布类型则新建一个</span></span><br><span class="line">        <span class="keyword">this</span>.clientList[key] = []</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.clientList[key].push(callback);	<span class="comment">// 将回调存进对应key标识的缓存池中</span></span><br><span class="line">&#125;</span><br><span class="line">publisher.trigger = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> key = <span class="built_in">Array</span>.prototype.shift.call(<span class="built_in">arguments</span>),  <span class="comment">// 取出arguments中第一个参数，即key</span></span><br><span class="line">        fns = <span class="keyword">this</span>.clientList[key];		 <span class="comment">// 取出对应key的缓存池</span></span><br><span class="line">    <span class="keyword">if</span>(!fns || fns.length === <span class="number">0</span>)&#123;			<span class="comment">// 如果没有回调返回false</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>,fn; fn = <span class="keyword">this</span>.clientList[i++]; )&#123;</span><br><span class="line">        fn.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>)		<span class="comment">// 遍历缓存池，调用回调函数传递消息</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">publisher.listen(<span class="string">'xcola'</span>,subscriber.subscribe);</span><br><span class="line">publisher.trigger(<span class="string">'xcola'</span>,<span class="string">'emmm'</span>)              <span class="comment">// 只有标识为xcola的回调会收到emmm</span></span><br></pre></td></tr></table></figure>
+<h3 id="添加取消订阅功能"><a href="#添加取消订阅功能" class="headerlink" title="添加取消订阅功能"></a>添加取消订阅功能</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">publiser.remove = <span class="function"><span class="keyword">function</span>(<span class="params">key,callback</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> fns = <span class="keyword">this</span>.clientList[key];        <span class="comment">// 取出对应key的缓存池</span></span><br><span class="line">    <span class="keyword">if</span>(!fns)&#123;                             <span class="comment">// 如果缓存池不存在，则返回false</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!callback)&#123;					<span class="comment">// 如果没有指定对应key的callback，则清除对应key的所有订阅回调</span></span><br><span class="line">        fns &amp;&amp; (fns.length === <span class="number">0</span>);		<span class="comment">// 只有fns不为空才会执行fns.length === 0</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = fns.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="keyword">var</span> _callback = fns[i];</span><br><span class="line">            <span class="keyword">if</span>(_callback == callback)&#123;</span><br><span class="line">                fns.splice(i,<span class="number">1</span>);		<span class="comment">// 删除缓存池中找到的对应的订阅callback</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="给对象动态的添加订阅发布功能"><a href="#给对象动态的添加订阅发布功能" class="headerlink" title="给对象动态的添加订阅发布功能"></a>给对象动态的添加订阅发布功能</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> event = &#123;                        <span class="comment">// 将所有方法封装在一个对象中</span></span><br><span class="line">    clientLish:[],</span><br><span class="line">    listen:<span class="function"><span class="keyword">function</span>(<span class="params">key,callback</span>)</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(!<span class="keyword">this</span>.clientList[key])&#123;</span><br><span class="line">                    <span class="keyword">this</span>.clientList[key] = []</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">this</span>.clientList[key].push(callback);</span><br><span class="line">            &#125;,</span><br><span class="line">    trigger:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="keyword">var</span> key = <span class="built_in">Array</span>.prototype.shift.call(<span class="built_in">arguments</span>),</span><br><span class="line">                    fns = <span class="keyword">this</span>.clientList[key];</span><br><span class="line">                <span class="keyword">if</span>(!fns || fns.length === <span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>,fn; fn = <span class="keyword">this</span>.clientList[i++]; )&#123;</span><br><span class="line">                    fn.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">    remove:<span class="function"><span class="keyword">function</span>(<span class="params">key,callback</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> fns = <span class="keyword">this</span>.clientList[key];</span><br><span class="line">            <span class="keyword">if</span>(!fns)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!callback)&#123;</span><br><span class="line">                fns &amp;&amp; (fns.length === <span class="number">0</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">let</span> i = fns.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>;i--)&#123;</span><br><span class="line">                    <span class="keyword">var</span> _callback = fns[i];</span><br><span class="line">                    <span class="keyword">if</span>(_callback == callback)&#123;</span><br><span class="line">                        fns.splice(i,<span class="number">1</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> installEvent = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>)</span>&#123;			<span class="comment">// 为某个对象安装订阅发布功能</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> event)&#123;					<span class="comment">// 遍历event的方法，为传入的对象添加event中存放的方法</span></span><br><span class="line">        obj[i] = event[i]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​                                                                                                                                        于2018/10/14 夜</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/JavaScript设计模式与开发实践/" rel="tag"># JavaScript设计模式与开发实践</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/27/部分面试知识点梳理/" rel="next" title="部分面试知识点梳理">
+                <i class="fa fa-chevron-left"></i> 部分面试知识点梳理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/27/2018-10-第四周读书笔记/" rel="prev" title="2018/10第四周杂记">
+                2018/10第四周杂记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjcxMC8xMzI0NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="xcola" />
+            
+              <p class="site-author-name" itemprop="name">xcola</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/flycatrix" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:chen-fish@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/灬柠檬猪" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=501960614&website=www.oicqzone.com" target="_blank" title="QQZone">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQZone</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://airpoc.cn/" title="Air的博客" target="_blank">Air的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://18dian.github.io/" title="林檀的博客" target="_blank">林檀的博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于面向对象的JavaScript"><span class="nav-number">1.</span> <span class="nav-text">关于面向对象的JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态类型"><span class="nav-number">1.1.</span> <span class="nav-text">动态类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多态"><span class="nav-number">1.2.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型模式"><span class="nav-number">1.3.</span> <span class="nav-text">原型模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-number">2.</span> <span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现方式"><span class="nav-number">2.1.</span> <span class="nav-text">实现方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于惰性单例"><span class="nav-number">2.2.</span> <span class="nav-text">关于惰性单例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#策略模式"><span class="nav-number">3.</span> <span class="nav-text">策略模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理模式"><span class="nav-number">4.</span> <span class="nav-text">代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟代理"><span class="nav-number">4.1.</span> <span class="nav-text">虚拟代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存代理"><span class="nav-number">4.2.</span> <span class="nav-text">缓存代理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布-订阅（观察者）模式"><span class="nav-number">5.</span> <span class="nav-text">发布-订阅（观察者）模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单订阅-发布实现："><span class="nav-number">5.1.</span> <span class="nav-text">简单订阅-发布实现：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指定订阅类型"><span class="nav-number">5.2.</span> <span class="nav-text">指定订阅类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加取消订阅功能"><span class="nav-number">5.3.</span> <span class="nav-text">添加取消订阅功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给对象动态的添加订阅发布功能"><span class="nav-number">5.4.</span> <span class="nav-text">给对象动态的添加订阅发布功能</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xcola</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">29.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记,JavaScript设计模式与开发实践," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="既然是杂记，就当流水账写吧。 deepin开发者与用户大会 - 南京站上周偶然看见了deepin在南京举办开发者与用户大会的消息，虽然我不是开发者但好歹算个常年双系统的用户吧，于是周末本着打酱油的心态去了趟南京，开会的地方是真偏呐。下了地铁就去签到了，书包里背了两块中秋节公司发的月饼也没好意思拿出来吃。。deepin的分享都很精彩，羡慕他们始终如一的坚持自由和开源的信仰，特别是见证了这三年间dee">
+<meta name="keywords" content="学习笔记,JavaScript设计模式与开发实践">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018&#x2F;10第四周杂记">
+<meta property="og:url" content="http://yoursite.com/2018/10/27/2018-10-第四周读书笔记/index.html">
+<meta property="og:site_name" content="xco1a&#39;s b10g">
+<meta property="og:description" content="既然是杂记，就当流水账写吧。 deepin开发者与用户大会 - 南京站上周偶然看见了deepin在南京举办开发者与用户大会的消息，虽然我不是开发者但好歹算个常年双系统的用户吧，于是周末本着打酱油的心态去了趟南京，开会的地方是真偏呐。下了地铁就去签到了，书包里背了两块中秋节公司发的月饼也没好意思拿出来吃。。deepin的分享都很精彩，羡慕他们始终如一的坚持自由和开源的信仰，特别是见证了这三年间dee">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-27T11:28:45.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018&#x2F;10第四周杂记">
+<meta name="twitter:description" content="既然是杂记，就当流水账写吧。 deepin开发者与用户大会 - 南京站上周偶然看见了deepin在南京举办开发者与用户大会的消息，虽然我不是开发者但好歹算个常年双系统的用户吧，于是周末本着打酱油的心态去了趟南京，开会的地方是真偏呐。下了地铁就去签到了，书包里背了两块中秋节公司发的月饼也没好意思拿出来吃。。deepin的分享都很精彩，羡慕他们始终如一的坚持自由和开源的信仰，特别是见证了这三年间dee">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/27/2018-10-第四周读书笔记/"/>
+
+
+
+
+
+  <title>2018/10第四周杂记 | xco1a's b10g</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xco1a's b10g</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/27/2018-10-第四周读书笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xcola">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xco1a's b10g">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">2018/10第四周杂记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-27T18:14:37+08:00">
+                2018-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>既然是杂记，就当流水账写吧。</p>
+<h3 id="deepin开发者与用户大会-南京站"><a href="#deepin开发者与用户大会-南京站" class="headerlink" title="deepin开发者与用户大会 - 南京站"></a>deepin开发者与用户大会 - 南京站</h3><p>上周偶然看见了deepin在南京举办开发者与用户大会的消息，虽然我不是开发者但好歹算个常年双系统的用户吧，于是周末本着打酱油的心态去了趟南京，开会的地方是真偏呐。下了地铁就去签到了，书包里背了两块中秋节公司发的月饼也没好意思拿出来吃。。deepin的分享都很精彩，羡慕他们始终如一的坚持自由和开源的信仰，特别是见证了这三年间deepin从交互界面到系统软件优化以及对常用软件进行linux适配的进步，虽然说光有情怀等于画饼充饥，但是我觉得没点情怀也很难做到这么多年面对质疑和唱衰的坚守。oray CTO分享了花生壳向日葵等产品，我用过向日葵的远控，了解过花生壳的内网穿透。我用过windows的原生远控，用过国外的team viewer，实话实说向日葵应该是最好用的，而且单个远程主机免费还不像team viewer那么多限制。不过让我觉得励志的是，这个CTO大学学的是柴油机。。虽然我也很喜欢deepin，但是用deepin还咋玩游戏。。</p>
+<p>嗯。。以上是上周断更的原因。</p>
+<h3 id="关于工作"><a href="#关于工作" class="headerlink" title="关于工作"></a>关于工作</h3><p>为了寻求不写lowB代码的方法，我看了几章设计模式，虽说有所启发，但是还觉得哪里我没领悟到，或者说缺失了什么。这一周给我的需求页面比较复杂，一个页面十几个echarts折线图，为了让他们互不干涉，写了很多if判断用了很多全局变量，代码结构不清晰，逻辑也显得很混乱，有的函数接收四五个参数或者写了快100行。阳哥建议我有空重构一下，emmm我自己都不知道从何下手，况且我也没有更好的办法分离它们。平均一个需求页面要写800到1000行js（jq），有些重复代码不知道如何抽象出来，用到全局变量的地方也没什么好的办法约束它们。。我又买了几本书，希望看完能有点启发吧。</p>
+<p>写了二十多个echarts之后，我终须下定决心动手写个echart类，一个实例对应一个图表，每个实例维护自己的配置参数，也许能改善重复的配置过程，增加一点复用。用后端给的接口数据做了下测试，渲染个折线图也不成问题，但是还觉得有些地方没考虑到，或者结构划分的还不是太好。代码放在<a href="https://github.com/flycatrix/echartCreator" target="_blank" rel="noopener">github</a>，下周如果再有echarts的需求，也许就能想到改进方案了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Chart</span> (<span class="params">IDselector</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.selector = IDselector;</span><br><span class="line">&#125;</span><br><span class="line">Chart.prototype = &#123;</span><br><span class="line">      generateData,        <span class="comment">// 生成data</span></span><br><span class="line">      generateDate,        <span class="comment">// 生成时间date</span></span><br><span class="line">      timeFormater,        <span class="comment">// 格式化时间戳  </span></span><br><span class="line">      generateSeries,      <span class="comment">// 生成series</span></span><br><span class="line">      dataFormater,        <span class="comment">// 格式化数据，返回数组[格式化后的数据，单位]</span></span><br><span class="line">      generateOption,      <span class="comment">// 生成option</span></span><br><span class="line">      renderChart          <span class="comment">// 渲染图表</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// res -- ajax传回的用于渲染表格的数据，数组。property -- 生成表格的字段，数组。formatFlag -- 是否对数据格式化</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateData</span> (<span class="params">res,property,formatFlag = ture</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> args = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> data = [];</span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">Array</span>.isArray(property))&#123;</span><br><span class="line">        <span class="built_in">console</span>.warn(<span class="string">'property should be a array'</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; property.length; i++)&#123;   <span class="comment">// 取出property中存的字段名</span></span><br><span class="line">            args[property[i]] = [];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; res.length; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(formatFlag)&#123;</span><br><span class="line">                    args[property[i]].push(<span class="keyword">this</span>.dataFormater(res[j][property[i]])[<span class="number">0</span>])     <span class="comment">// 根据拿到的字段名格式化后取值，作为数组存在data变量中</span></span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    args[property[i]].push(res[j][property[i]])     </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.unit = <span class="keyword">this</span>.dataFormater(res[<span class="number">0</span>][property[<span class="number">0</span>]])[<span class="number">1</span>] <span class="comment">// 记录单位</span></span><br><span class="line">    <span class="keyword">this</span>.data = args;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  data -- 含有时间戳数据的数组 timestemp -- 时间戳的字段名，fmt -- 时间格式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateDate</span> (<span class="params">data,timestemp,fmt</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timeArray = []</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; data.length; i++)&#123;</span><br><span class="line">        timeArray.push(<span class="keyword">new</span> <span class="built_in">Date</span>(data[i][timestemp]*<span class="number">1000</span>).format(fmt))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.formatedDate = timeArray;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 给时间戳类型的时间转换时间格式</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">timeFormater</span> (<span class="params">date,fmt</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> formatedDate = []</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; date.length ; i++)&#123;</span><br><span class="line">        <span class="keyword">var</span> temp = <span class="keyword">new</span> <span class="built_in">Date</span>(date[i])</span><br><span class="line">        formatedDate.push(temp.format(fmt))</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.formatedDate = formatedDate;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 格式化处理单个数据，返回处理后的数字和单位组成的数组</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dataFormater</span> (<span class="params">byte</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(byte == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">'0'</span>,<span class="string">''</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> k = <span class="number">1024</span>;</span><br><span class="line">    <span class="keyword">var</span> sizes = [<span class="string">''</span>,<span class="string">'K'</span>, <span class="string">'M'</span>, <span class="string">'G'</span>, <span class="string">'T'</span>];</span><br><span class="line">    <span class="keyword">var</span> i = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.log(byte) / <span class="built_in">Math</span>.log(k));</span><br><span class="line">    <span class="comment">// 返回数组 [缩小后保留一位小数的数字,单位]</span></span><br><span class="line">    <span class="keyword">return</span> [(byte / <span class="built_in">Math</span>.pow(k, i)).toFixed(<span class="number">1</span>),sizes[i]]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 生成series,data为包含几个属性名命名的数组的对象，property需要生成series的属性名的数组，name为series的name数组</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateSeries</span> (<span class="params">property,name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr = []</span><br><span class="line">    <span class="keyword">if</span>(!name)&#123;              <span class="comment">// 如果不传name数组则以property作为name</span></span><br><span class="line">        name = property</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; property.length; i++)&#123;</span><br><span class="line">        <span class="keyword">let</span> series = &#123;</span><br><span class="line">            name:name[i],</span><br><span class="line">            type:<span class="string">'line'</span>,</span><br><span class="line">            showAllSymbol:<span class="literal">true</span>,</span><br><span class="line">            itemStyle:&#123;</span><br><span class="line">                normal:&#123;</span><br><span class="line">                    color:<span class="string">'gray'</span></span><br><span class="line">                &#125;   </span><br><span class="line">            &#125;,</span><br><span class="line">            lineStyle:&#123;  </span><br><span class="line">                normal:&#123;</span><br><span class="line">                    color: <span class="string">'#007FFF'</span></span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;,</span><br><span class="line">            label: &#123;</span><br><span class="line">                normal: &#123;</span><br><span class="line">                    show: <span class="literal">true</span>,</span><br><span class="line">                    distance:<span class="number">10</span>,</span><br><span class="line">                    position: <span class="string">'top'</span>,</span><br><span class="line">                    formatter: <span class="string">'&#123;c&#125;'</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            data:<span class="keyword">this</span>.data[property[i]].reverse()</span><br><span class="line">        &#125;</span><br><span class="line">        arr.push(series)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.series = arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 设定option, dataTime时间数组，series,unit单位，legend折线标识</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateOption</span> (<span class="params">legend</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">var</span> option = &#123;</span><br><span class="line">        color:[<span class="string">'#007FFF'</span>,<span class="string">'#FF0000'</span>],</span><br><span class="line">        xAxis : [</span><br><span class="line">            &#123;</span><br><span class="line">                type : <span class="string">'category'</span>,</span><br><span class="line">                axisLine:&#123;  <span class="comment">//坐标轴线相关设置</span></span><br><span class="line">                    lineStyle:&#123;</span><br><span class="line">                        color: <span class="string">'#90A0AE'</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                data:<span class="keyword">this</span>.formatedDate,</span><br><span class="line">                splitLine: &#123;</span><br><span class="line">                    show: <span class="literal">false</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ], </span><br><span class="line">        yAxis : [</span><br><span class="line">            &#123;</span><br><span class="line">                type : <span class="string">'value'</span>,</span><br><span class="line">                axisLine:&#123;  <span class="comment">//坐标轴线相关设置</span></span><br><span class="line">                    lineStyle:&#123;</span><br><span class="line">                        color: <span class="string">'#90A0AE'</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                axisLabel:&#123;<span class="attr">formatter</span>:<span class="string">'&#123;value&#125;'</span>+ <span class="keyword">this</span>.unit&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        tooltip : &#123; <span class="comment">//鼠标放上去的提示</span></span><br><span class="line">            trigger: <span class="string">'item'</span>,</span><br><span class="line">            formatter: <span class="function"><span class="keyword">function</span>(<span class="params">params</span>)</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> params.name+<span class="string">'&lt;br/&gt;'</span>+ params.seriesName + <span class="string">':'</span> + params.data + <span class="string">' 单位：'</span> + that.unit;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        dataZoom: [&#123;     </span><br><span class="line">            type: <span class="string">'inside'</span>,  <span class="comment">//slider表示有滑动块的，inside表示内置的</span></span><br><span class="line">            start: <span class="number">0</span>,        </span><br><span class="line">            end: <span class="number">100</span></span><br><span class="line">        &#125;, &#123;</span><br><span class="line">            start: <span class="number">0</span>,</span><br><span class="line">            end: <span class="number">100</span>,</span><br><span class="line">            handleSize: <span class="string">'90%'</span>,</span><br><span class="line">            handleStyle: &#123;</span><br><span class="line">                color: <span class="string">'#000'</span>,</span><br><span class="line">                shadowBlur: <span class="number">3</span>,</span><br><span class="line">                shadowColor: <span class="string">'rgba(0, 0, 0, 0.6)'</span>,</span><br><span class="line">                shadowOffsetX: <span class="number">2</span>,</span><br><span class="line">                shadowOffsetY: <span class="number">2</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;],</span><br><span class="line">        series: <span class="keyword">this</span>.series,</span><br><span class="line">        legend:&#123;</span><br><span class="line">            show:<span class="literal">false</span>,</span><br><span class="line">            data:[],</span><br><span class="line">            <span class="comment">// selected:&#123;</span></span><br><span class="line">            <span class="comment">//     'prop':false,</span></span><br><span class="line">            <span class="comment">// &#125;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">if</span>(legend)&#123;</span><br><span class="line">        option.color = [<span class="string">'#007FFF'</span>,<span class="string">'#FF0000'</span>]</span><br><span class="line">        option.legend.show = <span class="literal">true</span>;</span><br><span class="line">        option.legend.data = legend</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.option = option;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 渲染图表</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderChart</span> (<span class="params">option</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> chart = echarts.init(<span class="built_in">document</span>.getElementById(<span class="keyword">this</span>.selector))</span><br><span class="line">    chart.setOption(<span class="keyword">this</span>.option);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样可以把从ajax数据处理到生成echarts的过程简化为</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Chart(<span class="string">'emm'</span>)</span><br><span class="line">a.generateData(res.data,[<span class="string">'ifout'</span>,<span class="string">'pkt_speed'</span>],<span class="string">'ts'</span>,<span class="string">'MM-dd'</span>);</span><br><span class="line">a.generateDate(res.data,<span class="string">'ts'</span>,<span class="string">'hh:mm'</span>);</span><br><span class="line">a.generateSeries([<span class="string">'ifout'</span>,<span class="string">'pkt_speed'</span>]);</span><br><span class="line">a.generateOption([<span class="string">'ifout'</span>,<span class="string">'pkt_speed'</span>]);</span><br><span class="line">a.renderChart()</span><br></pre></td></tr></table></figure>
+<p>option的配置好像不咋灵活。。            </p>
+<h3 id="关于读书"><a href="#关于读书" class="headerlink" title="关于读书"></a>关于读书</h3><p>从我觉得看设计模式的书不能直接帮助我改善代码，就开始有点懈怠。几个设计原则和编程技巧，其实我也没怎么能切实的领悟到并运用好，没人review代码以及没个师傅真是个头疼的事。。我开始看《代码整洁之道》，每天翻几页，希望体现在代码上有直接的效果吧。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/JavaScript设计模式与开发实践/" rel="tag"># JavaScript设计模式与开发实践</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/13/2018-10-第二周读书笔记/" rel="next" title="2018/10第二周读书笔记">
+                <i class="fa fa-chevron-left"></i> 2018/10第二周读书笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjcxMC8xMzI0NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="xcola" />
+            
+              <p class="site-author-name" itemprop="name">xcola</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/flycatrix" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:chen-fish@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/灬柠檬猪" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=501960614&website=www.oicqzone.com" target="_blank" title="QQZone">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQZone</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://airpoc.cn/" title="Air的博客" target="_blank">Air的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://18dian.github.io/" title="林檀的博客" target="_blank">林檀的博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#deepin开发者与用户大会-南京站"><span class="nav-number">1.</span> <span class="nav-text">deepin开发者与用户大会 - 南京站</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于工作"><span class="nav-number">2.</span> <span class="nav-text">关于工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于读书"><span class="nav-number">3.</span> <span class="nav-text">关于读书</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xcola</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">29.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

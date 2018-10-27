@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记,首刷javascript高级程序设计," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="函数是对象&amp;emsp;&amp;emsp;ECMAscript中的函数实际是function类型的对象实例，因此函数也像对象一样具有属性和方法。而js中的继承，自定义引用类型的实现，均依靠function对象中的prototype属性。 函数名是函数对象的指针&amp;emsp;&amp;emsp;类比普通对象的创建过程。 ​    var obj = new Object(); &amp;emsp;&amp;emsp;变量obj中保存">
+<meta name="keywords" content="学习笔记,首刷javascript高级程序设计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对函数类型的理解">
+<meta property="og:url" content="http://yoursite.com/2018/05/19/对函数类型的理解/index.html">
+<meta property="og:site_name" content="xco1a&#39;s b10g">
+<meta property="og:description" content="函数是对象&amp;emsp;&amp;emsp;ECMAscript中的函数实际是function类型的对象实例，因此函数也像对象一样具有属性和方法。而js中的继承，自定义引用类型的实现，均依靠function对象中的prototype属性。 函数名是函数对象的指针&amp;emsp;&amp;emsp;类比普通对象的创建过程。 ​    var obj = new Object(); &amp;emsp;&amp;emsp;变量obj中保存">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-23T09:08:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对函数类型的理解">
+<meta name="twitter:description" content="函数是对象&amp;emsp;&amp;emsp;ECMAscript中的函数实际是function类型的对象实例，因此函数也像对象一样具有属性和方法。而js中的继承，自定义引用类型的实现，均依靠function对象中的prototype属性。 函数名是函数对象的指针&amp;emsp;&amp;emsp;类比普通对象的创建过程。 ​    var obj = new Object(); &amp;emsp;&amp;emsp;变量obj中保存">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/19/对函数类型的理解/"/>
+
+
+
+
+
+  <title>对函数类型的理解 | xco1a's b10g</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xco1a's b10g</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/19/对函数类型的理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xcola">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xco1a's b10g">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">对函数类型的理解</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-19T19:01:12+08:00">
+                2018-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="函数是对象"><a href="#函数是对象" class="headerlink" title="函数是对象"></a>函数是对象</h3><p>&emsp;&emsp;ECMAscript中的函数实际是function类型的对象实例，因此函数也像对象一样具有属性和方法。而js中的继承，自定义引用类型的实现，均依靠function对象中的prototype属性。</p>
+<h3 id="函数名是函数对象的指针"><a href="#函数名是函数对象的指针" class="headerlink" title="函数名是函数对象的指针"></a>函数名是函数对象的指针</h3><p>&emsp;&emsp;类比普通对象的创建过程。</p>
+<p>​    <code>var obj = new Object();</code></p>
+<p>&emsp;&emsp;变量obj中保存的实际上是新创建的对象在堆内存中的地址，也就是一个指针。而通过函数声明或者构造函数获得的函数对象，其函数名也是这个函数对象的一个指针，因此，如果定义两个相同函数名的函数，后定义的函数名将覆盖前者，这个过程就如变量被重新赋值一样（因此javascript中没有重载）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">a,b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">a,b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a - b;</span><br><span class="line">&#125;</span><br><span class="line">sum(<span class="number">100</span>,<span class="number">50</span>);		<span class="comment">//50;</span></span><br></pre></td></tr></table></figure>
+<h3 id="函数的声明提升"><a href="#函数的声明提升" class="headerlink" title="函数的声明提升"></a>函数的声明提升</h3><p>&emsp;&emsp;在一般的使用中，函数声明和函数表达式将获得同样的结果。而如果一个函数调用发生在函数声明之后，也不会产生错误。</p>
+<blockquote>
+<p>&emsp;&emsp;而实际上，解析器在向执行环境中加载数据时，对函数声明和函数表达式并非一视同仁。解析器会率先读取函数声明，并使其在执行任何代码之前可用；至于函数表达式，则必须等到解析器执行到它所在的代码行，才会真正被解释执行。</p>
+</blockquote>
+<p>&emsp;&emsp;在C语言中，调用未声明的函数是不可行的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">max(<span class="number">2</span>,<span class="number">3</span>)			<span class="comment">//错误，函数未定义</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a&gt;b?a:b;</span><br><span class="line">&#125;</span><br><span class="line">max(<span class="number">2</span>,<span class="number">3</span>)			<span class="comment">//3</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;而javascript声明提升的特性使得我们可以在任意地方调用函数，只要它在某一处被声明过。</p>
+<h3 id="作为值的函数"><a href="#作为值的函数" class="headerlink" title="作为值的函数"></a>作为值的函数</h3><p>&emsp;&emsp;函数名本身是变量，因此</p>
+<ul>
+<li>可以把一个函数当作参数传递给另一个函数。</li>
+<li>可以在一个函数中返回另一个函数。</li>
+</ul>
+<p>&emsp;&emsp;在函数作为参数传递的过程中，首先要明确的一点是<strong>要访问函数的指针而不是执行它的话，应该去掉函数名后的括号</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">a,b</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span> (<span class="params">otherFunction , item1 , item2</span>)</span>&#123; 	<span class="comment">//函数作为参数传递</span></span><br><span class="line">    <span class="keyword">return</span> otherFunction(item1,item2);			<span class="comment">//实际上这个函数纯属多余。只是想说明一下函数能作为参数传递。。</span></span><br><span class="line">&#125;</span><br><span class="line">add(sum,<span class="number">3</span>,<span class="number">4</span>);		<span class="comment">// 7</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;在一个函数中返回另一个函数，能想到最接地气的例子是数组的sort排序方法。在sort方法中，需要我们指定一个排序的依据（比较函数）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">6</span>];</span><br><span class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;<span class="keyword">return</span> a - b&#125;); <span class="comment">// [0, 1, 2, 3, 4, 5, 6]</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;考虑如果需要以某类对象的某属性值为依据排序的情况。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [&#123;<span class="attr">name</span> :<span class="string">'o'</span>,<span class="attr">score</span> :<span class="number">18</span>&#125;,&#123;<span class="attr">name</span> :<span class="string">'c'</span>,<span class="attr">score</span> :<span class="number">12</span>&#125;,&#123;<span class="attr">name</span> :<span class="string">'x'</span>,<span class="attr">score</span> :<span class="number">11</span>&#125;,&#123;<span class="attr">name</span> :<span class="string">'l'</span>,<span class="attr">score</span> :<span class="number">19</span>&#125;,&#123;<span class="attr">name</span> :<span class="string">'a'</span>,<span class="attr">score</span> :<span class="number">22</span>&#125;,];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compare</span>(<span class="params">a,b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.score - b.score;</span><br><span class="line">&#125;</span><br><span class="line">arr.sort(compare);      <span class="comment">// compare函数作为参数，回调而非调用</span></span><br><span class="line"><span class="comment">//    0:&#123;name: "x", score: 11&#125;</span></span><br><span class="line"><span class="comment">//    1:&#123;name: "c", score: 12&#125;</span></span><br><span class="line"><span class="comment">//    2:&#123;name: "o", score: 18&#125;</span></span><br><span class="line"><span class="comment">//    3:&#123;name: "l", score: 19&#125;</span></span><br><span class="line"><span class="comment">//    4:&#123;name: "a", score: 22&#125;</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;如果事先指定了比较的属性，那么上面的函数完全可以实现需求。而如果在追求复用性的情况下，要求传递一个属性即可按此属性值给对象数组排序。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [&#123;<span class="attr">name</span> :<span class="string">'o'</span>,<span class="attr">score</span> :<span class="number">18</span>&#125;,&#123;<span class="attr">name</span> :<span class="string">'c'</span>,<span class="attr">score</span> :<span class="number">12</span>&#125;,&#123;<span class="attr">name</span> :<span class="string">'x'</span>,<span class="attr">score</span> :<span class="number">11</span>&#125;,&#123;<span class="attr">name</span> :<span class="string">'l'</span>,<span class="attr">score</span> :<span class="number">19</span>&#125;,&#123;<span class="attr">name</span> :<span class="string">'a'</span>,<span class="attr">score</span> :<span class="number">22</span>&#125;,];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compare</span>(<span class="params">property</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">obj1,obj2</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> obj1[property] - obj2[property];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">arr.sort(compare(<span class="string">'score'</span>));   <span class="comment">//调用而非回调。compare函数返回的匿名函数作为sort方法的回调函数。</span></span><br><span class="line"><span class="comment">//    0:&#123;name: "x", score: 11&#125;</span></span><br><span class="line"><span class="comment">//    1:&#123;name: "c", score: 12&#125;</span></span><br><span class="line"><span class="comment">//    2:&#123;name: "o", score: 18&#125;</span></span><br><span class="line"><span class="comment">//    3:&#123;name: "l", score: 19&#125;</span></span><br><span class="line"><span class="comment">//    4:&#123;name: "a", score: 22&#125;</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这个例子中，比较函数需要取到数组中保存的对象的一个属性并返回比较结果，外层的compare函数接收比较的属性名，return一个以两个对象为参数的匿名函数，最终在匿名函数中取得需要比较的对象的属性，并返回比较结果。</p>
+<p>&emsp;&emsp;在这插嘴记叙一下js操作对象属性时圆点操作符和用中括号操作符的不同之处。</p>
+<ul>
+<li><p>中括号运算符可以用字符串变量的内容作为属性名。 </p>
+</li>
+<li><p>中括号运算符可以用纯数字为属性名。 </p>
+</li>
+<li><p>中括号运算符可以用js的关键字和保留字作为属性名。 </p>
+</li>
+</ul>
+<p>&emsp;&emsp;也就是说。<strong>中括号运算符总是能代替点运算符。但点运算符却不一定能全部代替中括号运算符。 </strong>因为例子中属性名是以字符串的形式传递，因此用圆点则会出现函数中取不到对象属性的情况。</p>
+<p>我饿了。明天更新。</p>
+<p>===============我是一条分割线================</p>
+<p>emmm今天520，虐狗的节日那么多。。。嗝~~</p>
+<p>==================废话少说==================</p>
+<h3 id="函数内部的对象"><a href="#函数内部的对象" class="headerlink" title="函数内部的对象"></a>函数内部的对象</h3><p>&emsp;&emsp;函数本身是一个对象，其内部有两个特殊的对象 – arguments以及this。</p>
+<h4 id="arguments"><a href="#arguments" class="headerlink" title="arguments"></a>arguments</h4><p>&emsp;&emsp;arguments中保存着传入函数的所有参数，而js函数不限制传入参数的多少、不介意传入参数类型特性的实现，应该也归功于arguments对象。由于可以通过类此访问数组元素的方法访问arguments对象的成员，因此也称其为<strong>伪数组对象</strong>。arguments对象 也有length属性，其值也类似数组的length属性，表明了函数中参数的个数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span> (<span class="params">a,b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">arguments</span>[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">print(<span class="number">1</span>,<span class="number">2</span>,<span class="string">'3'</span>,[<span class="number">4</span>]);</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3 (字符串)</span></span><br><span class="line"><span class="comment">// [4] (数组)</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这个例子应该很能说明问题了。。形参只有两个（a和b），但是调用的时候传进去4个类型不一的参数，所以arguments.length = 4，循环打印了4个不同类型的输出。</p>
+<h4 id="this"><a href="#this" class="headerlink" title="this"></a>this</h4><p>&emsp;&emsp;this使用时非常灵活。个人觉的是js里第二有趣的部分，第一有趣的部分？大概是原型吧。。</p>
+<p>&emsp;&emsp;<strong>this引用的是函数执行时的环境对象</strong>，所以在函数未发生调用时，this的指向是不可确定的。this的指向和程序的执行过程密不可分，也不能脱离具体的执行环境分析this的指向。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayId</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.id);</span><br><span class="line">&#125;</span><br><span class="line">id = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    id: <span class="number">2</span>,</span><br><span class="line">    objson: &#123;</span><br><span class="line">   		id: <span class="number">3</span>,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.sayId = sayId;	<span class="comment">// 为obj对象添加sayId方法。</span></span><br><span class="line">obj.objson.sayId = sayId;	<span class="comment">// 为obj对象中的objson对象添加sayId方法。</span></span><br><span class="line"><span class="built_in">window</span>.sayId();		<span class="comment">// 1;</span></span><br><span class="line">obj.sayId();		<span class="comment">// 2；</span></span><br><span class="line">obj.objson.sayId();	 <span class="comment">// 3；</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;sayId引用了this，当window对象调用sayId时（window可省略不写），this指向window，而当obj对象调用sayId时，this指向obj。因此<strong>this总指向调用它的对象</strong>。</p>
+<p>&emsp;&emsp;进一步的，当obj.objson.sayId()调用sayId时，this并未指向obj，而是指向了obj对象中的objson对象，因此可得出结论，<strong>this总指向最后调用它的对象</strong>。所以在分析this指向问题时，不妨从调用处开始分析，在不同的函数调用处分析当前this的指向，抽丝剥茧。</p>
+<h3 id="函数的属性和方法"><a href="#函数的属性和方法" class="headerlink" title="函数的属性和方法"></a>函数的属性和方法</h3><p>&emsp;&emsp;函数是对象。函数是对象。函数是对象。。。。。</p>
+<p>&emsp;&emsp;对象会有属性和方法，所以函数也有属性 – prototype、length，方法 – call、apply。当然不止这些，以后在说。</p>
+<h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><h5 id="length"><a href="#length" class="headerlink" title="length"></a>length</h5><p>&emsp;&emsp;一句话说明：函数的length属性 = 形参的个数，所以函数的length说明了函数期望得到的参数个数。</p>
+<h5 id="prototype"><a href="#prototype" class="headerlink" title="prototype"></a>prototype</h5><p>&emsp;&emsp;prototype，原型。js是面向对象的语言，可它没有函数签名所以重载靠检测参数类型模拟；没有类的概念（es2015好像是有class了）所以靠构造函数模拟；没有继承的概念所以靠原型链模拟。。总之为了保证简单，去掉了复杂的概念，然后用简单的东西再去模拟复杂的东西。prototype则主要用在继承的实现上。</p>
+<p>&emsp;&emsp;在用构造函数构造对象时，有一个显而易见的缺点 – 无法共享属性和方法。构造出的对象每个都是相互独立的，既不互相影响，也都有自己属性和方法的副本，没有共享可言，也浪费了资源。为了解决这个问题，每个函数都有一个prototype属性，这里记录了    所有实例对象需要共享的属性和方法，而那些不需要共享的数据或者方法，则还放在构造函数中去。而实例对象一经创建，自动引用prototype中记录的属性和方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span> (<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line">Dog.prototype.class = <span class="string">'犬科'</span>;</span><br><span class="line">Dog.prototype.sayProperty = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'单身狗'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> xcola = <span class="keyword">new</span> Dog(xcola, <span class="number">23</span>);</span><br><span class="line"><span class="keyword">var</span> cola = <span class="keyword">new</span> Dog(cola, <span class="number">23</span>);</span><br><span class="line">xcola.sayProperty();		<span class="comment">// 单身狗</span></span><br><span class="line">cola.class;			<span class="comment">// 犬科</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;prototype记录的方法和属性为所有实例所共享，而prototype一经改动，变化也会反映在所有实例中。所以看起来，prototype像是实例对象的原型，实例则像是继承了prototype对象。</p>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><p>&emsp;&emsp;函数有两个相似的方法 – call和apply。不仅作用相似，使用方法也很相似。接下来是一段引用，看完是有点茅塞顿开的感觉。。</p>
+<blockquote>
+<p>每个函数都包涵两个非继承而来的方法：apply()和call()。这两个方法的用途都是在特定的作用域中调用函数。实际上等于设置函数体内的this对象的值。</p>
+</blockquote>
+<p>&emsp;&emsp;如果死记硬背call和apply的作用是改变函数中this的值，可能不能领会到在程序中使用call和apply函数的真正意图。</p>
+<p>&emsp;&emsp;call()的第一个参数是this指针的指向，其余参数则为要传给函数的参数。如下代码将func函数内部的this指针指向了window对象，a和b则是传给func函数的参数。而apply()与call()的区别仅仅是在于，传给函数的是参数还是参数数组。然而如果func函数需要的参数是arguments，此时显然apply函数更为恰当。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">func.call(<span class="built_in">window</span>,a,b)</span><br><span class="line">func.apply(<span class="built_in">window</span>,[a,b])</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;引自javascript高级程序设计，call和apply真正强大的地方在于扩展函数赖以运行的作用域。通过这两种方法，可以使得对象获得指定对象的属性和方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name , age</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.sayHello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    	<span class="built_in">console</span>.log(<span class="string">'hi danshengou'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name ,age ,score</span>)</span>&#123;</span><br><span class="line">    Person.call(<span class="keyword">this</span>, name, age);</span><br><span class="line">    <span class="keyword">this</span>.score = score;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> Student(<span class="string">'cola'</span>, <span class="number">23</span>, <span class="number">60</span>);</span><br><span class="line">s.sayHello();		<span class="comment">// hi danshengou</span></span><br><span class="line">s.name;				<span class="comment">// cola</span></span><br><span class="line">s.age;				<span class="comment">// 23</span></span><br><span class="line">s.score;			<span class="comment">// 60</span></span><br></pre></td></tr></table></figure>
+<p>从网上借鉴来一种运用场景：通过<code>document.getElementsByTagName</code></p>
+<p>选择的dom节点是一种类似array的伪数组。但它不能应用Array下的push，pop等方法。于是可以通过：<br><code>var domNodes =  Array.prototype.slice.call(document.getElementsByTagName(&quot;*&quot;));</code><br>这样domNodes就可以应用Array下的所有方法了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/首刷javascript高级程序设计/" rel="tag"># 首刷javascript高级程序设计</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/18/sass语法小记/" rel="next" title="sass语法小记">
+                <i class="fa fa-chevron-left"></i> sass语法小记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/23/关于javascript模块化开发/" rel="prev" title="关于javascript模块化开发">
+                关于javascript模块化开发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjcxMC8xMzI0NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="xcola" />
+            
+              <p class="site-author-name" itemprop="name">xcola</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/flycatrix" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:chen-fish@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/灬柠檬猪" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=501960614&website=www.oicqzone.com" target="_blank" title="QQZone">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQZone</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://airpoc.cn/" title="Air的博客" target="_blank">Air的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://18dian.github.io/" title="林檀的博客" target="_blank">林檀的博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数是对象"><span class="nav-number">1.</span> <span class="nav-text">函数是对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数名是函数对象的指针"><span class="nav-number">2.</span> <span class="nav-text">函数名是函数对象的指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数的声明提升"><span class="nav-number">3.</span> <span class="nav-text">函数的声明提升</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作为值的函数"><span class="nav-number">4.</span> <span class="nav-text">作为值的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数内部的对象"><span class="nav-number">5.</span> <span class="nav-text">函数内部的对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#arguments"><span class="nav-number">5.1.</span> <span class="nav-text">arguments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#this"><span class="nav-number">5.2.</span> <span class="nav-text">this</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数的属性和方法"><span class="nav-number">6.</span> <span class="nav-text">函数的属性和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性"><span class="nav-number">6.1.</span> <span class="nav-text">属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#length"><span class="nav-number">6.1.1.</span> <span class="nav-text">length</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#prototype"><span class="nav-number">6.1.2.</span> <span class="nav-text">prototype</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法"><span class="nav-number">6.2.</span> <span class="nav-text">方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xcola</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">29.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

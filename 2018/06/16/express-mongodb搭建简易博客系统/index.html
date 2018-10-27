@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记,NodeJS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="准备事项安装Nodejs，express，git，mongodb以及各种依赖库的过程略去不提。使用eslint规范代码。 npm install -g eslint 也可以 –save-dev 选择本地依赖安装 。懒人必备，直接init一个eslint规则。 eslint --init 这会提供几个可选选项，根据你的选择创建规范规则文件。放张图。  express通过mongoose库配置mong">
+<meta name="keywords" content="学习笔记,NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="express+mongodb搭建简易博客系统">
+<meta property="og:url" content="http://yoursite.com/2018/06/16/express-mongodb搭建简易博客系统/index.html">
+<meta property="og:site_name" content="xco1a&#39;s b10g">
+<meta property="og:description" content="准备事项安装Nodejs，express，git，mongodb以及各种依赖库的过程略去不提。使用eslint规范代码。 npm install -g eslint 也可以 –save-dev 选择本地依赖安装 。懒人必备，直接init一个eslint规则。 eslint --init 这会提供几个可选选项，根据你的选择创建规范规则文件。放张图。  express通过mongoose库配置mong">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/uploads/20180616124006.png">
+<meta property="og:updated_time" content="2018-09-15T02:06:28.721Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="express+mongodb搭建简易博客系统">
+<meta name="twitter:description" content="准备事项安装Nodejs，express，git，mongodb以及各种依赖库的过程略去不提。使用eslint规范代码。 npm install -g eslint 也可以 –save-dev 选择本地依赖安装 。懒人必备，直接init一个eslint规则。 eslint --init 这会提供几个可选选项，根据你的选择创建规范规则文件。放张图。  express通过mongoose库配置mong">
+<meta name="twitter:image" content="http://yoursite.com/uploads/20180616124006.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/16/express-mongodb搭建简易博客系统/"/>
+
+
+
+
+
+  <title>express+mongodb搭建简易博客系统 | xco1a's b10g</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xco1a's b10g</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/16/express-mongodb搭建简易博客系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xcola">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xco1a's b10g">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">express+mongodb搭建简易博客系统</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-16T12:31:09+08:00">
+                2018-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  4.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  19
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="准备事项"><a href="#准备事项" class="headerlink" title="准备事项"></a>准备事项</h2><p>安装Nodejs，express，git，mongodb以及各种依赖库的过程略去不提。使用eslint规范代码。</p>
+<p><code>npm install -g eslint</code></p>
+<p>也可以 <em>–save-dev</em> 选择本地依赖安装 。懒人必备，直接init一个eslint规则。</p>
+<p><code>eslint --init</code></p>
+<p>这会提供几个可选选项，根据你的选择创建规范规则文件。放张图。</p>
+<p><img src="\uploads\20180616124006.png" alt="20180616124006"></p>
+<p>express通过mongoose库配置mongodb连接。app.js文件添加</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose =<span class="built_in">require</span>(<span class="string">"mongoose"</span>);</span><br><span class="line">mongoose.connect(<span class="string">"mongodb://127.0.0.1:27017/express_blog"</span>);</span><br></pre></td></tr></table></figure>
+<p>package.json修改script项实现自动重启服务，此处需要node-dev包。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"start"</span>: <span class="string">"node-dev ./bin/www"</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>新建git仓库。</p>
+<p><code>git init</code></p>
+<p>新建 .gitignore 文件忽略node_modules文件夹。之后add文件，add . 匹配所有文件。</p>
+<p><code>git add .</code></p>
+<p>commit提交初始的环境配置。</p>
+<p><code>git commit -m &quot;init&quot;</code></p>
+<p>github上create a new repository后关联到远程仓库</p>
+<p><code>git remote add origin git remote add origin https://github.com/flycatrix/express-blog.git</code></p>
+<p>将本地仓库的内容推到远程库上</p>
+<p><code>git push -u origin master</code></p>
+<p>本地和远程分支合并</p>
+<p><code>git pull origin master:master</code></p>
+<p>准备OK。</p>
+<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><h3 id="mongoose（猫鼬）中间件"><a href="#mongoose（猫鼬）中间件" class="headerlink" title="mongoose（猫鼬）中间件"></a>mongoose（猫鼬）中间件</h3><p>博客的功能很大程度上依赖数据库操作，使用mongoose库（猫鼬）简化mongodb操作。mongoose使用对象模型的方法对mongodb数据库进行操作，使用schema方法规范模型的变量个数，变量类型等。吐槽官方文档，一个技术文档写的那么萌。。</p>
+<p>model文件夹存放要使用到的数据模型。简单的user模型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose =<span class="built_in">require</span>(<span class="string">"mongoose"</span>);</span><br><span class="line"><span class="keyword">var</span> Schema= mongoose.Schema;</span><br><span class="line"><span class="keyword">var</span>  obj = &#123;</span><br><span class="line">	username:<span class="built_in">String</span>,</span><br><span class="line">	password:<span class="built_in">String</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> model = mongoose.model(<span class="string">"user"</span> ,<span class="keyword">new</span> Schema(obj));</span><br><span class="line"><span class="built_in">module</span>.exports = model;</span><br></pre></td></tr></table></figure>
+<p>建立模型需要引用mongoose模块，Schema构造函数将写好的数据模型obj包装成Schema对象，最终导出的model对象将继承Schema构造函数的原型中所定义的 访问和操作mongodb 的方法。</p>
+<p>schema有十种数据类型，string是其中之一，MongoDB期望用户能按固定的规律存放数据，但实际上用户可以在MongoDB中的任一集合内存放任一类型的数据。mongoose采取事先说明好数据结构和类型的方式，规范用户写入MongoDB中的数据。同时，Schema也能在定义模型时定义MongoDB的索引，支持指定索引（index）或者唯一索引（unique）。对mongoose模型的使用将分散在各路由页面说明。</p>
+<p>关于Schema的更多用法和解释可移步mongoose的文档，写文档的一定是个爱猫的程序员。</p>
+<h2 id="session-cookie用户验证"><a href="#session-cookie用户验证" class="headerlink" title="session - cookie用户验证"></a>session - cookie用户验证</h2><h3 id="关于session"><a href="#关于session" class="headerlink" title="关于session"></a>关于session</h3><p>用户的的登录状态和权限等级的确认均需要用到cookie机制，然而用户在浏览器端可以轻易更改、伪造cookie。就如xss攻击可以在用户不知情的情况下获取记录在用户浏览器中的无httponly属性的cookie信息，攻击者一旦成功伪造cookie登入，便可操作受害人的资料数据等。然而xss有绕过httponly的方法，且httponly对中间人攻击无效。一年以前曾经测试过中间人攻击，直接登入受害人QQ邮箱。。不过cookie的secure属性可以只在https通信中传递cookie，可以有效防范中间人，嗅探什么的。。emm废话不说了。</p>
+<p>此外，cookie在每次请求的时候都会被附加在请求头中，大量的cookie必然会影响传输效率。那么，session应运而生。</p>
+<p>session是存储在服务器中的数据，通过session_id运作。当收到请求时，取出保存在cookie中的session，在服务端查看其是否存在登录属性，借此判断用户的登录状态。</p>
+<h3 id="express-session中间件"><a href="#express-session中间件" class="headerlink" title="express-session中间件"></a>express-session中间件</h3><p>express-session中间件件实现会话。先npm install express-session –save-dev，然后app.js中添加</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">"express-session"</span>);</span><br><span class="line">app.use(session(&#123;</span><br><span class="line">    name: <span class="string">"sessionid"</span>, <span class="comment">// 在响应中cookie的name字段，默认是connect.sid</span></span><br><span class="line">    secret:<span class="string">"xcola"</span>, <span class="comment">//用secret签名保证是本服务器生成的session</span></span><br><span class="line">    cookie: &#123;<span class="attr">maxAge</span>: <span class="number">1000</span>*<span class="number">3600</span> &#125;, <span class="comment">//1小时</span></span><br><span class="line">    resave: <span class="literal">true</span>,<span class="comment">// 将session强制保存在store中</span></span><br><span class="line">    saveUninitialized: <span class="literal">true</span> <span class="comment">// 第一次访问即设置cookie</span></span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+<p>当用户首次访问页面时，就为用户分配一个cookie，其中保存对应的sessionid。</p>
+<p><strong>登录逻辑：</strong>若用户登录成功，那么为这个session新添一个属性，当下次请求来临时，取得用户session中新增的属性字段，若为空则是未登录用户，若不为空则是已登录用户。</p>
+<p><strong>注销逻辑：</strong>使用destroy方法摧毁当前会话，在摧毁后会重新生成一个新的没有登录状态的session会话。</p>
+<h2 id="登录与注册功能"><a href="#登录与注册功能" class="headerlink" title="登录与注册功能"></a>登录与注册功能</h2><p>在express添加新路由需要三步。</p>
+<ul>
+<li>app.js 中require 路由模块（存放在routes文件夹下）</li>
+<li>app.js 中use注册路由</li>
+<li>routes文件夹中添加新路由模块文件并设置路由规则</li>
+</ul>
+<h3 id="register-注册页"><a href="#register-注册页" class="headerlink" title="register - 注册页"></a>register - 注册页</h3><h4 id="register-ejs模版部分"><a href="#register-ejs模版部分" class="headerlink" title="register.ejs模版部分"></a>register.ejs模版部分</h4><p>views文件夹新建register.ejs模版。页面部件偷懒扒取自bootstrap。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&apos;stylesheet&apos; href=&apos;/stylesheets/style.css&apos; /&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;/bootstrap/css/bootstrap.css&quot;&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot; src=&quot;/bootstrap/js/jquery-3.3.1.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;/bootstrap/js/bootstrap.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;%- include(&apos;./header.ejs&apos;,&#123;title: &quot;register&quot;,elsetitle:&quot;login&quot;&#125;)%&gt;</span><br><span class="line">    &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    	&lt;form method=&quot;post&quot; action=&quot;/register/validate&quot;&gt;</span><br><span class="line">    	  &lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">    	    &lt;label for=&quot;exampleInputEmail1&quot;&gt;Email address&lt;/label&gt;</span><br><span class="line">    	    &lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;Username&quot; name=&quot;username&quot;&gt;</span><br><span class="line">    	  &lt;/div&gt;</span><br><span class="line">    	  &lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">    	    &lt;label for=&quot;exampleInputPassword1&quot;&gt;Password&lt;/label&gt;</span><br><span class="line">    	    &lt;input type=&quot;password&quot; class=&quot;form-control&quot; id=&quot;exampleInputPassword1&quot; placeholder=&quot;Password&quot; name=&quot;password&quot;&gt;</span><br><span class="line">    	  &lt;/div&gt;</span><br><span class="line">    	  &lt;div class=&quot;checkbox&quot;&gt;</span><br><span class="line">    	    &lt;label&gt;</span><br><span class="line">    	      &lt;input type=&quot;checkbox&quot;&gt; Check me out</span><br><span class="line">    	    &lt;/label&gt;</span><br><span class="line">    	  &lt;/div&gt;</span><br><span class="line">    	  &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;Submit&lt;/button&gt;</span><br><span class="line">    	  &lt;%if(show)&#123;%&gt;</span><br><span class="line">    	  	&lt;div class=&quot;alert alert-danger&quot; role=&quot;alert&quot;&gt;用户名已被注册&lt;/div&gt;</span><br><span class="line">    	  &lt;%&#125;%&gt;</span><br><span class="line">    	&lt;/form&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>页面头部的导航栏写成独立的header.ejs文件，在使用到header的ejs中include一下，还可以在include的同时向header.ejs传入变量。想起来之前用php写公共部分再include，通过js改变页面内容的做法，简直不要太傻。</p>
+<h4 id="register-js路由模块部分"><a href="#register-js路由模块部分" class="headerlink" title="register.js路由模块部分"></a>register.js路由模块部分</h4><p>路由模块中设置路由规则，也承担根据用户输入连接和操作数据库的任务。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"><span class="keyword">var</span> userModel = <span class="built_in">require</span>(<span class="string">"../model/userModel"</span>);</span><br><span class="line"></span><br><span class="line">router.get(<span class="string">"/"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">	res.render(<span class="string">"register"</span>,&#123;<span class="attr">title</span>:<span class="string">"Register"</span>,<span class="attr">elsetitle</span>:<span class="string">"Login"</span>,<span class="attr">show</span>:<span class="number">0</span>&#125;);</span><br><span class="line">&#125;) </span><br><span class="line"></span><br><span class="line">router.post(<span class="string">"/validate"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">	userModel.find(&#123;</span><br><span class="line">		username:req.body.username</span><br><span class="line">	&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error,docs</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(docs.length==<span class="number">0</span>)&#123;</span><br><span class="line">			userModel.create(&#123;</span><br><span class="line">				username:req.body.username,</span><br><span class="line">				password:req.body.password</span><br><span class="line">			&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error,info</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span>(!error)&#123;</span><br><span class="line">					res.redirect(<span class="string">"/"</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			res.render(<span class="string">"register"</span>,&#123;<span class="attr">title</span>:<span class="string">"Register"</span>,<span class="attr">elsetitle</span>:<span class="string">"Login"</span>,<span class="attr">show</span>:<span class="number">1</span>&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"> </span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+<p>路由文件中引入我们事先写好的userModel（mongoose模块），以便按userModel中规定的模型检索数据库。在register.js路由模块中，get方法负责渲染页面，post方法在二级路由中实现数据库查询以及写入的操作。通过<strong>find方法</strong>检索用户提交的用户名，在<strong>回调函数</strong>中处理查询结果，<strong>error</strong>用于抛出一个错误信息，<strong>docs</strong>为查询后得出的文档数组，若docs长度为0，表示这是一个未被注册的用户名，因此调用<strong>create方法</strong>写入一个新用户信息。若docs的长度不为0，则显示 “用户名已被注册” 的消息。</p>
+<h3 id="login-登录页"><a href="#login-登录页" class="headerlink" title="login - 登录页"></a>login - 登录页</h3><p>login的ejs模版和register.ejs大同小异，不再贴出赘述。</p>
+<h4 id="login-js路由模块部分"><a href="#login-js路由模块部分" class="headerlink" title="login.js路由模块部分"></a>login.js路由模块部分</h4><p>login部分的路由，需要判断用户名和密码是否能在数据库中成功匹配。判断成功后，还应该为用户设置一条新的session属性，以便根据新添加的属性判断用户的登录状态，在数据库中取得用户信息。</p>
+<p>login.js路由模块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"><span class="keyword">var</span> userModel = <span class="built_in">require</span>(<span class="string">"../model/userModel"</span>);</span><br><span class="line">router.get(<span class="string">"/"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">	res.render(<span class="string">"login"</span>,&#123;<span class="attr">title</span>:<span class="string">"Login"</span>,<span class="attr">elsetitle</span>:<span class="string">"Register"</span>,<span class="attr">show</span>:<span class="number">0</span>&#125;);</span><br><span class="line">&#125;) </span><br><span class="line">router.post(<span class="string">"/validate"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">	userModel.find(&#123;</span><br><span class="line">		email:req.body.email,</span><br><span class="line">		password:req.body.password</span><br><span class="line">	&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error, docs</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(docs.length==<span class="number">0</span>)&#123;</span><br><span class="line">			res.render(<span class="string">"login"</span>,&#123;<span class="attr">title</span>:<span class="string">"Login"</span>,<span class="attr">elsetitle</span>:<span class="string">"Register"</span>,<span class="attr">show</span>:<span class="number">1</span>&#125;);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			req.session.userInfo = docs[<span class="number">0</span>];</span><br><span class="line">			res.redirect(<span class="string">"/"</span>) </span><br><span class="line">		&#125;</span><br><span class="line"> 	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+<p>get方法渲染登录页面，post请求中接收用户输入，若用户登录成功，那么为这个session新添一个属性userInfo并跳转至首页，若登录失败则在页面上显示错误消息。</p>
+<h2 id="博客的增删改查"><a href="#博客的增删改查" class="headerlink" title="博客的增删改查"></a>博客的增删改查</h2><h3 id="准备博客模型"><a href="#准备博客模型" class="headerlink" title="准备博客模型"></a>准备博客模型</h3><p>在用户登录之后，可以撰写、发表博客。博客内容和信息存储在MongoDB中，在model文件夹中建立mongoose模型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// article model</span></span><br><span class="line"><span class="keyword">var</span> mongoose =<span class="built_in">require</span>(<span class="string">"mongoose"</span>);</span><br><span class="line"><span class="keyword">var</span> Schema= mongoose.Schema;</span><br><span class="line"><span class="keyword">var</span>  obj = &#123;</span><br><span class="line">	author:<span class="built_in">String</span>,</span><br><span class="line">	title:<span class="built_in">String</span>,</span><br><span class="line">	content:<span class="built_in">String</span>,</span><br><span class="line">	createTime:<span class="built_in">Date</span>,</span><br><span class="line">    category: <span class="built_in">String</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> model = mongoose.model(<span class="string">"article"</span> ,<span class="keyword">new</span> Schema(obj));</span><br><span class="line"><span class="built_in">module</span>.exports = model;</span><br></pre></td></tr></table></figure>
+<p>author，title，content，createTime为博客的基本信息，category为博客添加分类信息。</p>
+<h3 id="首页显示博客列表"><a href="#首页显示博客列表" class="headerlink" title="首页显示博客列表"></a>首页显示博客列表</h3><p>首页提供对未登录或非博主用户展示博客列表功能，对博主提供删改接口。此外，添加销毁路由的操作。</p>
+<h4 id="index-js路由模块部分"><a href="#index-js路由模块部分" class="headerlink" title="index.js路由模块部分"></a>index.js路由模块部分</h4><p>index路由判断用户登录状态及用户权限，读取保存在数据库中的博客列表传输给index.ejs模版，最终显示在用户界面上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"><span class="keyword">var</span> articleModel =<span class="built_in">require</span>(<span class="string">"../model/articlemodel"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET home page. */</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(req.session.userInfo)&#123;</span><br><span class="line">		articleModel.find(&#123;&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error,docs</span>)</span>&#123;</span><br><span class="line">			res.render(<span class="string">'index'</span>, &#123; <span class="attr">title</span>: <span class="string">'Express'</span> ,<span class="attr">welcome</span>:req.session.userInfo.username,</span><br><span class="line">				list:docs,<span class="attr">show</span>:<span class="number">1</span></span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		articleModel.find(&#123;&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error,docs</span>)</span>&#123;</span><br><span class="line">			res.render(<span class="string">'index'</span>, &#123; <span class="attr">title</span>: <span class="string">'Express'</span> ,<span class="attr">welcome</span>:<span class="literal">null</span>,</span><br><span class="line">				list:docs,<span class="attr">show</span>:<span class="number">0</span></span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//destroy session</span></span><br><span class="line">router.get(<span class="string">"/logout"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">	req.session.destroy(<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!error)&#123;</span><br><span class="line">			res.redirect(<span class="string">'/login'</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+<p>get方法中首先读取用户登录状态，若存在则显示欢迎标签，同时在页面上增加对当前用户博客内容的删改功能，若是未登录用户，则仅能查看当前博客列表。</p>
+<h4 id="index-ejs模版部分"><a href="#index-ejs模版部分" class="headerlink" title="index.ejs模版部分"></a>index.ejs模版部分</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;&lt;%= title %&gt;&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;/bootstrap/css/bootstrap.css&quot;&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot; src=&quot;/bootstrap/js/jquery-3.3.1.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;/bootstrap/js/bootstrap.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;%- include(&apos;./header.ejs&apos;,&#123;title: &quot;index&quot;,elsetitle:&quot;article&quot;&#125;)%&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">		&lt;%if(show)&#123;%&gt;</span><br><span class="line">    	&lt;p&gt;Welcome back! &lt;%= welcome %&gt;&lt;/p&gt;</span><br><span class="line">    	 &lt;%&#125;%&gt;</span><br><span class="line">	    &lt;table class=&quot;table table-striped table-bordered &quot;&gt;</span><br><span class="line">        	&lt;caption&gt;Optional table caption.&lt;/caption&gt;</span><br><span class="line">        	&lt;thead&gt;</span><br><span class="line">        		&lt;tr&gt;</span><br><span class="line">        		  &lt;th&gt;作者&lt;/th&gt;</span><br><span class="line">        		  &lt;th&gt;标题&lt;/th&gt;</span><br><span class="line">        		  &lt;th&gt;创建时间&lt;/th&gt;</span><br><span class="line">                  &lt;th&gt;分类&lt;/th&gt;</span><br><span class="line">        		  &lt;%if(show)&#123;%&gt;</span><br><span class="line">        		  &lt;th&gt;操作&lt;/th&gt;</span><br><span class="line">        		  &lt;%&#125;%&gt;</span><br><span class="line">        		&lt;/tr&gt;</span><br><span class="line">        	&lt;/thead&gt;</span><br><span class="line">        	&lt;tbody&gt;</span><br><span class="line">        		&lt;%for(var i=0;i&lt;list.length;i++) &#123; %&gt;</span><br><span class="line">        			&lt;tr id=&quot;&lt;%= list[i]._id %&gt;&quot;&gt;</span><br><span class="line">        				&lt;th scope=&quot;row&quot;&gt;&lt;%= list[i].author%&gt;&lt;/th&gt;</span><br><span class="line">        				&lt;td&gt;&lt;%= list[i].title%&gt;&lt;/td&gt;</span><br><span class="line">        				&lt;td&gt;&lt;%= list[i].createTime%&gt;&lt;/td&gt;</span><br><span class="line">                        &lt;td&gt;&lt;%= list[i].category%&gt;&lt;/td&gt;</span><br><span class="line">        				&lt;%if(show)&#123;%&gt;</span><br><span class="line">        				&lt;td&gt;</span><br><span class="line">        					&lt;a class=&quot;btn btn-default&quot; role=&quot;button&quot; href=&quot;/update/&lt;%= list[i]._id %&gt;&quot; id=&quot;update&quot;&gt;更新&lt;/a&gt;</span><br><span class="line">        					&lt;a class=&quot;btn btn-danger&quot; role=&quot;button&quot; href=&quot;/remove/&lt;%= list[i]._id %&gt;&quot; id=&quot;delete&quot;&gt;删除&lt;/a&gt;</span><br><span class="line">        				&lt;/td&gt;</span><br><span class="line">						 &lt;%&#125;%&gt;</span><br><span class="line">        			&lt;/tr&gt;</span><br><span class="line">        		&lt;%&#125;%&gt;</span><br><span class="line">        	&lt;/tbody&gt;</span><br><span class="line">	    &lt;/table&gt;</span><br><span class="line">        </span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>在此指出，index.ejs模版中使用ejs语法中的for循环创建表格，同时将当次循环中的博客的id写入对应的tr的id属性以及删除按钮的href属性中去，这样当用户点击删除时才能告知服务器具体需要删除哪篇博客。后面查寻博客时则通过事件代理取tr的id值确定路由。</p>
+<p>article模版展示编写博客的页面，新建博客和更新博客共用此模版。</p>
+<h4 id="article-ejs模版部分"><a href="#article-ejs模版部分" class="headerlink" title="article.ejs模版部分"></a>article.ejs模版部分</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;/bootstrap/css/bootstrap.css&quot;&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot; src=&quot;/bootstrap/js/jquery-3.3.1.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot; src=&quot;/bootstrap/js/bootstrap.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  	&lt;%- include(&quot;header.ejs&quot;,&#123;title:&quot;write&quot;,elsetitle:&quot;logout&quot;,show:0&#125;)%&gt;</span><br><span class="line">   	&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">   		&lt;form action=&quot;/article&quot; method=&quot;post&quot;&gt;</span><br><span class="line">   		 </span><br><span class="line">   		  &lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">   		    &lt;label for=&quot;exampleInputEmail1&quot;&gt;标题&lt;/label&gt;</span><br><span class="line">   		    &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;exampleInputEmail1&quot; name=&quot;title&quot; placeholder=&quot;title&quot; value=&quot;&lt;%= art_title%&gt;&quot;&gt;</span><br><span class="line">   		  &lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">          &lt;label for=&quot;exampleInputEmail1&quot;&gt;分类&lt;/label&gt;</span><br><span class="line">          &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;exampleInputEmail1&quot; name=&quot;category&quot; placeholder=&quot;category&quot; value=&quot;&lt;%= art_category%&gt;&quot;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">   		  &lt;div class=&quot;form-group&quot;&gt;</span><br><span class="line">   		    &lt;label for=&quot;exampleInputPassword1&quot;&gt;内容 &lt;/label&gt;</span><br><span class="line">   		   &lt;textarea rows=&quot;4&quot; class=&quot;form-control&quot; name=&quot;content&quot;&gt;&lt;%= art_content%&gt;&lt;/textarea&gt;</span><br><span class="line">   		  &lt;/div&gt;</span><br><span class="line">   		  &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;Submit&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">   		  </span><br><span class="line">   		&lt;/form&gt;</span><br><span class="line">   	&lt;/div&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="增-编写博客"><a href="#增-编写博客" class="headerlink" title="增 - 编写博客"></a>增 - 编写博客</h3><p>在routes文件夹中新建article.js路由模块，在views文件夹下新建article.ejs模版文件，生成编写博客页面。</p>
+<h4 id="article-js路由模块部分"><a href="#article-js路由模块部分" class="headerlink" title="article.js路由模块部分"></a>article.js路由模块部分</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"><span class="keyword">var</span> articleModel =<span class="built_in">require</span>(<span class="string">"../model/articlemodel"</span>);</span><br><span class="line"><span class="comment">/* GET home page. */</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(req.session.userInfo)&#123;</span><br><span class="line">		res.render(<span class="string">'article'</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		res.redirect(<span class="string">"/login"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">router.post(<span class="string">"/"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">	articleModel.create(&#123;</span><br><span class="line">		author: req.session.userInfo.username,</span><br><span class="line">		title: req.body.title,</span><br><span class="line">		content: req.body.content,</span><br><span class="line">		createTime: <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">		category: req.body.category</span><br><span class="line">	&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error,info</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!error)&#123;</span><br><span class="line">			res.redirect(<span class="string">"/"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+<p>get方法中，先通过session的userInfo属性判断用户是否登入，若为已登录用户则加载article页面，若为未登录用户则跳转登录页。</p>
+<p>post方法中，接收用户输入，将用户编写的博客内容保存到MongoDB中。</p>
+<h3 id="删-删除博客"><a href="#删-删除博客" class="headerlink" title="删 - 删除博客"></a>删 - 删除博客</h3><p>使用动态路由的方式完成删除博客的操作。首页对已登录博主用户提供删除博客接口，当点击删除时，将被点击的博客的id当作路由地址通过get方式传给remove.js路由模块，在remove.js中通过deleteOne()方法安全删除博客。</p>
+<h4 id="remove-js路由模块部分"><a href="#remove-js路由模块部分" class="headerlink" title="remove.js路由模块部分"></a>remove.js路由模块部分</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"><span class="keyword">var</span> articleModel =<span class="built_in">require</span>(<span class="string">"../model/articlemodel"</span>);</span><br><span class="line"><span class="keyword">var</span> userModel = <span class="built_in">require</span>(<span class="string">"../model/userModel"</span>);</span><br><span class="line"><span class="comment">/* GET home page. */</span></span><br><span class="line">router.get(<span class="string">"/:id"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">	<span class="comment">// console.log(req.session.userInfo);</span></span><br><span class="line">	articleModel.deleteOne(&#123;</span><br><span class="line">		_id: req.params.id</span><br><span class="line">	&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error,docs</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!error)&#123;</span><br><span class="line">			articleModel.find(&#123;&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error,docs</span>)</span>&#123;</span><br><span class="line">				res.render(<span class="string">'index'</span>, &#123; <span class="attr">title</span>: <span class="string">'Express'</span> ,<span class="attr">welcome</span>:req.session.userInfo.username,</span><br><span class="line">							list:docs,<span class="attr">show</span>:<span class="number">1</span></span><br><span class="line">				&#125;);</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+<p>在express中，获取不同方式提交的数据的方法分以下几种。</p>
+<ul>
+<li>req.params获取动态路由字段。</li>
+<li>req.query获取get查询字段。</li>
+<li>req.body获取post字段。</li>
+</ul>
+<p>在删除路由模块后，需要再执行一次find()操作，否则首页的博客列表将为空。</p>
+<h3 id="改-更新博客"><a href="#改-更新博客" class="headerlink" title="改 - 更新博客"></a>改 - 更新博客</h3><p>更新博客也使用动态路由的方法。和删除操作很类似。需要注意的是更新博客需要获取原有的博客填充进article.ejs模版中。</p>
+<h4 id="update-js路由模块部分"><a href="#update-js路由模块部分" class="headerlink" title="update.js路由模块部分"></a>update.js路由模块部分</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"><span class="keyword">var</span> articleModel =<span class="built_in">require</span>(<span class="string">"../model/articlemodel"</span>);</span><br><span class="line"><span class="keyword">var</span> userModel = <span class="built_in">require</span>(<span class="string">"../model/userModel"</span>);</span><br><span class="line"><span class="comment">/* GET home page. */</span></span><br><span class="line"></span><br><span class="line">router.get(<span class="string">"/:id"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">	articleModel.find(&#123;</span><br><span class="line">		_id: req.params.id</span><br><span class="line">	&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error,docs</span>)</span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(!error)&#123;</span><br><span class="line">			res.render(<span class="string">'article'</span>,&#123;<span class="attr">art_title</span>:docs[<span class="number">0</span>].title,<span class="attr">art_content</span>:docs[<span class="number">0</span>].content,<span class="attr">art_category</span>:docs[<span class="number">0</span>].category&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+<p>更改之后仍使用编写博客时的方式提交博客，博客的createtime属性也将更新为最后一次提交更新的时间。</p>
+<h3 id="查-查看博客"><a href="#查-查看博客" class="headerlink" title="查 - 查看博客"></a>查 - 查看博客</h3><p>在index.ejs中对展示博客列表的table标签添加事件代理。监听每个tr的点击事件跳转到check路由上。</p>
+<p>index.ejs添加</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">        $(<span class="string">'tbody'</span>).on(<span class="string">'click'</span>,<span class="string">"tr"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            location.href = <span class="string">'/check/'</span>+$(<span class="keyword">this</span>).attr(<span class="string">'id'</span>);</span></span><br><span class="line"><span class="undefined">        &#125;)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在for循环输出博客列表时，事先给每个tr的id属性都设置成了博客的id。</p>
+<h4 id="check-js路由模块部分"><a href="#check-js路由模块部分" class="headerlink" title="check.js路由模块部分"></a>check.js路由模块部分</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"><span class="keyword">var</span> articleModel =<span class="built_in">require</span>(<span class="string">"../model/articlemodel"</span>);</span><br><span class="line"><span class="keyword">var</span> userModel = <span class="built_in">require</span>(<span class="string">"../model/userModel"</span>);</span><br><span class="line"><span class="comment">/* GET home page. */</span></span><br><span class="line">router.get(<span class="string">"/:id"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">	articleModel.find(&#123;</span><br><span class="line">		_id: req.params.id</span><br><span class="line">	&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error,docs</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!error)&#123;</span><br><span class="line">			res.render(<span class="string">'check'</span>,&#123;<span class="attr">title</span>:<span class="string">"blog"</span>,<span class="attr">show</span>:<span class="number">0</span>,<span class="attr">art_title</span>:docs[<span class="number">0</span>].title,<span class="attr">art_content</span>:docs[<span class="number">0</span>].content,<span class="attr">art_category</span>:docs[<span class="number">0</span>].category&#125;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+<p>这应该是最简单的一个模块吧。find一下然后传给check.ejs模版就好了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>至此，已经实现了一个简单的可以登录注册增删改查博文的小博客，但还缺少分类、评论等功能。第一次记叙小项目的实现过程，行文不免凌乱缺乏条理，章节安排参考了@liuxing的github项目<a href="https://github.com/liuxing/node-blog" target="_blank" rel="noopener">node-blog</a>，项目代码已上传我的github <a href="https://github.com/flycatrix/express-blog" target="_blank" rel="noopener">express-blog</a>。此外，由于对代码的理解较浅，表述不当之处，还望不吝赐教。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/NodeJS/" rel="tag"># NodeJS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/10/关于JavaScript模块化开发的梳理/" rel="next" title="关于JavaScript模块化开发的梳理">
+                <i class="fa fa-chevron-left"></i> 关于JavaScript模块化开发的梳理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/02/部分面试题浅析/" rel="prev" title="部分面试题浅析">
+                部分面试题浅析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjcxMC8xMzI0NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="xcola" />
+            
+              <p class="site-author-name" itemprop="name">xcola</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/flycatrix" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:chen-fish@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/灬柠檬猪" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=501960614&website=www.oicqzone.com" target="_blank" title="QQZone">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQZone</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://airpoc.cn/" title="Air的博客" target="_blank">Air的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://18dian.github.io/" title="林檀的博客" target="_blank">林檀的博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备事项"><span class="nav-number">1.</span> <span class="nav-text">准备事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库操作"><span class="nav-number">2.</span> <span class="nav-text">数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongoose（猫鼬）中间件"><span class="nav-number">2.1.</span> <span class="nav-text">mongoose（猫鼬）中间件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#session-cookie用户验证"><span class="nav-number">3.</span> <span class="nav-text">session - cookie用户验证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于session"><span class="nav-number">3.1.</span> <span class="nav-text">关于session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#express-session中间件"><span class="nav-number">3.2.</span> <span class="nav-text">express-session中间件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录与注册功能"><span class="nav-number">4.</span> <span class="nav-text">登录与注册功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#register-注册页"><span class="nav-number">4.1.</span> <span class="nav-text">register - 注册页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#register-ejs模版部分"><span class="nav-number">4.1.1.</span> <span class="nav-text">register.ejs模版部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#register-js路由模块部分"><span class="nav-number">4.1.2.</span> <span class="nav-text">register.js路由模块部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#login-登录页"><span class="nav-number">4.2.</span> <span class="nav-text">login - 登录页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#login-js路由模块部分"><span class="nav-number">4.2.1.</span> <span class="nav-text">login.js路由模块部分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客的增删改查"><span class="nav-number">5.</span> <span class="nav-text">博客的增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备博客模型"><span class="nav-number">5.1.</span> <span class="nav-text">准备博客模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#首页显示博客列表"><span class="nav-number">5.2.</span> <span class="nav-text">首页显示博客列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#index-js路由模块部分"><span class="nav-number">5.2.1.</span> <span class="nav-text">index.js路由模块部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#index-ejs模版部分"><span class="nav-number">5.2.2.</span> <span class="nav-text">index.ejs模版部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#article-ejs模版部分"><span class="nav-number">5.2.3.</span> <span class="nav-text">article.ejs模版部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增-编写博客"><span class="nav-number">5.3.</span> <span class="nav-text">增 - 编写博客</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#article-js路由模块部分"><span class="nav-number">5.3.1.</span> <span class="nav-text">article.js路由模块部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删-删除博客"><span class="nav-number">5.4.</span> <span class="nav-text">删 - 删除博客</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#remove-js路由模块部分"><span class="nav-number">5.4.1.</span> <span class="nav-text">remove.js路由模块部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改-更新博客"><span class="nav-number">5.5.</span> <span class="nav-text">改 - 更新博客</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#update-js路由模块部分"><span class="nav-number">5.5.1.</span> <span class="nav-text">update.js路由模块部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查-查看博客"><span class="nav-number">5.6.</span> <span class="nav-text">查 - 查看博客</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#check-js路由模块部分"><span class="nav-number">5.6.1.</span> <span class="nav-text">check.js路由模块部分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xcola</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">29.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

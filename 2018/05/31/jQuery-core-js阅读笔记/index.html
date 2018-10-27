@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记,jQuery," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;突然有了看看jQuery源码的念头。毕竟同样是js，为什么jQuery可以实现那么多方便易用的特性，同时也希望在拜读源码的过程中，能学习到一些关于构建库和模块的思路。 &amp;emsp;&amp;emsp;源码下载自github，目前为最新版3.3.1，先从总体架构看起 —— core,js。摘取部分并整理一下。 1234567891011121314151617181920212223">
+<meta name="keywords" content="学习笔记,jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery-core.js（整体架构部分）阅读笔记">
+<meta property="og:url" content="http://yoursite.com/2018/05/31/jQuery-core-js阅读笔记/index.html">
+<meta property="og:site_name" content="xco1a&#39;s b10g">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;突然有了看看jQuery源码的念头。毕竟同样是js，为什么jQuery可以实现那么多方便易用的特性，同时也希望在拜读源码的过程中，能学习到一些关于构建库和模块的思路。 &amp;emsp;&amp;emsp;源码下载自github，目前为最新版3.3.1，先从总体架构看起 —— core,js。摘取部分并整理一下。 1234567891011121314151617181920212223">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-01T08:30:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery-core.js（整体架构部分）阅读笔记">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;突然有了看看jQuery源码的念头。毕竟同样是js，为什么jQuery可以实现那么多方便易用的特性，同时也希望在拜读源码的过程中，能学习到一些关于构建库和模块的思路。 &amp;emsp;&amp;emsp;源码下载自github，目前为最新版3.3.1，先从总体架构看起 —— core,js。摘取部分并整理一下。 1234567891011121314151617181920212223">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/31/jQuery-core-js阅读笔记/"/>
+
+
+
+
+
+  <title>jQuery-core.js（整体架构部分）阅读笔记 | xco1a's b10g</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xco1a's b10g</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/31/jQuery-core-js阅读笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xcola">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xco1a's b10g">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">jQuery-core.js（整体架构部分）阅读笔记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-31T21:32:29+08:00">
+                2018-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;突然有了看看jQuery源码的念头。毕竟同样是js，为什么jQuery可以实现那么多方便易用的特性，同时也希望在拜读源码的过程中，能学习到一些关于构建库和模块的思路。</p>
+<p>&emsp;&emsp;源码下载自github，目前为最新版3.3.1，先从总体架构看起 —— core,js。摘取部分并整理一下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jQuery = <span class="built_in">window</span>.jQuery = <span class="built_in">window</span>.$ = <span class="function"><span class="keyword">function</span>(<span class="params"> selector, context </span>) </span>&#123;		</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> jQuery.fn.init( selector, context );			</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> quickExpr = <span class="regexp">/^[^&lt;]*(&lt;(.|\s)+&gt;)[^&gt;]*$|^#(\w+)$/</span>,	</span><br><span class="line">	isSimple = <span class="regexp">/^.[^:#\[\.]*$/</span>,</span><br><span class="line">	<span class="literal">undefined</span>;	</span><br><span class="line">jQuery.fn = jQuery.prototype = &#123;			</span><br><span class="line">	init: <span class="function"><span class="keyword">function</span>(<span class="params"> selector, context </span>) </span>&#123;&#125;,</span><br><span class="line">    </span><br><span class="line">    	size: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">    <span class="comment">// 返回jq对象中个元素个数</span></span><br><span class="line">    	get: <span class="function"><span class="keyword">function</span>(<span class="params"> num </span>) </span>&#123;&#125;,</span><br><span class="line">    <span class="comment">// 以类似数组索引的方法取得一个jq对象中的元素</span></span><br><span class="line">    	pushStack: <span class="function"><span class="keyword">function</span>(<span class="params"> elems </span>) </span>&#123;&#125;,</span><br><span class="line">    <span class="comment">// 将一个元素压入jq栈</span></span><br><span class="line">    	each: <span class="function"><span class="keyword">function</span>(<span class="params"> callback, args </span>) </span>&#123;&#125;,</span><br><span class="line">    <span class="comment">// 迭代器，可遍历数组和对象</span></span><br><span class="line">    	index: <span class="function"><span class="keyword">function</span>(<span class="params"> elem </span>) </span>&#123;&#125;,</span><br><span class="line">    <span class="comment">// 搜寻指定元素，返回其位置</span></span><br><span class="line">    	attr: <span class="function"><span class="keyword">function</span>(<span class="params"> name, value, type </span>) </span>&#123;&#125;,</span><br><span class="line">    <span class="comment">// 获取匹配元素集合中第一个元素的属性值，或为每个匹配元素设置一个或多个属性</span></span><br><span class="line">    	css: <span class="function"><span class="keyword">function</span>(<span class="params"> key, value </span>) </span>&#123;&#125;,</span><br><span class="line">    <span class="comment">// 获取匹配元素中第一个元素的样式或者给指定的元素设定CSS样式</span></span><br><span class="line">    	wrapAll: <span class="function"><span class="keyword">function</span>(<span class="params"> html </span>) </span>&#123;&#125;,</span><br><span class="line">    <span class="comment">// 在对象外部插入html标签</span></span><br><span class="line">		append: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">    <span class="comment">// 将由参数指定的内容插入匹配元素集合中每个元素的末尾</span></span><br><span class="line">    	find: <span class="function"><span class="keyword">function</span>(<span class="params"> selector </span>) </span>&#123;&#125;,</span><br><span class="line">	<span class="comment">// 获取当前匹配元素中符合参数选择器的对象</span></span><br><span class="line">	clone: <span class="function"><span class="keyword">function</span>(<span class="params"> events </span>) </span>&#123;&#125;,</span><br><span class="line">	<span class="comment">// 深拷贝一组匹配元素的值</span></span><br><span class="line">	add: <span class="function"><span class="keyword">function</span>(<span class="params"> selector </span>) </span>&#123;&#125;,</span><br><span class="line">	<span class="comment">// 以给定的参数创建一个新的jq对象</span></span><br><span class="line">	is: <span class="function"><span class="keyword">function</span>(<span class="params"> selector </span>) </span>&#123;&#125;,</span><br><span class="line">	<span class="comment">// 根据给定的条件检查当前匹配元素，存在匹配时返回true</span></span><br><span class="line">	val: <span class="function"><span class="keyword">function</span>(<span class="params"> value </span>) </span>&#123;&#125;,</span><br><span class="line">	<span class="comment">// 返回当前元素的value值</span></span><br><span class="line">	html: <span class="function"><span class="keyword">function</span>(<span class="params"> value </span>) </span>&#123;&#125;,</span><br><span class="line">	<span class="comment">// 返回或设定当前元素的html标签内容</span></span><br><span class="line">	replaceWith: <span class="function"><span class="keyword">function</span>(<span class="params"> value </span>) </span>&#123;&#125;,</span><br><span class="line">	<span class="comment">// 用提供的内容替换当前匹配元素</span></span><br><span class="line">	eq: <span class="function"><span class="keyword">function</span>(<span class="params"> i </span>) </span>&#123;&#125;,</span><br><span class="line">	<span class="comment">// 以索引的方式取得一组jq对象中的某一个对象</span></span><br><span class="line">	slice: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">	<span class="comment">// 和数组的slice方法类似，可以缩小当前jq对象数组的范围</span></span><br><span class="line">	map: <span class="function"><span class="keyword">function</span>(<span class="params"> callback </span>) </span>&#123;&#125;,</span><br><span class="line">	<span class="comment">// 和数组的map方法类似</span></span><br><span class="line">	data: <span class="function"><span class="keyword">function</span>(<span class="params"> key, value </span>)</span>&#123;&#125;,</span><br><span class="line">	<span class="comment">// 向dom元素附加一个数据（键值对）</span></span><br><span class="line">	domManip: <span class="function"><span class="keyword">function</span>(<span class="params"> args, table, reverse, callback </span>) </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line">	<span class="comment">// dom操作的核心函数</span></span><br><span class="line">jQuery.fn.init.prototype = jQuery.fn;</span><br><span class="line">	<span class="comment">// 把jQuery的原型传递给init的原型</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;首先在全局注册jQuery变量（$），随后此变量指向jq的构造函数。有个很有意思的小地方 ——  定义了一个变量叫 undefined，由于没给它赋值，因此它的值也是undefined。这样做的意义可以分为两个方面，首先它减少了程序在作用域链中搜寻undefined值的时间，其次也在防范用户有意无意的改变undefined的值（undefined是可以赋值的，但谷歌浏览器会忽视用户给undefined的赋值）。</p>
+<p>&emsp;&emsp;值得学习的是，在构造函数中 “return new ” 的方法使得jq获得了无new构造jq对象的特性，但是，如果直接return 自己的构造函数无疑会造成无限递归自己的问题。如下所示。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jQuery = <span class="function"><span class="keyword">function</span>(<span class="params">selector</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.selector = selector;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> jQuery(selector);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;因此这个构造函数把构造对象的任务交给了jQuery.fn.init函数。jQuery.fn.init实际上是jQuery.prototype.init，在这个过程中，分离出两个不同的构造器 —— jQuery.prototype和jQuery.prototype.init.prototype。到了这里虽然解决了无new操作且避免递归的问题，也自然而然引出另一个问题 —— 构建jq对象的任务是在jQuery.prototype.init.prototype中完成的，所以构建出的对象其原型会指向jQuery.prototype.init.prototype而不是jQuery.prototype，其this也无法引用到jQuery的原型方法。</p>
+<p>&emsp;&emsp;比如，在jQuery.prototype中，还有很多种方法，在上面的代码块中仅列出一部分函数的声明，注释中给出了每个方法的作用。这些方法均为实例方法，实例化出的jq对象即可调用。</p>
+<p>&emsp;&emsp;另外，jQuery本身还存在很多静态方法，这些方法由jQuery直接调用，例如扩展方法（extend）。可以发现，在这其中存在静态和实例方法中有共用的方法，即既是静态方法，也是实例方法，举个栗子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">each: <span class="function"><span class="keyword">function</span>(<span class="params"> callback, args </span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> jQuery.each( <span class="keyword">this</span>, callback, args );</span><br><span class="line">	&#125;,</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;each方法可以被实例化的对象调用也可以被jQuery本身调用。且这个静态方法的实现还依赖于实例方法。但jq实例是通过init构造器构造的，init构造器和jQuery构造器又是分离的，那么怎么解决这个问题呢，在这段程序的最后。</p>
+<p><code>jQuery.fn.init.prototype = jQuery.fn;</code></p>
+<p>&emsp;&emsp;把jQuery的原型传递给init的原型，这样jQuery.prototype.init.prototype会指向jQuery.prototype，事实上也就是jQuery的原型对象覆盖了init构造器的原型对象。通过这种方法，将两个分离的构造器整合在了一起。当用户使用$()时，首先通过init构造器创建了一个jq对象，其次通过jQuery.fn.init.prototype = jQuery.fn的方法将实例方法挂载，静态方法又依赖于实例方法才得以实现，至此，通过init构造器完成了无new化jq对象的构建、通过init和jQuery的原型传递实现了实例方法挂载、在实例方法中call或者apply方法又实现了jQuery静态方法的挂载。</p>
+<p>&emsp;&emsp;这一部分原理和思路是我在参考了很多前辈和大神的分析讲解后才得以勉强理解。在构建对象的核心模块上尽显其思路之巧妙写法之风骚。此外，core.js中在实例方法和静态方法的处理中展现出的编程技巧也十分值得学习。阅读源码过程艰难，基本就处于理解偏差乃至根本看不懂的尴尬境地，但希望拜读之后，这些思路和技巧亦能成为我的血肉。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/26/对ajax的理解/" rel="next" title="对ajax的理解">
+                <i class="fa fa-chevron-left"></i> 对ajax的理解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/10/关于JavaScript模块化开发的梳理/" rel="prev" title="关于JavaScript模块化开发的梳理">
+                关于JavaScript模块化开发的梳理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjcxMC8xMzI0NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="xcola" />
+            
+              <p class="site-author-name" itemprop="name">xcola</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/flycatrix" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:chen-fish@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/灬柠檬猪" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=501960614&website=www.oicqzone.com" target="_blank" title="QQZone">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQZone</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://airpoc.cn/" title="Air的博客" target="_blank">Air的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://18dian.github.io/" title="林檀的博客" target="_blank">林檀的博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xcola</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">29.2k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
