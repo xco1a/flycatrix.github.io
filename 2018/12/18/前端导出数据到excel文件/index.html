@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="xcola, blog">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景：这是需求。。请教静姐，找到一个库 – xlsx.full.min.js，支持导出导入数据到csv或者excel文件。alicdn：1&amp;lt;script src=&quot;http://g.alicdn.com/cs70/luban-component/0.2.3/xlsx.full.min.js&quot;&amp;gt;&amp;lt;/script&amp;gt; 使用方法：数据格式：  页面上添加a标签：1&amp;lt;a hre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xco1a&#39;s b10g">
+<meta property="og:url" content="http://yoursite.com/2018/12/18/前端导出数据到excel文件/index.html">
+<meta property="og:site_name" content="xco1a&#39;s b10g">
+<meta property="og:description" content="背景：这是需求。。请教静姐，找到一个库 – xlsx.full.min.js，支持导出导入数据到csv或者excel文件。alicdn：1&amp;lt;script src=&quot;http://g.alicdn.com/cs70/luban-component/0.2.3/xlsx.full.min.js&quot;&amp;gt;&amp;lt;/script&amp;gt; 使用方法：数据格式：  页面上添加a标签：1&amp;lt;a hre">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://cdn.nlark.com/lark/0/2018/png/146541/1545117260764-7cad7831-0a93-4338-b76b-3a25c68be1b7.png">
+<meta property="og:image" content="https://cdn.nlark.com/lark/0/2018/png/146541/1545117761507-630eb32a-37dc-46aa-bdf7-9baf1e2beefb.png">
+<meta property="og:image" content="https://cdn.nlark.com/lark/0/2018/png/146541/1545118006261-6c25e7b6-290c-4b74-a1f0-17f7077e8a8d.png">
+<meta property="og:image" content="https://cdn.nlark.com/lark/0/2018/png/146541/1545118052145-25c4fbcf-8a21-41af-a29a-6f4697c0b968.png">
+<meta property="og:updated_time" content="2018-12-18T10:42:11.476Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="xco1a&#39;s b10g">
+<meta name="twitter:description" content="背景：这是需求。。请教静姐，找到一个库 – xlsx.full.min.js，支持导出导入数据到csv或者excel文件。alicdn：1&amp;lt;script src=&quot;http://g.alicdn.com/cs70/luban-component/0.2.3/xlsx.full.min.js&quot;&amp;gt;&amp;lt;/script&amp;gt; 使用方法：数据格式：  页面上添加a标签：1&amp;lt;a hre">
+<meta name="twitter:image" content="https://cdn.nlark.com/lark/0/2018/png/146541/1545117260764-7cad7831-0a93-4338-b76b-3a25c68be1b7.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/18/前端导出数据到excel文件/">
+
+
+
+
+
+  <title> | xco1a's b10g</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xco1a's b10g</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/18/前端导出数据到excel文件/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xcola">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xco1a's b10g">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline"></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-18T18:45:35+08:00">
+                2018-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  995
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h2><p><img src="https://cdn.nlark.com/lark/0/2018/png/146541/1545117260764-7cad7831-0a93-4338-b76b-3a25c68be1b7.png" alt="undefined"><br>这是需求。。<br>请教静姐，找到一个库 – xlsx.full.min.js，支持导出导入数据到csv或者excel文件。<br>alicdn：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://g.alicdn.com/cs70/luban-component/0.2.3/xlsx.full.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h2><h3 id="数据格式："><a href="#数据格式：" class="headerlink" title="数据格式："></a>数据格式：</h3><p><img src="https://cdn.nlark.com/lark/0/2018/png/146541/1545117761507-630eb32a-37dc-46aa-bdf7-9baf1e2beefb.png" alt="undefined"> </p>
+<h3 id="页面上添加a标签："><a href="#页面上添加a标签：" class="headerlink" title="页面上添加a标签："></a>页面上添加a标签：</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span> <span class="attr">download</span>=<span class="string">"machine_info.xlsx"</span> <span class="attr">id</span>=<span class="string">"hf"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="导出过程："><a href="#导出过程：" class="headerlink" title="导出过程："></a>导出过程：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">exportToExcel</span> (<span class="params">dataIndex</span>) </span>&#123;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">let</span> jsono = processData(dataIndex); <span class="comment">//这里的jsono就是处理好的数据</span></span><br><span class="line">                </span><br><span class="line">                <span class="keyword">var</span> tmpDown; <span class="comment">//导出的二进制对象</span></span><br><span class="line">                <span class="function"><span class="keyword">function</span> <span class="title">downloadExl</span>(<span class="params">json, type</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">var</span> tmpdata = json[<span class="number">0</span>];</span><br><span class="line">                    json.unshift(&#123;&#125;);</span><br><span class="line">                    <span class="keyword">var</span> keyMap = []; <span class="comment">//获取keys</span></span><br><span class="line">                    <span class="comment">//keyMap =Object.keys(json[0]);</span></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> tmpdata) &#123;</span><br><span class="line">                        keyMap.push(k);</span><br><span class="line">                        json[<span class="number">0</span>][k] = k;</span><br><span class="line">                    &#125;</span><br><span class="line">                  <span class="keyword">var</span> tmpdata = [];<span class="comment">//用来保存转换好的json </span></span><br><span class="line">                        json.map(<span class="function">(<span class="params">v, i</span>) =&gt;</span> keyMap.map(<span class="function">(<span class="params">k, j</span>) =&gt;</span> <span class="built_in">Object</span>.assign(&#123;&#125;, &#123;</span><br><span class="line">                            v: v[k],</span><br><span class="line">                            position: (j &gt; <span class="number">25</span> ? getCharCol(j) : <span class="built_in">String</span>.fromCharCode(<span class="number">65</span> + j)) + (i + <span class="number">1</span>)</span><br><span class="line">                        &#125;))).reduce(<span class="function">(<span class="params">prev, next</span>) =&gt;</span> prev.concat(next)).forEach(<span class="function">(<span class="params">v, i</span>) =&gt;</span> tmpdata[v.position] = &#123;</span><br><span class="line">                            v: v.v</span><br><span class="line">                        &#125;);</span><br><span class="line">                        <span class="keyword">var</span> outputPos = <span class="built_in">Object</span>.keys(tmpdata); <span class="comment">//设置区域,比如表格从A1到D10</span></span><br><span class="line">                        <span class="keyword">var</span> tmpWB = &#123;</span><br><span class="line">                            SheetNames: [<span class="string">'Sheet1'</span>], <span class="comment">//保存的表标题</span></span><br><span class="line">                            Sheets: &#123;</span><br><span class="line">                                <span class="string">'Sheet1'</span>: <span class="built_in">Object</span>.assign(&#123;&#125;,</span><br><span class="line">                                    tmpdata, <span class="comment">//内容</span></span><br><span class="line">                                    &#123;</span><br><span class="line">                                        <span class="string">'!ref'</span>: outputPos[<span class="number">0</span>] + <span class="string">':'</span> + outputPos[outputPos.length - <span class="number">1</span>] <span class="comment">//设置填充区域</span></span><br><span class="line">                                    &#125;)</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;;</span><br><span class="line">                        tmpDown = <span class="keyword">new</span> Blob([s2ab(XLSX.write(tmpWB, </span><br><span class="line">                            &#123;<span class="attr">bookType</span>: (type == <span class="literal">undefined</span> ? <span class="string">'xlsx'</span>:type),<span class="attr">bookSST</span>: <span class="literal">false</span>, <span class="attr">type</span>: <span class="string">'binary'</span>&#125;<span class="comment">//这里的数据是用来定义导出的格式类型</span></span><br><span class="line">                            ))], &#123;</span><br><span class="line">                            type: <span class="string">""</span></span><br><span class="line">                        &#125;); <span class="comment">//创建二进制对象写入转换好的字节流</span></span><br><span class="line">                    <span class="keyword">var</span> href = URL.createObjectURL(tmpDown); <span class="comment">//创建对象超链接</span></span><br><span class="line">                    <span class="built_in">document</span>.getElementById(<span class="string">"hf"</span>).href = href; <span class="comment">//绑定a标签</span></span><br><span class="line">                    <span class="built_in">document</span>.getElementById(<span class="string">"hf"</span>).click(); <span class="comment">//模拟点击实现下载</span></span><br><span class="line">                    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//延时释放</span></span><br><span class="line">                        URL.revokeObjectURL(tmpDown); <span class="comment">//用URL.revokeObjectURL()来释放这个object URL</span></span><br><span class="line">                    &#125;, <span class="number">100</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="function"><span class="keyword">function</span> <span class="title">s2ab</span>(<span class="params">s</span>) </span>&#123; <span class="comment">//字符串转字符流</span></span><br><span class="line">                    <span class="keyword">var</span> buf = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(s.length);</span><br><span class="line">                    <span class="keyword">var</span> view = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(buf);</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i != s.length; ++i) view[i] = s.charCodeAt(i) &amp; <span class="number">0xFF</span>;</span><br><span class="line">                    <span class="keyword">return</span> buf;</span><br><span class="line">                &#125;</span><br><span class="line">                 <span class="comment">// 将指定的自然数转换为26进制表示。映射关系：[0-25] -&gt; [A-Z]。</span></span><br><span class="line">                <span class="function"><span class="keyword">function</span> <span class="title">getCharCol</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">let</span> temCol = <span class="string">''</span>,</span><br><span class="line">                    s = <span class="string">''</span>,</span><br><span class="line">                    m = <span class="number">0</span></span><br><span class="line">                    <span class="keyword">while</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                        m = n % <span class="number">26</span> + <span class="number">1</span></span><br><span class="line">                        s = <span class="built_in">String</span>.fromCharCode(m + <span class="number">64</span>) + s</span><br><span class="line">                        n = (n - m) / <span class="number">26</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">return</span> s</span><br><span class="line">                &#125;</span><br><span class="line">                downloadExl(jsono)</span><br><span class="line"></span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="为button绑定事件："><a href="#为button绑定事件：" class="headerlink" title="为button绑定事件："></a>为button绑定事件：</h3><p><img src="https://cdn.nlark.com/lark/0/2018/png/146541/1545118006261-6c25e7b6-290c-4b74-a1f0-17f7077e8a8d.png" alt="undefined"> </p>
+<h3 id="效果："><a href="#效果：" class="headerlink" title="效果："></a>效果：</h3><p><img src="https://cdn.nlark.com/lark/0/2018/png/146541/1545118052145-25c4fbcf-8a21-41af-a29a-6f4697c0b968.png" alt="undefined"> </p>
+<h2 id="简单封装成鲁班组件："><a href="#简单封装成鲁班组件：" class="headerlink" title="简单封装成鲁班组件："></a>简单封装成鲁班组件：</h2><p>app-export.js:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'app-export'</span>, Vue.extend(&#123;</span><br><span class="line">    template: join([</span><br><span class="line">        <span class="string">'&lt;button is="app-button" id="&#123;&#123;id&#125;&#125;" bs-style="primary" @click="exportToExcel()"&gt;导出&lt;/button&gt;'</span>,</span><br><span class="line">        <span class="string">'&lt;a href="" download="&#123;&#123;filename&#125;&#125;.xlsx" id="hf"&gt;&lt;/a&gt;'</span>,</span><br><span class="line">    ]),</span><br><span class="line">    props: [<span class="string">'id'</span>, <span class="string">'data'</span>,<span class="string">'filename'</span>],</span><br><span class="line">    created: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = (!<span class="keyword">this</span>.id ? (<span class="string">'app-export'</span> + RandomUtil.randomInt(<span class="number">10</span>)) : <span class="keyword">this</span>.id);</span><br><span class="line">        VueUtil.parseProps(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">this</span>.$root[<span class="keyword">this</span>.id] = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">this</span>.filename = (!<span class="keyword">this</span>.filename ? (<span class="string">'export'</span> + RandomUtil.randomInt(<span class="number">10</span>)) : <span class="keyword">this</span>.filename);</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        exportToExcel: <span class="function"><span class="keyword">function</span> (<span class="params">jsono</span>) </span>&#123;</span><br><span class="line">            jsono = <span class="keyword">this</span>.data</span><br><span class="line">            <span class="keyword">if</span>(jsono == <span class="literal">undefined</span> || jsono == <span class="string">''</span>||jsono.length == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">var</span> tmpDown; <span class="comment">//导出的二进制对象</span></span><br><span class="line">            <span class="function"><span class="keyword">function</span> <span class="title">downloadExl</span>(<span class="params">json, type</span>) </span>&#123;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">var</span> tmpdata = json[<span class="number">0</span>];</span><br><span class="line">                json.unshift(&#123;&#125;);</span><br><span class="line">                <span class="keyword">var</span> keyMap = []; <span class="comment">//获取keys</span></span><br><span class="line">                <span class="comment">//keyMap =Object.keys(json[0]);</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> tmpdata) &#123;</span><br><span class="line">                    keyMap.push(k);</span><br><span class="line">                    json[<span class="number">0</span>][k] = k;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">var</span> tmpdata = [];<span class="comment">//用来保存转换好的json </span></span><br><span class="line">                json.map(<span class="function">(<span class="params">v, i</span>) =&gt;</span> keyMap.map(<span class="function">(<span class="params">k, j</span>) =&gt;</span> <span class="built_in">Object</span>.assign(&#123;&#125;, &#123;</span><br><span class="line">                    v: v[k],</span><br><span class="line">                    position: (j &gt; <span class="number">25</span> ? getCharCol(j) : <span class="built_in">String</span>.fromCharCode(<span class="number">65</span> + j)) + (i + <span class="number">1</span>)</span><br><span class="line">                &#125;))).reduce(<span class="function">(<span class="params">prev, next</span>) =&gt;</span> prev.concat(next)).forEach(<span class="function">(<span class="params">v, i</span>) =&gt;</span> tmpdata[v.position] = &#123;</span><br><span class="line">                    v: v.v</span><br><span class="line">                &#125;);</span><br><span class="line">                <span class="keyword">var</span> outputPos = <span class="built_in">Object</span>.keys(tmpdata); <span class="comment">//设置区域,比如表格从A1到D10</span></span><br><span class="line">                <span class="keyword">var</span> tmpWB = &#123;</span><br><span class="line">                    SheetNames: [<span class="string">'Sheet1'</span>], <span class="comment">//保存的表标题</span></span><br><span class="line">                    Sheets: &#123;</span><br><span class="line">                        <span class="string">'Sheet1'</span>: <span class="built_in">Object</span>.assign(&#123;&#125;,</span><br><span class="line">                            tmpdata, <span class="comment">//内容</span></span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="string">'!ref'</span>: outputPos[<span class="number">0</span>] + <span class="string">':'</span> + outputPos[outputPos.length - <span class="number">1</span>] <span class="comment">//设置填充区域</span></span><br><span class="line">                            &#125;)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;;</span><br><span class="line">                tmpDown = <span class="keyword">new</span> Blob([s2ab(XLSX.write(tmpWB, </span><br><span class="line">                    &#123;<span class="attr">bookType</span>: (type == <span class="literal">undefined</span> ? <span class="string">'xlsx'</span>:type),<span class="attr">bookSST</span>: <span class="literal">false</span>, <span class="attr">type</span>: <span class="string">'binary'</span>&#125;<span class="comment">//这里的数据是用来定义导出的格式类型</span></span><br><span class="line">                    ))], &#123;</span><br><span class="line">                    type: <span class="string">""</span></span><br><span class="line">                &#125;); <span class="comment">//创建二进制对象写入转换好的字节流</span></span><br><span class="line">                <span class="keyword">var</span> href = URL.createObjectURL(tmpDown); <span class="comment">//创建对象超链接</span></span><br><span class="line">                    <span class="built_in">document</span>.getElementById(<span class="string">"hf"</span>).href = href; <span class="comment">//绑定a标签</span></span><br><span class="line">                    <span class="built_in">document</span>.getElementById(<span class="string">"hf"</span>).click(); <span class="comment">//模拟点击实现下载</span></span><br><span class="line">                    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">//延时释放</span></span><br><span class="line">                        URL.revokeObjectURL(tmpDown); <span class="comment">//用URL.revokeObjectURL()来释放这个object URL</span></span><br><span class="line">                    &#125;, <span class="number">100</span>);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="function"><span class="keyword">function</span> <span class="title">s2ab</span>(<span class="params">s</span>) </span>&#123; <span class="comment">//字符串转字符流</span></span><br><span class="line">                    <span class="keyword">var</span> buf = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(s.length);</span><br><span class="line">                    <span class="keyword">var</span> view = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(buf);</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i != s.length; ++i) view[i] = s.charCodeAt(i) &amp; <span class="number">0xFF</span>;</span><br><span class="line">                    <span class="keyword">return</span> buf;</span><br><span class="line">                &#125;</span><br><span class="line">                 <span class="comment">// 将指定的自然数转换为26进制表示。映射关系：[0-25] -&gt; [A-Z]。</span></span><br><span class="line">                <span class="function"><span class="keyword">function</span> <span class="title">getCharCol</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">let</span> temCol = <span class="string">''</span>,</span><br><span class="line">                    s = <span class="string">''</span>,</span><br><span class="line">                    m = <span class="number">0</span></span><br><span class="line">                    <span class="keyword">while</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                        m = n % <span class="number">26</span> + <span class="number">1</span></span><br><span class="line">                        s = <span class="built_in">String</span>.fromCharCode(m + <span class="number">64</span>) + s</span><br><span class="line">                        n = (n - m) / <span class="number">26</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">return</span> s</span><br><span class="line">                &#125;</span><br><span class="line">                downloadExl(jsono)</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;))</span><br></pre></td></tr></table></figure></p>
+<p>用法：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">app-export</span> <span class="attr">filename</span>=<span class="string">"machine-info"</span> <span class="attr">:data</span>=<span class="string">"context.machineData"</span>&gt;</span><span class="tag">&lt;/<span class="name">app-export</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/18/LeeTCode两数相加/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjcxMC8xMzI0NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="xcola">
+            
+              <p class="site-author-name" itemprop="name">xcola</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/flycatrix" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:chen-fish@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/灬柠檬猪" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=501960614&website=www.oicqzone.com" target="_blank" title="QQZone">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQZone</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://airpoc.cn/" title="Air的博客" target="_blank">Air的博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://18dian.github.io/" title="林檀的博客" target="_blank">林檀的博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景："><span class="nav-number">1.</span> <span class="nav-text">背景：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法："><span class="nav-number">2.</span> <span class="nav-text">使用方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据格式："><span class="nav-number">2.1.</span> <span class="nav-text">数据格式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面上添加a标签："><span class="nav-number">2.2.</span> <span class="nav-text">页面上添加a标签：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导出过程："><span class="nav-number">2.3.</span> <span class="nav-text">导出过程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为button绑定事件："><span class="nav-number">2.4.</span> <span class="nav-text">为button绑定事件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果："><span class="nav-number">2.5.</span> <span class="nav-text">效果：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单封装成鲁班组件："><span class="nav-number">3.</span> <span class="nav-text">简单封装成鲁班组件：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xcola</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">32.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
