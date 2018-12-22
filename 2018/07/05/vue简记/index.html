@@ -1,384 +1,77 @@
-<!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang="">
+<!DOCTYPE HTML>
+<html>
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="theme-color" content="#222">
-<meta name="baidu-site-verification" content="MF6aIFORsF">
+  <meta charset="utf-8">
+  
+  <title>vue简记 | xco1a&#39;s b10g</title>
+  <meta name="author" content="xcola">
 
+  
+  <meta name="description" content="做有态度的码农">
+  
 
+  
 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta property="og:title" content="vue简记">
+  <meta property="og:site_name" content="xco1a&#39;s b10g">
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
+  
+    <meta property="og:image" content="">
+  
 
+  
+  <link href="/css/images/favicon.ico" rel="icon">
+  
 
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="学习笔记,Vue,">
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="vue-cli目录结构npm安装vue-cli，init一个vue项目。tree生成树列表保留部分项目文件： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950│  .babelrc│  .editorconfig│  .gitignore│  .postcssrc.">
-<meta name="keywords" content="学习笔记,Vue">
-<meta property="og:type" content="article">
-<meta property="og:title" content="vue简记">
-<meta property="og:url" content="http://yoursite.com/2018/07/05/vue简记/index.html">
-<meta property="og:site_name" content="xco1a&#39;s b10g">
-<meta property="og:description" content="vue-cli目录结构npm安装vue-cli，init一个vue项目。tree生成树列表保留部分项目文件： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950│  .babelrc│  .editorconfig│  .gitignore│  .postcssrc.">
-<meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/uploads/2018-7-6.png">
-<meta property="og:updated_time" content="2018-09-07T11:07:40.526Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue简记">
-<meta name="twitter:description" content="vue-cli目录结构npm安装vue-cli，init一个vue项目。tree生成树列表保留部分项目文件： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950│  .babelrc│  .editorconfig│  .gitignore│  .postcssrc.">
-<meta name="twitter:image" content="http://yoursite.com/uploads/2018-7-6.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Gemini',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2018/07/05/vue简记/">
-
-
-
-
-
-  <title>vue简记 | xco1a's b10g</title>
+  <link rel="alternate" href="/atom.xml" title="xco1a&#39;s b10g" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
 
 
-
-
-
-
-
+  <!-- baidu webmaster push -->
+  <script src="//push.zhanzhang.baidu.com/push.js"></script>
 
 </head>
+</html>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">xco1a's b10g</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <h1 class="site-subtitle" itemprop="description"></h1>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">xco1a&#39;s b10g</a></h1>
+  <h2><a href="/"></a></h2>
 </div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
-            
-            Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
-            
-            Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
-            
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            Archives
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
 </nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-07-05T09:13:16.000Z"><a href="/2018/07/05/vue简记/">2018-07-05</a></time>
+      
+      
+  
+    <h1 class="title">vue简记</h1>
+  
 
-<meta name="baidu-site-verification" content="MF6aIFORsF">
-
- </div>
     </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/vue简记/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xcola">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xco1a's b10g">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">vue简记</h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-05T17:13:16+08:00">
-                2018-07-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.7k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
+    <div class="entry">
       
         <h2 id="vue-cli目录结构"><a href="#vue-cli目录结构" class="headerlink" title="vue-cli目录结构"></a>vue-cli目录结构</h2><p>npm安装vue-cli，init一个vue项目。tree生成树列表保留部分项目文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">│  .babelrc</span><br><span class="line">│  .editorconfig</span><br><span class="line">│  .gitignore</span><br><span class="line">│  .postcssrc.js</span><br><span class="line">│  index.html</span><br><span class="line">│  package.json</span><br><span class="line">│  README.md</span><br><span class="line">│  </span><br><span class="line">├─build</span><br><span class="line">│      build.js</span><br><span class="line">│      check-versions.js</span><br><span class="line">│      utils.js</span><br><span class="line">│      vue-loader.conf.js</span><br><span class="line">│      webpack.base.conf.js</span><br><span class="line">│      webpack.dev.conf.js</span><br><span class="line">│      webpack.prod.conf.js</span><br><span class="line">│      </span><br><span class="line">├─config</span><br><span class="line">│      dev.env.js</span><br><span class="line">│      index.js</span><br><span class="line">│      prod.env.js</span><br><span class="line">│      </span><br><span class="line">├─src</span><br><span class="line">│  │  App.vue</span><br><span class="line">│  │  main.js</span><br><span class="line">│  │  </span><br><span class="line">│  ├─assets</span><br><span class="line">│  │  └─images</span><br><span class="line">│  │          swipe1.png</span><br><span class="line">│  │          swipe2.png</span><br><span class="line">│  │          swipe3.png</span><br><span class="line">│  │          </span><br><span class="line">│  ├─components</span><br><span class="line">│  │  │  event.vue</span><br><span class="line">│  │  │  explore.vue</span><br><span class="line">│  │  │  invest.vue</span><br><span class="line">│  │  │  questions.vue</span><br><span class="line">│  │  │  </span><br><span class="line">│  │  └─common</span><br><span class="line">│  │          banner.vue</span><br><span class="line">│  │          navbar.vue</span><br><span class="line">│  │          </span><br><span class="line">│  ├─router</span><br><span class="line">│  │      index.js</span><br><span class="line">│  │      </span><br><span class="line">│  └─store</span><br><span class="line">│          index.js</span><br><span class="line">│          </span><br><span class="line">└─static</span><br><span class="line">        .gitkeep</span><br></pre></td></tr></table></figure>
@@ -404,7 +97,7 @@
 <li>actions中声明请求数据，回调函数等异步方法，可以看到actions中的方法在请求回数据后，会commit到mutations中去。action不能直接更改状态。</li>
 </ul>
 <h4 id="App-vue"><a href="#App-vue" class="headerlink" title="App.vue"></a>App.vue</h4><p>App.vue是主组件，它为其他组件提供路由容器，是其他组件显示的基础。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;router-view&gt;<span class="xml"><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> explore <span class="keyword">from</span> <span class="string">'./components/explore'</span></span><br><span class="line"><span class="keyword">import</span> dcplan <span class="keyword">from</span> <span class="string">'./components/dcplan'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'App'</span>,</span><br><span class="line">  components:&#123;</span><br><span class="line">  	explore,</span><br><span class="line">    dcplan</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;style lang="scss" scoped&gt;</span></span><br><span class="line"><span class="regexp">	</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> explore <span class="keyword">from</span> <span class="string">'./components/explore'</span></span><br><span class="line"><span class="keyword">import</span> dcplan <span class="keyword">from</span> <span class="string">'./components/dcplan'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'App'</span>,</span><br><span class="line">  components:&#123;</span><br><span class="line">  	explore,</span><br><span class="line">    dcplan</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;style lang="scss" scoped&gt;</span></span><br><span class="line"><span class="regexp">	</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure>
 <h4 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a>main.js</h4><p>main.js是项目模块的入口，Vue实例在这里创建，同时也在这里引入注册项目需要的组件（router、vuex、第三方UI库等等）。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The Vue build version to load with the `import` command</span></span><br><span class="line"><span class="comment">// (runtime-only or standalone) has been set in webpack.base.conf with an alias.</span></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App'</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">'./router'</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./store'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Mint <span class="keyword">from</span> <span class="string">'mint-ui'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'mint-ui/lib/style.css'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Mint);</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; Swipe, SwipeItem &#125; <span class="keyword">from</span> <span class="string">'mint-ui'</span>;</span><br><span class="line"></span><br><span class="line">Vue.use(Swipe);</span><br><span class="line">Vue.use(SwipeItem)</span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* eslint-disable no-new */</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: <span class="string">'&lt;App/&gt;'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>放置静态文件的文件夹，iconfont字体什么的塞进去。git会忽略空文件夹，为了防止它被忽略，给它里面放了一个.gitkeep文件。。</p>
@@ -415,492 +108,152 @@
       
     </div>
     
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
+    <footer>
+        <div class="alignright">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
-          
-            <a href="/tags/Vue/" rel="tag"># Vue</a>
-          
+          <a href="javascript:void(0)" class="share-link bdsharebuttonbox" data-cmd="more">分享</a>
         </div>
-      
+        
+  
+  <div class="categories">
+    <a href="/categories/前端/">前端</a>
+  </div>
 
-      
-      
-      
+        
+  
+  <div class="tags">
+    <a href="/tags/学习笔记/">学习笔记</a>, <a href="/tags/Vue/">Vue</a>
+  </div>
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/07/02/部分面试题浅析/" rel="next" title="部分面试题浅析">
-                <i class="fa fa-chevron-left"></i> 部分面试题浅析
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/20/react简记/" rel="prev" title="react简记">
-                react简记 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
+        <!-- partial('post/share') -->
+      <div class="clearfix"></div>
     </footer>
   </div>
-  
-  
-  
-  </article>
+</article>
 
 
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
 
   
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjcxMC8xMzI0NQ=="></div>
-    </div>
-
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
   
-
-
-
-        </div>
-        
-          
+    <li><a href="/categories/前端/">前端</a><small>17</small></li>
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image" src="/uploads/avatar.png" alt="xcola">
-            
-              <p class="site-author-name" itemprop="name">xcola</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">20</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">categories</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
-                  <span class="site-state-item-name">tags</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/flycatrix" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="mailto:chen-fish@foxmail.com" target="_blank" title="E-Mail">
-                      
-                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="http://weibo.com/灬柠檬猪" target="_blank" title="weibo">
-                      
-                        <i class="fa fa-fw fa-globe"></i>weibo</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=501960614&website=www.oicqzone.com" target="_blank" title="QQZone">
-                      
-                        <i class="fa fa-fw fa-globe"></i>QQZone</a>
-                  </span>
-                
-            </div>
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-cli目录结构"><span class="nav-number">1.</span> <span class="nav-text">vue-cli目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bulid文件夹"><span class="nav-number">1.1.</span> <span class="nav-text">bulid文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#config文件夹"><span class="nav-number">1.2.</span> <span class="nav-text">config文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#src文件夹"><span class="nav-number">1.3.</span> <span class="nav-text">src文件夹</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#components组件"><span class="nav-number">1.3.1.</span> <span class="nav-text">components组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#router路由"><span class="nav-number">1.3.2.</span> <span class="nav-text">router路由</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#store仓库（vuex）"><span class="nav-number">1.3.3.</span> <span class="nav-text">store仓库（vuex）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#App-vue"><span class="nav-number">1.3.4.</span> <span class="nav-text">App.vue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#main-js"><span class="nav-number">1.3.5.</span> <span class="nav-text">main.js</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static"><span class="nav-number">1.4.</span> <span class="nav-text">static</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#index-html"><span class="nav-number">1.5.</span> <span class="nav-text">index.html</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-        <div class="back-to-top">
-          <i class="fa fa-arrow-up"></i>
-          
-            <span id="scrollpercent"><span>0</span>%</span>
-          
-        </div>
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">xcola</span>
-
+    <li><a href="/categories/博客/">博客</a><small>1</small></li>
   
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-area-chart"></i>
-    </span>
-    
-      <span class="post-meta-item-text">Site words total count&#58;</span>
-    
-    <span title="Site words total count">32.7k</span>
+    <li><a href="/categories/服务器/">服务器</a><small>2</small></li>
   
+    <li><a href="/categories/随笔/">随笔</a><small>1</small></li>
+  
+  </ul>
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
-
-
-
-
-
-
-
-
-        
-<div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
   
-    <span class="site-uv">
-      <i class="fa fa-user"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      
-    </span>
-  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2018/12/22/一点感想/">一点感想</a>
+      </li>
+    
+      <li>
+        <a href="/2018/12/18/前端导出数据到excel文件/">前端导出数据到excel文件</a>
+      </li>
+    
+      <li>
+        <a href="/2018/12/18/LeeTCode两数相加/">LeeTCode两数相加</a>
+      </li>
+    
+      <li>
+        <a href="/2018/11/17/2018-11-杂记/">2018-11-杂记</a>
+      </li>
+    
+      <li>
+        <a href="/2018/10/27/2018-10-第四周读书笔记/">2018/10第四周杂记</a>
+      </li>
+    
+  </ul>
 </div>
 
 
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/JavaScript设计模式与开发实践/">JavaScript设计模式与开发实践</a><small>2</small></li>
+  
+    <li><a href="/tags/NodeJS/">NodeJS</a><small>1</small></li>
+  
+    <li><a href="/tags/React/">React</a><small>1</small></li>
+  
+    <li><a href="/tags/Vue/">Vue</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+    <li><a href="/tags/代码整洁之道/">代码整洁之道</a><small>1</small></li>
+  
+    <li><a href="/tags/学习笔记/">学习笔记</a><small>15</small></li>
+  
+    <li><a href="/tags/瞎折腾/">瞎折腾</a><small>3</small></li>
+  
+    <li><a href="/tags/随笔/">随笔</a><small>1</small></li>
+  
+    <li><a href="/tags/面试笔记/">面试笔记</a><small>2</small></li>
+  
+    <li><a href="/tags/首刷javascript高级程序设计/">首刷javascript高级程序设计</a><small>2</small></li>
+  
+  </ul>
+</div>
 
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-
-    
-
-  </div>
 
   
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/JavaScript设计模式与开发实践/" style="font-size: 13.33px;">JavaScript设计模式与开发实践</a> <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/tags/代码整洁之道/" style="font-size: 10px;">代码整洁之道</a> <a href="/tags/学习笔记/" style="font-size: 20px;">学习笔记</a> <a href="/tags/瞎折腾/" style="font-size: 16.67px;">瞎折腾</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a> <a href="/tags/面试笔记/" style="font-size: 13.33px;">面试笔记</a> <a href="/tags/首刷javascript高级程序设计/" style="font-size: 13.33px;">首刷javascript高级程序设计</a>
+  </div>
+</div>
 
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  <p>
+  
+  &copy; 2018 xcola
+  
+  All rights reserved.</p>
+  <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</div>
+<div class="clearfix"></div>
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></footer>
+  <script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
 
 
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
-  
-
-  
-
-  
-
-  
-
+<div id="bg"></div>
 </body>
 </html>
