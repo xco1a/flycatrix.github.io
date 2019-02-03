@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="学习笔记,">
+  <meta name="keywords" content="python,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;可能在频繁使用复制粘贴解决重复代码之后，才能明白学习模块化开发的重要性。参考了阮一峰前辈的日志以后，稍稍理清了一些思路。随着页面功能复杂化，页面需要编写的js代码也越来越多，页面开发转而使用软件工程的方法进行分工合作、进度管理等等。简单的铺写javascript程序满足不了这些需求，而javascript脚本语言的特性也不满足模块化开发的基本需要 – 没有class 和 m">
-<meta name="keywords" content="学习笔记">
+<meta name="description" content="背景csv一般以逗号分隔字段，这个从sqlite3导出的grafana数据库以 | 分隔字段。。做法是逐条读取csv的数据，拼接成sql语句，通过MySQLdb库执行数据库操作。 在执行的过程中发现有某些csv数据被意外截断的情况，是因为某些字段存储的是json字符串，中间的逗号和分号造成字符串意外分成两个或者多个，所以还需要循环拼接一下才能还原出完整的sql语句。 在插入的时候发现主键总是出现状">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于javascript模块化开发">
-<meta property="og:url" content="http://yoursite.com/2018/05/23/关于javascript模块化开发/index.html">
+<meta property="og:title" content="python迁移csv数据到mysql">
+<meta property="og:url" content="http://yoursite.com/2019/02/03/python迁移csv数据到mysql/index.html">
 <meta property="og:site_name" content="xco1a&#39;s b10g">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;可能在频繁使用复制粘贴解决重复代码之后，才能明白学习模块化开发的重要性。参考了阮一峰前辈的日志以后，稍稍理清了一些思路。随着页面功能复杂化，页面需要编写的js代码也越来越多，页面开发转而使用软件工程的方法进行分工合作、进度管理等等。简单的铺写javascript程序满足不了这些需求，而javascript脚本语言的特性也不满足模块化开发的基本需要 – 没有class 和 m">
+<meta property="og:description" content="背景csv一般以逗号分隔字段，这个从sqlite3导出的grafana数据库以 | 分隔字段。。做法是逐条读取csv的数据，拼接成sql语句，通过MySQLdb库执行数据库操作。 在执行的过程中发现有某些csv数据被意外截断的情况，是因为某些字段存储的是json字符串，中间的逗号和分号造成字符串意外分成两个或者多个，所以还需要循环拼接一下才能还原出完整的sql语句。 在插入的时候发现主键总是出现状">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-23T02:43:50.000Z">
+<meta property="og:updated_time" content="2019-02-03T04:13:19.314Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于javascript模块化开发">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;可能在频繁使用复制粘贴解决重复代码之后，才能明白学习模块化开发的重要性。参考了阮一峰前辈的日志以后，稍稍理清了一些思路。随着页面功能复杂化，页面需要编写的js代码也越来越多，页面开发转而使用软件工程的方法进行分工合作、进度管理等等。简单的铺写javascript程序满足不了这些需求，而javascript脚本语言的特性也不满足模块化开发的基本需要 – 没有class 和 m">
+<meta name="twitter:title" content="python迁移csv数据到mysql">
+<meta name="twitter:description" content="背景csv一般以逗号分隔字段，这个从sqlite3导出的grafana数据库以 | 分隔字段。。做法是逐条读取csv的数据，拼接成sql语句，通过MySQLdb库执行数据库操作。 在执行的过程中发现有某些csv数据被意外截断的情况，是因为某些字段存储的是json字符串，中间的逗号和分号造成字符串意外分成两个或者多个，所以还需要循环拼接一下才能还原出完整的sql语句。 在插入的时候发现主键总是出现状">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/23/关于javascript模块化开发/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/03/python迁移csv数据到mysql/">
 
 
 
 
 
-  <title>关于javascript模块化开发 | xco1a's b10g</title>
+  <title>python迁移csv数据到mysql | xco1a's b10g</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/关于javascript模块化开发/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/03/python迁移csv数据到mysql/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xcola">
@@ -270,7 +270,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">关于javascript模块化开发</h2>
+          <h2 class="post-title" itemprop="name headline">python迁移csv数据到mysql</h2>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-23T09:47:10+08:00">
-                2018-05-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-03T12:10:47+08:00">
+                2019-02-03
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -341,7 +341,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  802
+                  370
                 </span>
               
 
@@ -357,7 +357,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2
+                  1
                 </span>
               
             </div>
@@ -378,19 +378,11 @@
       
 
       
-        <p>&emsp;&emsp;可能在频繁使用复制粘贴解决重复代码之后，才能明白学习模块化开发的重要性。参考了阮一峰前辈的日志以后，稍稍理清了一些思路。随着页面功能复杂化，页面需要编写的js代码也越来越多，页面开发转而使用软件工程的方法进行分工合作、进度管理等等。简单的铺写javascript程序满足不了这些需求，而javascript脚本语言的特性也不满足模块化开发的基本需要 – 没有class 和 module的概念。按照javascript一贯的作风，则是用现有的运行环境下，模拟出模块的概念。</p>
-<p>&emsp;&emsp;类比我们批量构建对象时的经验，从工厂模式到构造函数，再到原型模式，再发展为构造函数与原型组合的模式，每次改进都解决了之前模式固有的弊端，也进一步提出了新的问题。模块是实现特定功能的一组方法，模拟模块化模式的过程和构建对象模式的过程也很相似。</p>
-<h3 id="原始写法"><a href="#原始写法" class="headerlink" title="原始写法"></a>原始写法</h3><p>&emsp;&emsp;以函数的形式拆解代码，把不同的函数放在一起则构成一个模块。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">module1Func1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// some code...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">module2Func2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// some code...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;在使用这种原始的模块时，调用函数就可以了。但是这种模式下，函数名是在全局声明的，无法保证不与其他变量名、函数名相冲突。此外，模块成员之间看不出联系，如果不再函数名上或注释里说明，几乎是无法区分的。</p>
-<h3 id="对象写法"><a href="#对象写法" class="headerlink" title="对象写法"></a>对象写法</h3><p>&emsp;&emsp;为了解决原始写法里成员之间没有联系、全局变量名易导致冲突的问题，将模块中的函数写成对象的属性方法，在使用的时候，调用这个对象的属性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">    func1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// some code...</span></span><br><span class="line">    &#125;,</span><br><span class="line">    func2: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// some code...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.func1();</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;这种写法将函数联系在一起，但是却没有给予他们恰当的保护，外部可以轻易改写模块对象内部的方法和变量，而为了保证模块的高复用性和可靠性，保护模块内部状态不被篡改是有必要的。</p>
-<h3 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h3><p>&emsp;&emsp;函数有一种显而易见的特性：它的作用域内的变量和方法对外界是不可见的。利用函数的这种特性，可以有效的保护模块内部数据和方法不被篡改以及保证模块本身的可靠性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">module</span> = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">func1</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// some code...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">func2</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// some code...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        func1: func1,</span><br><span class="line">        func2: func2</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="built_in">module</span>.func1();			<span class="comment">// 调用</span></span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;到这里，好像已经完美解决了日常使用模块的需要，需要注意的是，由于模块的独立性，模块内部的程序是不直接与外界直接交互的，所以为了使模块能够的调用全局变量，使用模块时应该显式的将所需变量传入模块。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.func1(args1 , args2 ,..);</span><br></pre></td></tr></table></figure>
-
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>csv一般以逗号分隔字段，这个从sqlite3导出的grafana数据库以 | 分隔字段。。做法是逐条读取csv的数据，拼接成sql语句，通过MySQLdb库执行数据库操作。</p>
+<p>在执行的过程中发现有某些csv数据被意外截断的情况，是因为某些字段存储的是json字符串，中间的逗号和分号造成字符串意外分成两个或者多个，所以还需要循环拼接一下才能还原出完整的sql语句。</p>
+<p>在插入的时候发现主键总是出现状况，首先是变量类型，其次是值会重复，于是直接加了个i变量充当主键。。虽说暴力了点但是it’s works。</p>
+<p>目前还有的问题是在导入某个字段有超级长的json，里面还包含转义字符串的时候，会错误，本来想通过在拼接的时候用三对引号包裹每个字段的方式解决，但是没成功。。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> MySQLdb</span><br><span class="line"></span><br><span class="line">csv_file = sys.argv[<span class="number">1</span>]</span><br><span class="line">tables = sys.argv[<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">conn = MySQLdb.connect(host=<span class="string">'mysql.rds.aliyuncs.com'</span>, user=<span class="string">'grafana'</span>, passwd=<span class="string">'121321'</span>, db=<span class="string">'grafana_config'</span>)</span><br><span class="line">cursor = conn.cursor()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(csv_file) <span class="keyword">as</span> f:</span><br><span class="line">    f_csv = csv.reader(f)</span><br><span class="line">    create_table_sql = <span class="string">'create table if not exists '</span> + tables</span><br><span class="line">    seq = <span class="string">','</span></span><br><span class="line">    i = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> f_csv:</span><br><span class="line">        i = i + <span class="number">1</span></span><br><span class="line">        rows = <span class="string">''</span></span><br><span class="line">        <span class="keyword">for</span> piece <span class="keyword">in</span> row:</span><br><span class="line">            rows += piece + <span class="string">','</span></span><br><span class="line"></span><br><span class="line">        total_str = rows[<span class="number">0</span>:<span class="number">-1</span>].split(<span class="string">'|'</span>)</span><br><span class="line">        insert_sql = <span class="string">"insert into "</span> + tables + <span class="string">" values("</span></span><br><span class="line">        values = []</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> total_str:</span><br><span class="line">            values.append(<span class="string">"'"</span> + str(item) + <span class="string">"'"</span>)</span><br><span class="line">        <span class="keyword">del</span> values[<span class="number">0</span>]</span><br><span class="line">        value_str = seq.join(values)</span><br><span class="line">        insert_sql += str(i) + <span class="string">','</span> + value_str +  <span class="string">')'</span></span><br><span class="line">        print(insert_sql)</span><br><span class="line">        cursor.execute(insert_sql)</span><br><span class="line">        conn.commit()</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">conn.close()</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -409,7 +401,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            <a href="/tags/python/" rel="tag"># python</a>
           
         </div>
       
@@ -422,8 +414,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/19/对函数类型的理解/" rel="next" title="对函数类型的理解">
-                <i class="fa fa-chevron-left"></i> 对函数类型的理解
+              <a href="/2019/01/23/vue学习笔记（一）/" rel="next" title="vue学习笔记（一）">
+                <i class="fa fa-chevron-left"></i> vue学习笔记（一）
               </a>
             
           </div>
@@ -431,10 +423,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/23/对闭包的理解/" rel="prev" title="对闭包的理解">
-                对闭包的理解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -601,7 +589,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#原始写法"><span class="nav-number">1.</span> <span class="nav-text">原始写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象写法"><span class="nav-number">2.</span> <span class="nav-text">对象写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#立即执行函数"><span class="nav-number">3.</span> <span class="nav-text">立即执行函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li></ol></div>
             
 
           </div>
